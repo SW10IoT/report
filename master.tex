@@ -34,11 +34,18 @@
 \cleardoublepage
 %mainmatter
 \pagenumbering{arabic} %use arabic page numbering in the mainmatter
+
 \input{sections/introduction.tex}
-\input{sections/ch2name.tex}
+
+\chapter{Theory}
+\input{sections/theoryintro.tex}
+\input{sections/lattice.tex}
+
 \input{sections/conclusion.tex}
-\printbibliography[heading=bibintoc]
-\label{bib:mybiblio}
+
+\bibliographystyle{plainnat}
+\bibliography{bib/mybib}
+
 \appendix
 \input{sections/appAname.tex}
 \end{document}
