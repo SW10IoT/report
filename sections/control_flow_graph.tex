@@ -1,1 +1,7 @@
 \section{Control Flow Graph}
+If one wants to analyse a program and the analysis is flow sensitive one can use a Control Flow Graph(CFG) to track the flow of the program.
+An analysis being flow sensitive means that it does matter in which order pieces of the program are executed.
+A CFG is simply just another representation of the program source.
+It is a directed graph where a node is a specific place in the program and edges represent the possible options to which the program can execute to.
+A CFG always consists of one entry node and one exit node, called \textit{entry} and \textit{exit}.
+Given a node \textit{n} the set of predecessor nodes are denoted \textit{pred(n)} and the set of successors are denoted \textit{succ(n)}.
