@@ -26,3 +26,17 @@ The greatest lower bound $\sqcap X$ can be defined by the same logic.
 \paragraph{Lattice}
 A lattice can now be defined as a partial order in which $\sqcup X$ and $\sqcap X$ is defined for all $X \subset S$.
 It should be noted  that a lattice must have a unique largest element $\top$ defined as $\top = \sqcup S$ and unique smallest element $\bot$ 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figures/lattice_example_numbers}
+\end{center}
+\caption{A lattice with four elements}
+\label{lattice_example}
+\end{figure}
+
+In \cref{lattice_example} a lattice with four elements is depicted.
+This lattice is defined by the set $\{1, 2, 3, 4 \}$.
+In general the set A defines a lattice $(2^A, \sqsubseteq )$ where $\top = \emptyset$, $\bot = A$, $x\sqcup y = x \cup y$ and $x \sqcap y = x \cap y$.
+
+\todo{noget om hvordan vi vil bruge det i analysen? Synes det er svaert at skrive inden fixed point og analyserne er introduceret}
