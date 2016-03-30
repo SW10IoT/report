@@ -1,0 +1,19 @@
+\section{The Fixed-point Algorithm}
+
+Operating on a CFG that contains the nodes $\{ v_1, v_2, \dots, v_n \}$ we work with the lattice $L^n$.
+Assuming that the node $v_i$ generates the dataflow equation $\llbracket v_i \rrbracket = F_i ( \llbracket v_1 \rrbracket, \dots, \llbracket v_n \rrbracket)$, the equations of all the nodes can be combined in a function $ F: L^n \rightarrow L^n$.
+
+\[ F(x_1, \dots, x_n) = (F_1(x_1, \dots, x_n), \dots, F_n(x_1, \dots, x_n)) \]
+
+This combined function resembles the function presented in \cref{theory:fixedpoint:systemsofequations}, and it can indeed be solved by fixed-points.
+A naive algorithm for solving such a function is presented in \citet{schwartzbach}:
+
+\begin{algorithmic}
+  \State $x = (\bot, \dots, \bot)$
+  \Do
+  \State $t = x$
+  \State $x = F(x)$
+  \doWhile $ x \ne t $
+\end{algorithmic}
+
+\todo{if we use the more advanced algorithms, write them here}

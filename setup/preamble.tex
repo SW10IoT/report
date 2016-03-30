@@ -73,10 +73,15 @@
 \usepackage{amsmath}
 % Adds new math symbols
 \usepackage{amssymb}
+% double brackets [[, \\llbracket \\rrbracket
+\usepackage{stmaryrd}
 % Use theorems in your document
 % The ntheorem package is also used for the example environment
 % When using thmmarks, amsmath must be an option as well. Otherwise \eqref doesn't work anymore.
 \usepackage[framed,amsmath,thmmarks]{ntheorem}
+%algoritms
+\usepackage{algorithmicx,algpseudocode}
+\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Page Layout
