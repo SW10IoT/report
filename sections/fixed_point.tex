@@ -33,3 +33,21 @@ This computation has been illustrated in \cref{lattice_walk} where the analysis 
 \caption{A walk through the lattice, starting a $\bot$ and ending in the fixed-point}
 \label{lattice_walk}
 \end{figure}
+
+\section{Systems of Equations}
+Combining equations into a system of equations can be solved by using fixed-points.
+Consider an equation system of the form:
+
+$
+\begin{array}{l c l}
+x_1 = F_1(x_1, \dots, x_n) \\
+x_2 = F_2(x_1, \dots, x_n)\\
+\vdots\\
+x_n = F_n(x_1, \dots, x_n)\\
+\end{array}
+$
+
+Here $x_i$ are variables and $F_i: L^n \rightarrow L$ is a monotone function.
+A least unique solution to such a system can be found as the least fixed-point of the combined function $F : L^n \rightarrow L^n$ defined by:
+
+$F(x_1, \dots, x_n) = (F_1(x_1, \dots, x_n), \dots, F_n(x_1, \dots, x_n)) $
