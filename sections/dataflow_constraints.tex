@@ -1,0 +1,13 @@
+\section{Dataflow Constraints}
+For analyzing a CFG of a program we need to be able to describe the relationship between the individual nodes.
+Some analyses track variable content while others track use of certain expressions.
+Similarly, some analyses need information from its successors while others need information from its predecessors.
+
+To describe these different analyses we annotate each node with a \emph{dataflow constraint}.
+Dataflow constraints relate the value of a node to its neighboring nodes and is denoted $\constraint{v}$.
+A dataflow analysis consists of a number of dataflow constraints that each defines the relation of a construction in the programming language.
+
+An example of a dataflow constraint could be conditions (from the liveness example in \citet{schwartzbach})
+\[ \constraint{v} = JOIN(v) \cup vars(E) \]
+
+where JOIN combines the constraints of the successors of $v$ and vars(E) denote the set of variables occuring in E.
