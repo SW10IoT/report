@@ -17,3 +17,6 @@ pdflatex: master.tex
 	rm -f $(OTHER) $(PS)
 clean:
 	rm -f $(OTHER) $(PS)
+
+quick:
+	pdflatex master.tex
