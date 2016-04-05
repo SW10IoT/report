@@ -1,0 +1,58 @@
+\section{Security vulnerabilities}
+
+To make a tool that finds security vulnerabilities in a program is a very broad and ambitious task.
+In order to make the task more manageable we have picked three common types of vulnerabilities from the OWASP list of top 10 vulnerabilities in web applications \cite{OWASP10}.
+The chosen vulnerabilities will in the following be described and code examples will be presented showing the vulnerability in practice.
+These code examples will later be used for testing the application.
+
+\paragraph{Injection}
+An injection is an uncontrolled use of user input that reaches an interpreter.
+This could be a SQL interpreter, the command line or the Python interpreter.
+If an injection vulnerability exists the user can  send arbitrary commands to the server, and possibly access or alter data without authorization.
+The typical workaround is to sanitize the input so only the desired characters will be accepted. \citep{OWASPTOP10PDF}
+
+We have chosen to work with SQL injections which are a subgroup of injection attacks.
+
+\subparagraph{SQL injection}
+This description is based on \citet{sqlinjection}.SQL injections happen when an application creates a query partly from user input without sanitizing this input.
+The user can escape the query and add an arbitrary query.
+Depending on the system, the user can now change the database, read the database or in severe cases even execute system commands.
+
+An implementation of a SQL injection can be found in \cref{appendix:sqli}.
+Here a database is setup with the library SQLAlchemy which has protection against SQL injection built in.
+The problem is that it also supports raw SQL queries, and this example only utilizes these.
+
+In \cref{sql2} the author has prepared a SQL statement concatenated with a request parameter to find a particular user.
+Because the resulting string is not sanitized, the user can input whatever he wants, and an input like
+\[ name' ~ \text{OR} ~ 'a' = \text{'a} \]
+will return all users in the database, which is of course not intended behaviour.
+Note the missing apostrophe after the equality sign.
+The query still needs to be valid, so the string is first closed with the string ``name'', and afterwards a tautology is appending in an OR construction.
+This ultimately means that the statement sent to the SQL interpreter looks for all users instead of just a particular one.
+\todo{mere dybde i eksemplet? Vis konsol output?}
+\todo{html siderne ogsa i appendix?}
+
+\paragraph{XSS}
+Cross site scripting (abbreviated XSS) occur when a site takes untrusted data and sends it to other users without sanitization.
+The description i based on \citet{crosssitescripting}.
+One example could be a comment section where an evil user sends in a comment containing some javascript.
+When other users see this comment, their browser runs this javascript, which can access cookies or redirect to a malicious site.
+Again, this can be prevented by sanitizing user input that is stored.
+
+A very simple example of a cross site scripting is presented in \cref{appendix:xss}.
+In \cref{xss:request} some input is taken and it is inserted into the resultpage in \cref{xss:replace}
+In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary javascript, which all subsequent users would execute in their browsers.
+\todo{maske forsimple eksemplerne endnu mere, sa det kun er det omtalte der star der}
+
+\paragraph{Path traversal}
+Path traversal is when access to a ressource gives uninteded access to the filesystem of the server.
+This description is based on \citet{pathtraversal}.
+An example could be attaching an image to the page decided by some user input.
+If the input is not validated an attacker will be able to traverse the file system with the parent directory element ('..'). 
+
+An example of this vulnerability can be seen in \cref{appendix:path_traversal}.
+Providing the request parameter as \emph{?image\_name=../file.txt} will open and show file.txt in the browser.
+This could posssibly result in database content or passwords to be accessed by intruders.
+
+
+\todo{all these problems have a solution that are related to sanitization. Maybe we should write a section on sanitization and the different solutions that already exist}
