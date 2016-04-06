@@ -1,11 +1,15 @@
 Finding security flaws in a program cover a range of different techniques.
 What we are interested in is to determine whether a dangerous input from the user is able to reach a place in the code where it can cause damage.
 
+This chapter will describe the theory used for building the static analysis engine used by PyT.
+It is based on the lecture notes on static analysis in \citet{schwartzbach}
 
-The bad news is, it turns out, that we will not be able to provide answers, but only appriximations to this problem.
-This unfortunate fact is due to Rice's theorem which can be phrased as ``all interesting questions about the behaviour of programs are undecidable'' \citep[p.~3]{schwartzbach}.
-It turns out that \emph{interesting questions} is a rather large group of problems, and our problem is part of this group.
+
 \section{Undecidable}\label{theory_intro}
+As mentioned above we want to track input and then determine if it is harmful or not.
+The bad news are, that it turns out, that we will not be able to provide answers, but only approximations to this problem.
+This is due to Rice's theorem which can be phrased as ``all interesting questions about the behaviour of programs are undecidable'' \citep[p.~3]{schwartzbach}.
+These \emph{interesting questions} is a rather large group of problems, and our problem is part of this group.
 
 We will therefore not be able to provide definitive answers for each input, but we will be able to provide an approximation that comes as close as possible.
 
@@ -15,5 +19,3 @@ The solution to the problem will then be gradually approached by algorithm desig
 The algorithm stops when it can not get closer to an answer.
 This answer is then the approximation which can be used for further analysis.
 
-This chapter will describe the theory used for building the static analysis engine used by PyT.
-It is based on the lecture notes on static analysis in \citet{schwartzbach}
