@@ -1,10 +1,10 @@
 \subsection{Reaching definitions}
-To solve our problem of detecting when unsanizited user input reaches a critical point in the code, we need an analysis of what assignments may influence the values of all variables at any point in the program.
+To solve our problem of detecting when unsanitized user input reaches a critical point in the code, we need an analysis of what assignments may influence the values of all variables at any point in the program.
 The \emph{Reaching Definitions} as presented in \citet[p.~26]{schwartzbach} achieves just this.
 
-Consider the following python code, \cref{reaching::code}, the example corresponds to the examples in \citet{schwartzbach} adapted to runnable python code.
+Consider the following python code, \cref{reaching::code}, the example corresponds to the examples in \citet{schwartzbach} adapted to python code.
 
-\begin{lstlisting}[caption={Code example from \citet{schwarzbach} translated to python code.}, label=reaching::code, numbers=left, frame=single, linewidth=6cm]
+\begin{lstlisting}[caption={Code example from \citet{schwartzbach} translated to python code.}, label=reaching::code, numbers=left, frame=single, linewidth=6cm]
 x = input()
 x = int(x)
 while x > 1:
@@ -40,11 +40,11 @@ The CFG of this code is presented in \cref{reaching::cfg}.
 
 
 \subparagraph{Lattice}
-The lattice used for this analysis is a powerset lattice of all the assignments in the program.
+The lattice used for this analysis is a power set lattice of all the assignments in the program.
 
 \[ L = ( 2^{ \{x = \text{input()}, ~ x = \text{int(x)}, ~ y = x/2, ~ x = x-y, ~ z = x-4, ~ x = x/2, ~ z = z-1 \} } , \subseteq ) \]
 
-\todo{visualization of the lattice - do this or not?}
+\todo{visualisation of the lattice - do this or not?}
 
 \subparagraph{Dataflow Constraint System}
 The analysis is performed backwards by joining the constraints of all predecessors of all nodes.
@@ -60,7 +60,7 @@ Assignment nodes changes the content of a variable and the former assignment to 
 
 \[ \constraint{v} = JOIN(v) \downarrow id \cup \{ v \} \]
 
-Where the $\downarrow$ function removes all assignements to the variable $id$ from the result of the JOIN.
+Where the $\downarrow$ function removes all assignments to the variable $id$ from the result of the JOIN.
 
 Applying the previously defined dataflow constraints to the generated CFG looks as follows:
 
@@ -141,5 +141,5 @@ These constraints can now be interpreted in order to answer question that requir
 \paragraph{Interpreting the result}
 
 Looking at the final equations the potential flow of values through the program can be seen.
-For exampel, looking at the print statement, the value of x could have originated from three places in the program: the $x = int(x)$, $x = x-y$ or the $x = x/2$ statement.
+For example, looking at the print statement, the value of x could have originated from three places in the program: the $x = int(x)$, $x = x-y$ or the $x = x/2$ statement.
 Depending on the purpose of the analysis, this information can be used to deduce whether any dangerous flows are possible.
