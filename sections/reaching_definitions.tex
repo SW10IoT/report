@@ -66,20 +66,20 @@ Applying the previously defined dataflow constraints to the generated CFG looks 
 
 \begin{figure}[H]
 \[
-\begin{array}{l}
-  \constraint{entry} = \{\}\\
-  \constraint{x = input()} = \assignconstraint{\constraint{entry}}{x}{x = input()}\\
-  \constraint{x = int(x)} = \assignconstraint{\constraint{x = input}}{x}{x = int(x)}\\
-  \constraint{\text{while } x > 1} = \constraint{x = int(x)} ~ \cup ~ \constraint{z = z - 1}\\
-  \constraint{ y = x / 2} = \assignconstraint{\constraint{\text{while } x > 1}}{y}{y = x / 2}\\
-  \constraint{\text{if } y > 3} = \constraint{ y = x / 2}\\
-  \constraint{ x = x-y} = \assignconstraint{\constraint{\text{if } y > 3}}{x}{x = x-y}\\
-  \constraint{ z = x-4} = \assignconstraint{(\constraint{x = x-y} ~ \cup ~ \constraint{\text{if } y > 3})}{z}{z = x-4}\\
-  \constraint{\text{if } z > 0} = \constraint{z = x - 4}\\
-  \constraint{x = x / 2} = \assignconstraint{\constraint{\text{if } z > 0}}{x}{x = x/2}\\
-  \constraint{z = z - 1} = \assignconstraint{(\constraint{\text{if } z > 0} ~ \cup ~ \constraint{x = x / 2}}{z}{z = z - 1}\\
-  \constraint{print(x)} = \constraint{\text{while } x > 1}\\
-  \constraint{exit} = \constraint{print(x)}
+\begin{array}{lcl}
+  \constraint{entry} & = & \{\}\\
+  \constraint{x = input()} & = & \assignconstraint{\constraint{entry}}{x}{x = input()}\\
+  \constraint{x = int(x)} & = & \assignconstraint{\constraint{x = input}}{x}{x = int(x)}\\
+  \constraint{\text{while } x > 1} & = & \constraint{x = int(x)} ~ \cup ~ \constraint{z = z - 1}\\
+  \constraint{ y = x / 2} & = & \assignconstraint{\constraint{\text{while } x > 1}}{y}{y = x / 2}\\
+  \constraint{\text{if } y > 3} & = & \constraint{ y = x / 2}\\
+  \constraint{ x = x-y} & = & \assignconstraint{\constraint{\text{if } y > 3}}{x}{x = x-y}\\
+  \constraint{ z = x-4} & = & \assignconstraint{(\constraint{x = x-y} ~ \cup ~ \constraint{\text{if } y > 3})}{z}{z = x-4}\\
+  \constraint{\text{if } z > 0} & = & \constraint{z = x - 4}\\
+  \constraint{x = x / 2} & = & \assignconstraint{\constraint{\text{if } z > 0}}{x}{x = x/2}\\
+  \constraint{z = z - 1} & = & \assignconstraint{(\constraint{\text{if } z > 0} ~ \cup ~ \constraint{x = x / 2}}{z}{z = z - 1}\\
+  \constraint{print(x)} & = & \constraint{\text{while } x > 1}\\
+  \constraint{exit} & = & \constraint{print(x)}
 \end{array}
 \]
 \caption{Dataflow constraints applied on the generated CFG}
@@ -92,20 +92,20 @@ The first iteration of this looks as follows:
 
 \begin{figure}[H]
 \[
-\begin{array}{l}
-  \constraint{entry} = \{\}\\
-  \constraint{x = input()} = \{x = input()\}\\
-  \constraint{x = int(x)} = \{x = int(x)\}\\
-  \constraint{\text{while } x > 1} = \{\}\\
-  \constraint{ y = x / 2} = \{ y = x / 2\}\\
-  \constraint{\text{if } y > 3} = \{\}\\
-  \constraint{ x = x-y} = \{ x = x - y \} \\
-  \constraint{ z = x-4} = \{z = x-4 \} \\
-  \constraint{\text{if } z > 0} = \{\}\\
-  \constraint{x = x / 2} = \{ x = x / 2 \}\\
-  \constraint{z = z - 1} = \{ z = z -1 \} \\
-  \constraint{print(x)} = \{\}\\
-  \constraint{exit} = \{\}\\
+\begin{array}{lcl}
+  \constraint{entry} & = & \{\}\\
+  \constraint{x = input()} & = & \{x = input()\}\\
+  \constraint{x = int(x)} & = & \{x = int(x)\}\\
+  \constraint{\text{while } x > 1} & = & \{\}\\
+  \constraint{ y = x / 2} & = & \{ y = x / 2\}\\
+  \constraint{\text{if } y > 3} & = & \{\}\\
+  \constraint{ x = x-y} & = & \{ x = x - y \} \\
+  \constraint{ z = x-4} & = & \{z = x-4 \} \\
+  \constraint{\text{if } z > 0} & = & \{\}\\
+  \constraint{x = x / 2} & = & \{ x = x / 2 \}\\
+  \constraint{z = z - 1} & = & \{ z = z -1 \} \\
+  \constraint{print(x)} & = & \{\}\\
+  \constraint{exit} & = & \{\}\\
 \end{array}
 \]
 \caption{First iteration of the fixed-point algorithm}
@@ -118,20 +118,20 @@ These constraints can now be interpreted in order to answer question that requir
 
 \begin{figure}[H]
 \[
-\begin{array}{l}
-  \constraint{entry} = \{\}\\
-  \constraint{x = input()} = \{x = input()\}\\
-  \constraint{x = int(x)} = \{x = int(x)\}\\
-  \constraint{\text{while } x > 1} = \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
-  \constraint{ y = x / 2} =  \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
-  \constraint{\text{if } y > 3} =  \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
-  \constraint{ x = x-y} =  \{ y = x / 2, ~ x=x-y, ~ z=z-1 \}\\
-  \constraint{ z = x-4} =  \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ z=x-4, ~ x = x/2\}\\
-  \constraint{\text{if } z > 0} = \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ z=x-4, ~ x = x/2\}\\
-  \constraint{x = x / 2} = \{ y = x / 2, ~ z=x-4, ~ x = x/2\}\\
-  \constraint{z = z - 1} = \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
-  \constraint{print(x)} = \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
-  \constraint{exit} = \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
+\begin{array}{lcl}
+  \constraint{entry} & = & \{\}\\
+  \constraint{x = input()} & = & \{x = input()\}\\
+  \constraint{x = int(x)} & = & \{x = int(x)\}\\
+  \constraint{\text{while } x > 1} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
+  \constraint{ y = x / 2} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
+  \constraint{\text{if } y > 3} &  = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
+  \constraint{ x = x-y} & = & \{ y = x / 2, ~ x=x-y, ~ z=z-1 \}\\
+  \constraint{ z = x-4} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ z=x-4, ~ x = x/2\}\\
+  \constraint{\text{if } z > 0} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ z=x-4, ~ x = x/2\}\\
+  \constraint{x = x / 2} & = & \{ y = x / 2, ~ z=x-4, ~ x = x/2\}\\
+  \constraint{z = z - 1} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
+  \constraint{print(x)} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
+  \constraint{exit} & = & \{ x = int(x), ~ y = x / 2, ~ x=x-y, ~ x = x/2, ~ z=z-1 \}\\
 \end{array}
 \]
 \caption{Final result of the fixed-point algorithm}
