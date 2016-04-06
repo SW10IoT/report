@@ -27,15 +27,23 @@ As stated earlier a dataflow analysis consist of many of the concepts that have 
 These concepts will in the following be instantiated on the previously introduced example as to present the complete analysis.
 
 \subparagraph{Control flow graph}
-The CFG of this code looks as presented on \todo{cfg + ref}.
+The CFG of this code is presented in \cref{reaching::cfg}.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[scale=.5]{./figures/reaching_definitions.pdf}
+  \caption{CFG of the python code presented in \cref{reaching::code}}
+  \label{reaching::cfg}
+  \end{center}
+\end{figure}
+
 
 \subparagraph{Lattice}
 The lattice used for this analysis is a powerset lattice of all the assignments in the program.
 
-\[ L = ( 2^{ \{x = \text{input}, ~ y = x/2, ~ x = x-y, ~ z=x-4, ~ x = x/2, ~ z = z-1 \} } , \subseteq ) \]
-\todo{tjek om nodes har disse navne paa figuren}
+\[ L = ( 2^{ \{x = \text{input()}, ~ x = \text{int(x)}, ~ y = x/2, ~ x = x-y, ~ z = x-4, ~ x = x/2, ~ z = z-1 \} } , \subseteq ) \]
 
-\todo{visualization of the lattice}
+\todo{visualization of the lattice - do this or not?}
 
 \subparagraph{Dataflow Constraint System}
 The analysis is performed backwards by joining the constraints of all predecessors of all nodes.
