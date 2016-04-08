@@ -38,6 +38,10 @@ The CFG of this code is presented in \cref{reaching::cfg}.
   \end{center}
 \end{figure}
 
+The flow is linear until the while loop.
+The while loop diverts the flow into the loop and ultimately to the print statement.
+The loop has two if statements where the flow is again split up.
+It is easy to see from the flow graph that there are many possible routes from entry to exit, and the propagation of values is not straightforward.
 
 \subparagraph{Lattice}
 The lattice used for this analysis is a power set lattice of all the assignments in the program.
