@@ -1,4 +1,8 @@
 \section{The Fixed-point Algorithm}
+A CFG has been defined in \cref{control_flow_graph} and a lattice has been defined in \cref{lattice}.
+Given a CFG and lattice a fixed-point algorithm can be defined.
+The following is from \citet{schwartzbach}.
+
 
 Operating on a CFG that contains the nodes $\{ v_1, v_2, \dots, v_n \}$ we work with the lattice $L^n$.
 Assuming that the node $v_i$ generates the dataflow equation $\llbracket v_i \rrbracket = F_i ( \llbracket v_1 \rrbracket, \dots, \llbracket v_n \rrbracket)$, the equations of all the nodes can be combined in a function $ F: L^n \rightarrow L^n$.
