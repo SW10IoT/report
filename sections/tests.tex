@@ -1,0 +1,47 @@
+\section{Testing}
+During the development of the application we have had great success working very test oriented.
+In particular when developing the conversion from abstract syntax tree to control flow graph, testing has been invaluable.
+The abstract nature of the syntax tree together with the many possibilities of python yield a huge number of cases for each construct, and the edges have to be just right in every one of them.
+
+When developing all these fragments of the complete grammar, we need to be sure that our previous work still works as intended.
+To help us be sure that all our assumptions and implementations hold we have utilized unit testing a great deal.
+The following will mention some of the issues where testing has helped the process.
+
+\paragraph{Cases}
+An example of a construct which has many different cases is the \texttt{if}, which has variants with \texttt{elif} and \texttt{else} clauses.
+The \texttt{if} abstract syntax node contains an \emph{orelse} reference which can either be another \texttt{if}, representing an \text{elif} clause, or a list of statements, representing the body of an \texttt{else} clause.
+In addition an \texttt{if} can have many different statements in its \emph{test} clause.
+These statements are often logic expressions but can also be nameconstants, function calls, lambdas and even a list.
+
+When the basic cases of the \texttt{if} is implemented we also need to know that \texttt{if} statements inside the body of an \texttt{if} statement works properly.
+When that works we need to consider how to handle \texttt{break}, \texttt{yield} and \texttt{return} statements inside the \texttt{if}.
+
+Testing has greatly helped when exploring and developing these cases, because they explicitly run each case every time the test is run.
+This assures that a change fixing one case did not break another case.
+
+\paragraph{Complex features}
+The development of python is still ongoing which results in periodic changes to both the grammar and the semantics of the language.
+Continously adding features from both the object oriented and the functional paradigm results in more possiblities but also a more complex internal structure.
+This is evident when attempting to generate control flow graphs from the abstract syntax.
+
+One example is that you can assign a list to a tuple, and python will \emph{unpack} and assign the items of the list to the corresponding items of the tuple.
+An example is show on \cref{tuple:unpacking}, where x gets the value 4 and the tuple y gets overwritten with the tuple (5,6).
+\begin{lstlisting}[caption={Tuple unpacking}, label=tuple:unpacking, numbers=left, frame=single, linewidth=6cm]
+  x = 1
+  y = (2,3)
+  x,*y = [4,5,6]
+\end{lstlisting}
+
+Generating the control flow graph for expressions like these have given a lot of insight into python, but it has also been a challenge to represent them properly in the control flow graph.
+Also here testing has provided useful for keeping track of the parts involved.
+The example consists of assignments, a tuple, the star operator and a list in order to show off one concept.
+All the concepts both need to work indivually and together, and tests have helped ensuring this.
+
+\paragraph{Dynamic types}
+Python is a dynamic language which can be very unforgiving to debug.
+A wrong type returned from a function produces an error in a function somewhere completely different.
+The stacktrace is not always helpful at telling where the actual problem is located.
+
+When developing with tests a catalog of small tests naturally developed.
+When introducing an error that breaks more than just the construct at hand, test have helped pinpointing the real cause of the error.
+This has sometimes lead to insight that either helped us understand why our implementation was wrong, or why what we expected was not the real outcome.
