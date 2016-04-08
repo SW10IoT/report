@@ -35,24 +35,24 @@ This ultimately means that the statement sent to the SQL interpreter looks for a
 \paragraph{XSS}
 Cross site scripting (abbreviated XSS) occur when a site takes untrusted data and sends it to other users without sanitization.
 The description i based on \citet{crosssitescripting}.
-One example could be a comment section where an evil user sends in a comment containing some javascript.
-When other users see this comment, their browser runs this javascript, which can access cookies or redirect to a malicious site.
+One example could be a comment section where an evil user sends in a comment containing some JavaScript.
+When other users see this comment, their browser runs this JavaScript, which can access cookies or redirect to a malicious site.
 Again, this can be prevented by sanitizing user input that is stored.
 
 A very simple example of a cross site scripting is presented in \cref{appendix:xss}.
-In \cref{xss:request} some input is taken and it is inserted into the resultpage in \cref{xss:replace}
-In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary javascript, which all subsequent users would execute in their browsers.
+In \cref{xss:request} some input is taken and it is inserted into the result page in \cref{xss:replace}
+In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
 \todo{maske forsimple eksemplerne endnu mere, sa det kun er det omtalte der star der}
 
 \paragraph{Path traversal}
-Path traversal is when access to a ressource gives uninteded access to the filesystem of the server.
+Path traversal is when access to a resource gives unintended access to the file system of the server.
 This description is based on \citet{pathtraversal}.
 An example could be attaching an image to the page decided by some user input.
 If the input is not validated an attacker will be able to traverse the file system with the parent directory element ('..'). 
 
 An example of this vulnerability can be seen in \cref{appendix:path_traversal}.
 Providing the request parameter as \emph{?image\_name=../file.txt} will open and show file.txt in the browser.
-This could posssibly result in database content or passwords to be accessed by intruders.
+This could possibly result in database content or passwords to be accessed by intruders.
 
 
 \todo{all these problems have a solution that are related to sanitization. Maybe we should write a section on sanitization and the different solutions that already exist}
