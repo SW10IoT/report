@@ -1,9 +1,11 @@
 \section{Interprocedural analysis}
 As Python contain functions we need a strategy for dealing with these.
-There are two strategies, one is to analyse a function when it is read in the source code the other is to analyse the function when it is called.
-The first strategy requires that we assume the worst about every function call, because we cannot know that it should not be the case.
+\citet{schwartzbach} presents two strategies for dealing with this.
+The first strategy is to analyse a function when its definition is read in the source code, while the other is to analyse the function each time it is called.
 
-The second strategy is called interprocedural analysis, and produces a single CFG from a program with a number of function calls.
+The first strategy, called monovariant interprocedural analysis, requires that we assume the worst about every function call, because we cannot know anything about the context the function is called in.
+
+The second strategy is called polyvariant interprocedural analysis, and produces a single CFG from a program with a number of function calls.
 This is done by \emph{gluing} the function bodies into the main CFG every time a function is called.
 From a source code perspective this would be like in-lining all functions that are called.
 
