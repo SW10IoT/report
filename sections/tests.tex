@@ -1,10 +1,10 @@
 \section{Testing}
-During the development of the application we have had great success working very test oriented.
+During the development of the application we have had great success working test oriented.
 In particular when developing the conversion from abstract syntax tree to control flow graph, testing has been invaluable.
 The abstract nature of the syntax tree together with the many possibilities of python yield a huge number of cases for each construct, and the edges have to be just right in every one of them.
 
 When developing all these fragments of the complete grammar, we need to be sure that our previous work still works as intended.
-To help us be sure that all our assumptions and implementations hold we have utilized unit testing a great deal.
+To help us be sure that all our assumptions and implementations hold we have utilised unit testing a great deal.
 The following will mention some of the issues where testing has helped the process.
 
 \paragraph{Cases}
@@ -21,7 +21,7 @@ This assures that a change fixing one case did not break another case.
 
 \paragraph{Complex features}
 The development of python is still ongoing which results in periodic changes to both the grammar and the semantics of the language.
-Continously adding features from both the object oriented and the functional paradigm results in more possiblities but also a more complex internal structure.
+Continuously adding features from both the object oriented and the functional paradigm results in more possibilities but also a more complex internal structure.
 This is evident when attempting to generate control flow graphs from the abstract syntax.
 
 One example is that you can assign a list to a tuple, and python will \emph{unpack} and assign the items of the list to the corresponding items of the tuple.
@@ -35,13 +35,13 @@ An example is show on \cref{tuple:unpacking}, where x gets the value 4 and the t
 Generating the control flow graph for expressions like these have given a lot of insight into python, but it has also been a challenge to represent them properly in the control flow graph.
 Also here testing has provided useful for keeping track of the parts involved.
 The example consists of assignments, a tuple, the star operator and a list in order to show off one concept.
-All the concepts both need to work indivually and together, and tests have helped ensuring this.
+All the concepts both need to work individually and together, and tests have helped ensuring this.
 
 \paragraph{Dynamic types}
 Python is a dynamic language which can be very unforgiving to debug.
 A wrong type returned from a function produces an error in a function somewhere completely different.
-The stacktrace is not always helpful at telling where the actual problem is located.
+The stack trace is not always helpful at telling where the actual problem is located.
 
-When developing with tests a catalog of small tests naturally developed.
+When developing with tests a catalogue of small tests naturally developed.
 When introducing an error that breaks more than just the construct at hand, test have helped pinpointing the real cause of the error.
 This has sometimes lead to insight that either helped us understand why our implementation was wrong, or why what we expected was not the real outcome.
