@@ -30,7 +30,7 @@ html1 = open('templates/example2_response.html').read()
 @app.route('/example2action',methods = ['POST'])
 def example2_action():
     data = request.form['my_text'] (*@ \label{xss:request} @*)
-    resp = make\_response(html1.replace('{{ data }}', data )) (*@ \label{xss:replace}@*)
+    resp = make_response(html1.replace('{{ data }}', data )) (*@ \label{xss:replace}@*)
     resp.set_cookie(
         'session_id',
         ''.join(random.choice(string.ascii_uppercase)
