@@ -8,10 +8,11 @@ To help us be sure that all our assumptions and implementations hold we have uti
 The following will mention some of the issues where testing has helped the process.
 
 \paragraph{Cases}
-An example of a construct which has many different cases is the \texttt{if}, which has variants with \texttt{elif} and \texttt{else} clauses.
+An example of a construct which has many different cases is the \texttt{if} statement, which has variants with \texttt{elif} and \texttt{else} clauses.
 The \texttt{if} abstract syntax node contains an \emph{orelse} reference which can either be another \texttt{if}, representing an \text{elif} clause, or a list of statements, representing the body of an \texttt{else} clause.
 In addition an \texttt{if} can have many different statements in its \emph{test} clause.
 These statements are often logic expressions but can also be nameconstants, function calls, lambdas and even a list.
+\todo{Maybe an illustration showing the different ast cases for if?}
 
 When the basic cases of the \texttt{if} is implemented we also need to know that \texttt{if} statements inside the body of an \texttt{if} statement works properly.
 When that works we need to consider how to handle \texttt{break}, \texttt{yield} and \texttt{return} statements inside the \texttt{if}.
