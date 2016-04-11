@@ -28,7 +28,7 @@ This is evident when attempting to generate control flow graphs from the abstrac
 One example is that you can assign a list to a tuple, and python will \emph{unpack} and assign the items of the list to the corresponding items of the tuple.
 This is possible using the \texttt{*}-operator.
 An example is show on \cref{tuple:unpacking}, where x gets the value 4 and the tuple y gets overwritten with the tuple (5,6).
-\begin{lstlisting}[caption={Tuple unpacking}, label=tuple:unpacking, numbers=left, frame=single, linewidth=6cm]
+\begin{lstlisting}[style=python, caption={Tuple unpacking}, label=tuple:unpacking]
   x = 1
   y = (2,3)
   x,*y = [4,5,6]

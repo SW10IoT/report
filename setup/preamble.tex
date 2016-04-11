@@ -84,9 +84,28 @@
 \usepackage{algorithmicx,algpseudocode}
 \algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
 
-% python code
+% listings used for code examples
 \usepackage{listings}
-\lstset{language=python}
+% default style
+\lstdefinestyle{default}{
+  numbers=left,
+  frame=single,
+  linewidth=6cm,
+  captionpos=b,
+}
+% python style
+\lstdefinestyle{python}{
+  style=default,
+  language=Python,
+  basicstyle=\small\tt,
+  keywordstyle=\color{blue},
+  commentstyle=\color[rgb]{0.13,0.54,0.13},
+  backgroundcolor=\color{cyan!10},
+  morekeywords={
+    True,
+    False
+    },
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Page Layout
 % http://en.wikibooks.org/wiki/LaTeX/Page_Layout
