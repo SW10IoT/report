@@ -109,3 +109,111 @@ If the condition is true the body is executed and the condition is evaluated aga
 This process continuous until the condition is false.
 A \texttt{while} control structure can also have an \texttt{else} statement.
 The body of the \texttt{else} statement is executed when the condition of the \texttt{while} statement is false.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python, caption={Code example.}, label={python:while:code}]
+while x > 0:
+    x += 1
+    x += 2
+print('Done')
+    \end{lstlisting}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/while_no_orelse.pdf}
+    \caption{Possible flows.}
+    \label{python:while:flow}
+  \end{subfigure}
+  \caption{A \texttt{while} control structure.}
+  \label{python:while}
+\end{figure}
+
+For an example we can take a look at \cref{python:while}.
+Here we have a simple \texttt{while} control structure with a condition, \texttt{x > 0}.
+The possible flows can be seen on \cref{python:while:flow}.
+An example with the \texttt{else} statement can be found on \cref{python:while:else}
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python, caption={Code example.}, label={python:while:else:code}]
+while x < 100:
+    x += 1
+    x += 2
+else:
+    x += 3
+    x += 4
+    \end{lstlisting}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/while_else.pdf}
+    \caption{Possible flows.}
+    \label{python:while:else:flow}
+  \end{subfigure}
+  \caption{A \texttt{while} control structure.}
+  \label{python:while:else}
+\end{figure}
+
+
+\paragraph{\texttt{for}}
+The \texttt{for} control structure is used for iterating over a object that is iterable.
+This could for instance be a list or a tuple.\todo{ref to list and tuple}
+This control structure has an optional \texttt{else} statement, which body is executed when there is nothing to iterate or the \texttt{for} statement is done iterating.
+To illustrate the \texttt{for} control structure we provide two examples.
+The first example, on \cref{python:for}, shows the most common usage of the \texttt{for} control structure.
+Here we iterate over a range, which is described in \cref{}. \todo{ref too built in functions - range}
+The second example also has a \texttt{else} statement and can be found on \cref{python:for:else}.
+
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python, caption={Code example.}, label={python:for:code}]
+for x in range(3):
+    print(x)
+    y += 1
+x = 3
+    \end{lstlisting}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/for.pdf}
+    \caption{Possible flows.}
+    \label{python:for:flow}
+  \end{subfigure}
+  \caption{A \texttt{for} control structure.}
+  \label{python:for}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python, caption={Code example.}, label={python:for:else:code}]
+for x in range(3):
+    print(x)
+    y += 1
+else:
+    print(y)
+    \end{lstlisting}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/for_complete.pdf}
+    \caption{Possible flows.}
+    \label{python:for:else:flow}
+  \end{subfigure}
+  \caption{A \texttt{for} control structure with an \texttt{else} statement.}
+  \label{python:for:else}
+\end{figure}
