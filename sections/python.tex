@@ -73,3 +73,34 @@ The condition of the \texttt{if} statement is evaluated and if it holds the body
 These possible flows can be seen on \cref{python:if:else:flow}.
 
 
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python, caption={Code example.}, label={python:if:elif:code}]
+if True:
+    x = 0
+elif False:
+    y = 0
+else:
+    z = 0
+    \end{lstlisting}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/if_else_elif.pdf}
+    \caption{Possible flows.}
+    \label{python:if:elif:flow}
+  \end{subfigure}
+  \caption{An \texttt{if} control structure containing an \texttt{if}, an \texttt{elif}, and an \texttt{else} statement.}
+  \label{python:if:elif}
+\end{figure}
+
+
+And now the last possible statement in an \texttt{if} control structure the \texttt{elif} statement.
+The \texttt{elif} statement has a condition like the \texttt{if} statement and if it holds its body is evaluated.
+An example can be found on \cref{python:if:elif}.
+
+
+\paragraph{\texttt{while}}
