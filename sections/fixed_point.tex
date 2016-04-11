@@ -1,12 +1,3 @@
-\section{Monotone functions}
-A function $f: L \to L$ is monotone when $\forall x,y \in S : x \sqsubseteq y \Rightarrow f(x) \sqsubseteq f(y)$.
-Being monotone does not imply that the function is increasing.
-All constant functions are monotone.
-
-If we look at the least upper bound and greatest lower bound functions they are monotone in both arguments.
-This means that we can apply the least upper bound function on two arguments and be certain that it will never decrease.
-This is an important requirement for the fixed-point theorem which will be presented in the next section.
-
 \section{Fixed-point}
 For the static analysis of a program we need a theorem that can find the best approximation of some dataflow problem.
 Because we will generally consider problems that are undecidable, see \cref{theory_intro}, we need a framework that overestimate the answer, and thus makes an approximation.
@@ -33,21 +24,3 @@ This computation has been illustrated in \cref{lattice_walk} where the analysis 
 \caption{A walk through the lattice, starting a $\bot$ and ending in the fixed-point}
 \label{lattice_walk}
 \end{figure}
-
-\section{Systems of Equations}\label{theory:fixedpoint:systemsofequations}
-Combining equations into a system of equations can be solved by using fixed-points.
-Consider an equation system of the form:
-
-$
-\begin{array}{l c l}
-x_1 = F_1(x_1, \dots, x_n) \\
-x_2 = F_2(x_1, \dots, x_n)\\
-\vdots\\
-x_n = F_n(x_1, \dots, x_n)\\
-\end{array}
-$
-
-Here $x_i$ are variables and $F_i: L^n \rightarrow L$ is a monotone function.
-A least unique solution to such a system can be found as the least fixed-point of the combined function $F : L^n \rightarrow L^n$ defined by:
-
-$F(x_1, \dots, x_n) = (F_1(x_1, \dots, x_n), \dots, F_n(x_1, \dots, x_n)) $
