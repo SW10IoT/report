@@ -43,3 +43,33 @@ Taking a look at \cref{python:if:simple} we can see a simple \texttt{if} structu
 The code, \cref{python:if:simple:code}, is an \texttt{if} statement with a condition, \texttt{True}.
 If the condition holds the body is evaluated and if not the program moves on to the next piece of code.
 This flow can be seen on \cref{python:if:simple:flow}.
+
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python, caption={Code example.}, label={python:if:else:code}]
+if True:
+    x = 0
+else:
+    y = 0
+    \end{lstlisting}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/if_else.pdf}
+    \caption{Possible flows.}
+    \label{python:if:else:flow}
+  \end{subfigure}
+  \caption{An \texttt{if} control structure containing an \texttt{if} and an \texttt{else} statement.}
+  \label{python:if:else}
+\end{figure}
+
+A more advanced \texttt{if} control structure can be seen on \cref{python:if:else}.
+This example consists of an \texttt{if} statement and an \texttt{else} statement.
+The condition of the \texttt{if} statement is evaluated and if it holds the body of the \texttt{if} is evaluated if no the body of the \texttt{else} is evaluated.
+These possible flows can be seen on \cref{python:if:else:flow}.
+
+
