@@ -26,6 +26,7 @@ Continuously adding features from both the object oriented and the functional pa
 This is evident when attempting to generate control flow graphs from the abstract syntax.
 
 One example is that you can assign a list to a tuple, and python will \emph{unpack} and assign the items of the list to the corresponding items of the tuple.
+This is possible using the \texttt{*}-operator.
 An example is show on \cref{tuple:unpacking}, where x gets the value 4 and the tuple y gets overwritten with the tuple (5,6).
 \begin{lstlisting}[caption={Tuple unpacking}, label=tuple:unpacking, numbers=left, frame=single, linewidth=6cm]
   x = 1
@@ -43,6 +44,6 @@ Python is a dynamic language which can be very unforgiving to debug.
 A wrong type returned from a function produces an error in a function somewhere completely different.
 The stack trace is not always helpful at telling where the actual problem is located.
 
-When developing with tests a catalogue of small tests naturally developed.
+When developing with tests a catalogue of small tests are naturally developed.
 When introducing an error that breaks more than just the construct at hand, test have helped pinpointing the real cause of the error.
 This has sometimes lead to insight that either helped us understand why our implementation was wrong, or why what we expected was not the real outcome.
