@@ -2,7 +2,7 @@
 This section will shortly give an overview of the Python programming language version 3.5.1.
 This section is based on \citet{python_docs}.
 
-The Python programming language was created by Guido van Rossum in the early 1990s and is to this day the main author.
+The Python programming language was created by Guido van Rossum in the early 1990s and he is to this day the main author.
 As the language has grown there are obviously many more contributors and everyone can contribute as Python is Open Source.
 
 \subsection{Control Structures}\label{python:control_structures}
@@ -14,7 +14,7 @@ The \texttt{if} control structure has several statements:
 \begin{enumerate}
 \item A simple \texttt{if} statement
 \item An \texttt{if-else} statement
-\item An \texttt{if-elif-else} statement
+\item An \texttt{if-elif-else} statement where the \texttt{elif} statement can be repeated
 \end{enumerate}
 The \texttt{if} and \texttt{elif} statements contain a condition which is evaluated to either true or false.
 If the condition is true the body of the statement is executed if it is false the interpreter will jump to the code after the body.
@@ -39,9 +39,9 @@ if True:
   \label{python:if:simple}
 \end{figure}
 
-Taking a look at \cref{python:if:simple} we can see a simple \texttt{if} structure containing only one \texttt{if} statement.
+Taking a look at \cref{python:if:simple} we can see a simple \texttt{if} control structure containing only one \texttt{if} statement.
 The code, \cref{python:if:simple:code}, is an \texttt{if} statement with a condition, \texttt{True}.
-If the condition holds the body is executed and if not the program moves on to the next piece of code.
+If the condition holds the body is executed and if not, the program moves on to the next piece of code.
 This flow can be seen on \cref{python:if:simple:flow}.
 
 
@@ -69,7 +69,7 @@ else:
 
 A more advanced \texttt{if} control structure can be seen on \cref{python:if:else}.
 This example consists of an \texttt{if} statement and an \texttt{else} statement.
-The condition of the \texttt{if} statement is evaluated and if it holds the body of the \texttt{if} is executed if no the body of the \texttt{else} is executed.
+The condition of the \texttt{if} statement is evaluated and if it holds the body of the \texttt{if} is executed if not the body of the \texttt{else} is executed.
 These possible flows can be seen on \cref{python:if:else:flow}.
 
 
@@ -98,7 +98,7 @@ else:
 \end{figure}
 
 
-And now the last possible statement in an \texttt{if} control structure the \texttt{elif} statement.
+And now the last possible statement in an \texttt{if} control structure the \texttt{if-elif-else} statement.
 The \texttt{elif} statement has a condition like the \texttt{if} statement and if it holds its body is executed.
 An example can be found on \cref{python:if:elif}.
 
@@ -163,8 +163,8 @@ else:
 
 
 \paragraph{\texttt{for}}
-The \texttt{for} control structure is used for iterating over a object that is iterable.
-This could for instance be a list or a tuple.\todo{ref to list and tuple}
+The \texttt{for} control structure is used for iterating over an object that is iterable.
+This could for instance be a list or a tuple, \cref{}.\todo{ref to list and tuple}
 This control structure has an optional \texttt{else} statement, which body is executed when there is nothing to iterate or the \texttt{for} statement is done iterating.
 To illustrate the \texttt{for} control structure we provide two examples.
 The first example, on \cref{python:for}, shows the most common usage of the \texttt{for} control structure.
