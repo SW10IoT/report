@@ -5,6 +5,39 @@ This section is based on \citet{python_docs}.
 The Python programming language was created by Guido van Rossum in the early 1990s and he is to this day the main author.
 As the language has grown there are obviously many more contributors and everyone can contribute as Python is Open Source.
 
+\subsection{some header}
+The Python programming language is a dynamic language basically just constructed of lists and dictionaries.
+\todo{Noget omkring unicode}
+
+\subsection{Parsing Python}
+A Python program uses newlines as delimiters.\footnote{A line can be joined with the next line if it has a ``\texttt{\textbackslash}'' at the end of the line.}
+But if an expression is stretched over several lines for instance in parentheses it is still one line but several physical lines.
+
+A comment starts with a ``\texttt{\#}'' symbol.
+
+Indentation is used for grouping statements for instance a body of a function.
+The recommended indentation is four spaces.\todo{uvigtigt? ellers skal vi have pep 8 kilde}
+
+
+
+Identifiers are unlimited in length and the casing is important.
+The following keywords are reserved and cannot be used as identifiers, see \cref{python:keywords_tabular}.
+\begin{figure}
+  \centering
+  \begin{tabular}{l l l l l}
+    False & class & finally & is & return \\
+None   &    continue &  for     &   lambda  &   try \\
+True   &    def     &   from     &  nonlocal &  while \\
+and    &    del     &   global   &  not      &  with \\
+as     &    elif    &   if        & or       &  yield \\
+assert  &   else    &   import   &  pass \\
+break   &   except  &   in      &   raise \\
+  \end{tabular}
+  \caption{Python keywords}
+  \label{python:keywords_tabular}
+\end{figure}
+For a complete list of disallowed identifiers see \citet{python_docs}.
+
 \subsection{Control Structures}\label{python:control_structures}
 The python programming language has three control structures, \texttt{if}, \texttt{while} and \texttt{for}.
 In the following they are presented as simple examples and a figure showing the possible flow.
