@@ -41,9 +41,9 @@ When other users see this comment, their browser runs this JavaScript, which can
 Again, this can be prevented by sanitizing user input that is stored.
 
 A very simple example of a cross site scripting is presented in \cref{appendix:xss}.
-In \cref{xss:request} some input is taken and it is inserted into the result page in \cref{xss:replace}
+In \cref{xss:request} some input is taken and it is inserted into the result page in \cref{xss:replace}.
+A link to the vulnerable web page can be constructed and sent to a unknowing user who opens the link and gets important information stolen.
 In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
-\todo{maske forsimple eksemplerne endnu mere, sa det kun er det omtalte der star der}
 
 \paragraph{Path traversal}
 Path traversal is when access to a resource gives unintended access to the file system of the server.
