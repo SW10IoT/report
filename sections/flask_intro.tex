@@ -1,0 +1,151 @@
+\section{Flask}
+Flask is a framework for developing web applications in python\citep{flask_official}.
+Its goal is to be minimal without compromizing functionality.
+It is extensible and flexible, so components like database, template engine and form validation can be chosen by the developer.
+
+The minimal nature of Flask makes it possible to write a web page in a very small amount of code.
+The following program craetes a web server that serves a ``Hello World!'' page on the root.
+
+\begin{lstlisting}[style=python, caption='Minimal Flask application', label='minimal_flask']
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run()
+\end{lstlisting}
+
+The Flask framework is imported and a function is defined with the \texttt{app.route} decorator which tells the framework where to serve the page.
+The function returns the string ``Hello World!'' which is shown on the web page.
+
+The following will present the Flask functionality that will be used in this project.
+The descriptions will be based on the \citet{flask_docs}.
+
+\paragraph{Routing}
+The \texttt{app.route} decorator is used to bind a function to a URL.
+The parameter provided binds the function to the relative path.
+Example paths are '/' for the root and '/hello\_world' for a subpage.
+The example in \cref{minimal_flask} binds the function \texttt{hello\_world()} to the  url \texttt{hostname/}
+
+\subparagraph{HTTP methods} Another parameter for the \texttt{app.route} decorator is the methods allowed.
+This parameter enables other HTTP methods than the default GET.
+An example of enabling the POST method can be seen on \cref{methods}.
+
+\begin{lstlisting}[style=python, caption='Enabling POST requests for a login form', label=methods]
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        do_the_login()
+    else:
+        show_the_login_form()
+\end{lstlisting}
+
+\paragraph{Requests}
+Interaction with the incoming request happens through the \texttt{request} object.
+This object contains all attributes of the request such as arguments from the query string, form data from POST requests and uploaded files.
+\Cref{query_string} shows a very simple use of the query string.
+The query string 'name' is retrieved with the default value 'no name' and assigned to \texttt{param}, which is then returned to the user.
+
+\begin{lstlisting}[style=python, caption='Simple use of the query string', label=query_string]
+@app.route('/query_param')
+def query_param():
+    param = request.args.get('name', 'no name')
+    return name
+\end{lstlisting}
+
+\paragraph{Responses}
+When returning from a function that will be rendered as a web page, Flask provided several possibilities that makes this process flexible.
+For example a returned string will automatically be converted to a valid HTML page.
+Special functions for creating responses exist, such as \texttt{send\_file(path, name)} which sends a file to the client.
+HTML files can be rendered with \texttt{make\_response()}, and more complex pages can be constructed with the template engine.
+The template engine will be explained in the following.
+
+\subparagraph{Templates}
+Flask uses a template engine called \emph{Jinja2}, which helps the developer keep the application secure.
+The template engine escapes any dangerous user inputs without the developer having to consider it.
+
+\begin{lstlisting}[style=python, caption='Rendering a template that displays the name parameter', label=template]
+from flask import render_template
+  
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello.html', name=name)
+\end{lstlisting}
+
+\begin{lstlisting}[style=python, caption='The Jinja2 template used by the hello example', label=template_html]
+<!doctype html>
+<title>Hello from Flask</title>
+
+<h1>Hello {{ name }}!</h1>
+\end{lstlisting}
+
+\Cref{template} shows a simple example of a template being rendered.
+The \texttt{render\_template} function takes the template displayed in \cref{template_html} and replaces the name variable with the name entered in the URL.
+The template engine handles all escaping, so a malicious user cannot compromise the page through the URL.
+
+\subparagraph{The Response object}
+Sometimes a page is more complex than just rendering a template and replacing variables with the appropriate values.
+Web pages have response codes to indicate errors, headers that define the parameters of the request and cookies to keep track of the user.
+In order to work with these aspects we need to get hold of the response before sending it to the client.
+This is done with the \texttt{make\_response()} method.
+The usage of the \texttt{make\_response()} method is shown in \cref{make_response} where a handler for 404 errors is defined.
+Instead of showing the browser's default 404 error, we want to show our own error.
+\texttt{make\_response()} takes a parameter for setting the status code, so creating the custom 404 handler just renders a template and sets the error code to 404.
+The \texttt{make\_response()} method returns a response object, which can then be manipulated by for example add a header, or a cookie with \texttt{set\_cookie(name, value)}.
+
+\begin{lstlisting}[style=python, caption='Using make\_response to create a custom 404 handler', label=make_response]
+@app.errorhandler(404)
+def not_found(error):
+    resp = make_response(render_template('error.html'), 404)
+    resp.headers['X-Something'] = 'A value'
+    return resp
+\end{lstlisting}
+
+\paragraph{SQLAlchemy}
+SQL ALchemy is a toolkit for operating on SQL databases directly from Python.
+Its goal is to provide ``efficient and high performing database access, adapted into a simple and Pythonic domain language''\citep{sqlalchemy_official}.
+
+The code displayed on \cref{sqlalchemy_model} shows how the connection to a database is created.
+The URI of the database is provided to the config attribute of the flask application, and a database object is created.
+This object contains a \texttt{Model} class that can be used to declare the model.
+In the example, a \texttt{User} model is declared.
+
+\begin{lstlisting}[style=python, caption='A SQLAlchemy database model', label=sqlalchemy_model]
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['_DATABASE_URI'] = 'sqlite:////tmp/database.db'
+db = SQLAlchemy(app)
+
+
+class User(db.Model): 
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+\end{lstlisting}
+
+Now that the database model is created we can populate it.
+In \cref{sql_alchemy} the usage of a SQLAlchemy database is shown.
+Between \cref{populate_start} and \cref{populate_end} Users are created and inserted into the database.
+Afterwards, in \cref{query}, the database is being queried, first to show all Users, and afterwards to show only the first User named 'admin'.
+
+\begin{lstlisting}[style=python, caption='Populating the database and querying the content', label=sqlalchemy_use, escapeinside={(*@}{@*)}]
+admin = User('admin', 'admin@example.com') (*@ \label{populate_start} @*)
+guest = User('guest', 'guest@example.com')
+
+db.session.add(admin)
+db.session.add(guest)
+db.session.commit() (*@ \label{populate_end} @*)
+
+users = User.query.all() (*@ \label{query} @*)
+admin = User.query.filter_by(username='admin').first()
+\end{lstlisting}
+
