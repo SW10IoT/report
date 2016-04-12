@@ -5,17 +5,17 @@ This chapter will describe the theory used for building the static analysis engi
 It is based on the lecture notes on static analysis in \citet{schwartzbach}
 
 
-\section{Undecidable}\label{theory_intro}
-As mentioned above we want to track input and then determine if it is harmful or not.
-The bad news are, that it turns out, that we will not be able to provide answers, but only approximations to this problem.
+\paragraph{Undecidable}\label{theory_intro}
+As mentioned above we want to track input and determine whether it is harmful or not in the way it is used throughout the application.
+Unforturnately, it turns out that we will not be able to provide definite answers to this question, but only qualified approximations.
 This is due to Rice's theorem which can be phrased as ``all interesting questions about the behaviour of programs are undecidable'' \citep[p.~3]{schwartzbach}.
-These \emph{interesting questions} is a rather large group of problems, and our problem is part of this group.
+These \emph{interesting questions} consitute a rather large group of problems, and our problem is part of this group.
 
-We will therefore not be able to provide definitive answers for each input, but we will be able to provide an approximation that comes as close as possible.
-
-Static analysis is the tool to use for these approximations.
-Static analysis is technique used for answering this type of question by defining a number of rules which define the problem.
-The solution to the problem will then be gradually approached by algorithm designed for this purpose.
+\paragraph{Static analysis}
+Static analysis is the theoretical topic that engage in solving this type of problem.
+The problem is characterized by setting up a number of rules which define the problem.
+The program is then converted into a model which represent the flow of the program.
+The solution to the problem will then be gradually approached by algorithm that applies the defined rules on the model.
 The algorithm stops when it can not get closer to an answer.
-This answer is then the approximation which can be used for further analysis.
+This answer is then the approximation which can be used for further analysis and be the basis of an answer to the problem.
 
