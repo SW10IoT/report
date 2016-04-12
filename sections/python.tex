@@ -10,7 +10,7 @@ The Python programming language is a dynamic language basically just constructed
 \todo{Noget omkring unicode}
 
 \subsection{Parsing Python}
-A Python program uses newlines as delimiters.\footnote{A line can be joined with the next line if it has a ``\texttt{\textbackslash}'' at the end of the line.}
+A Python program uses newlines as delimiters between statements.\footnote{A line can be joined with the next line if it has a ``\texttt{\textbackslash}'' at the end of the line.}
 But if an expression is stretched over several lines for instance in parentheses it is still one line but several physical lines.
 
 A comment starts with a ``\texttt{\#}'' symbol.
@@ -37,6 +37,18 @@ break   &   except  &   in      &   raise \\
   \label{python:keywords_tabular}
 \end{figure}
 For a complete list of disallowed identifiers see \citet{python_docs}.
+
+Integers are not allowed to start with ``0'' and their size depends on the amount of available memory.
+Integers can be represented as \texttt{integer}, \texttt{oct}, \texttt{hex} and \texttt{bin}.
+Floating points is a number containing a ``.'' and one is able to use an exponent, for instance: ``3.14e-10''.
+
+There are the following operators:
+\begin{itemize}
+\item ``+'' - Used for addition and string concatenation.
+\item ``-'' - Used for subtraction.
+\item ``*'' \todo{SKal de alle med eller hvor meget detalje?}
+\end{itemize}
+
 
 \subsection{Control Structures}\label{python:control_structures}
 The python programming language has three control structures, \texttt{if}, \texttt{while} and \texttt{for}.
