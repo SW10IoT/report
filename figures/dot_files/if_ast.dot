@@ -1,0 +1,8 @@
+digraph name {
+	if -> test;
+	if -> body;
+	if -> orelse;
+	test -> expr
+	body -> "stmt*";
+	orelse -> "[ ]";
+	}
