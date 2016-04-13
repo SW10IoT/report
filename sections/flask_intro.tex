@@ -4,9 +4,9 @@ Its goal is to be minimal without compromising functionality.
 It is extensible and flexible, so components like database, template engine and form validation can be chosen by the developer.
 
 The minimal nature of Flask makes it possible to write a web page in a very small amount of code.
-The following program creates a web server that serves a ``Hello World!'' page on the root.
+The following program, see \cref{minimal_flask}, creates a web server that serves a ``Hello World!'' page on the root.
 
-\begin{lstlisting}[style=python, caption='Minimal Flask application', label='minimal_flask']
+\begin{lstlisting}[style=python, caption={Minimal Flask application}, label={minimal_flask}]
 from flask import Flask
 app = Flask(__name__)
 
@@ -34,7 +34,7 @@ The example in \cref{minimal_flask} binds the function \texttt{hello\_world()} t
 This parameter enables other HTTP methods than the default GET.
 An example of enabling the POST method can be seen on \cref{methods}.
 
-\begin{lstlisting}[style=python, caption='Enabling POST requests for a login form', label=methods]
+\begin{lstlisting}[style=python, caption={Enabling POST requests for a login form}, label={methods}]
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -49,7 +49,7 @@ This object contains all attributes of the request such as arguments from the qu
 \Cref{query_string} shows a very simple use of the query string.
 The query string 'name' is retrieved with the default value 'no name' and assigned to \texttt{param}, which is then returned to the user.
 
-\begin{lstlisting}[style=python, caption='Simple use of the query string', label=query_string]
+\begin{lstlisting}[style=python, caption={Simple use of the query string}, label={query_string}]
 @app.route('/query_param')
 def query_param():
     param = request.args.get('name', 'no name')
@@ -67,7 +67,7 @@ The template engine will be explained in the following.
 Flask uses a template engine called \emph{Jinja2}, which helps the developer keep the application secure.
 The template engine escapes any dangerous user inputs without the developer having to consider it.
 
-\begin{lstlisting}[style=python, caption='Rendering a template that displays the name parameter', label=template]
+\begin{lstlisting}[style=python, caption={Rendering a template that displays the name parameter}, label={template}]
 from flask import render_template
   
 @app.route('/hello/<name>')
@@ -75,7 +75,7 @@ def hello(name=None):
     return render_template('hello.html', name=name)
 \end{lstlisting}
 
-\begin{lstlisting}[style=python, caption='The Jinja2 template used by the hello example', label=template_html]
+\begin{lstlisting}[style=python, caption={The Jinja2 template used by the hello example}, label={template_html}]
 <!doctype html>
 <title>Hello from Flask</title>
 
@@ -96,7 +96,7 @@ Instead of showing the browser's default 404 error, we want to show our own erro
 \texttt{make\_response()} takes a parameter for setting the status code, so creating the custom 404 handler just renders a template and sets the error code to 404.
 The \texttt{make\_response()} method returns a response object, which can then be manipulated by for example add a header, or a cookie with \texttt{set\_cookie(name, value)}.
 
-\begin{lstlisting}[style=python, caption='Using make\_response to create a custom 404 handler', label=make_response]
+\begin{lstlisting}[style=python, caption={Using make\_response to create a custom 404 handler}, label={make_response}]
 @app.errorhandler(404)
 def not_found(error):
     resp = make_response(render_template('error.html'), 404)
@@ -113,7 +113,7 @@ The URI of the database is provided to the config attribute of the flask applica
 This object contains a \texttt{Model} class that can be used to declare the model.
 In the example, a \texttt{User} model is declared.
 
-\begin{lstlisting}[style=python, caption='A SQLAlchemy database model', label=sqlalchemy_model]
+\begin{lstlisting}[style=python, caption={A SQLAlchemy database model}, label={sqlalchemy_model}]
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -133,11 +133,11 @@ class User(db.Model):
 \end{lstlisting}
 
 Now that the database model is created we can populate it.
-In \cref{sql_alchemy} the usage of a SQLAlchemy database is shown.
+In \cref{sqlalchemy_use} the usage of a SQLAlchemy database is shown.
 Between \cref{populate_start} and \cref{populate_end} Users are created and inserted into the database.
 Afterwards, in \cref{query}, the database is being queried, first to show all Users, and afterwards to show only the first User named 'admin'.
 
-\begin{lstlisting}[style=python, caption='Populating the database and querying the content', label=sqlalchemy_use, escapeinside={(*@}{@*)}]
+\begin{lstlisting}[style=python, caption={Populating the database and querying the content}, label={sqlalchemy_use}, keywordstyle=\color{black}, escapeinside={(*@}{@*)}]
 admin = User('admin', 'admin@example.com') (*@ \label{populate_start} @*)
 guest = User('guest', 'guest@example.com')
 
