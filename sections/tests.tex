@@ -14,23 +14,24 @@ In addition an \texttt{if} can have many different expressions in its \emph{test
 These expressions are often logic expressions but can also be nameconstants, function calls, lambdas and even a list.
 To illustrate the three d\texttt{if}ferent cases three abstract directed graphs have been made.
 \begin{itemize}
-\item The graph for a single \texttt{if} statement can be seen on \cref{test:ast:if}.
-\item The graph for an \texttt{if} and an \texttt{elif} statement can be seen on \cref{test:ast:if_else}.
+\item The graph for a single \texttt{if} statement can be seen on the left on \cref{test:ast:if_and_else}.
+\item The graph for an \texttt{if} and an \texttt{elif} statement can be seen on the right on \cref{test:ast:if_and_else}.
 \item The graph for an \texttt{if}, \texttt{elif} and else statement can be seen on \cref{test:ast:if_elif_else}
 \end{itemize}
+\textbf{Note:} On \cref{test:ast:if_and_else} and \cref{test:ast:if_elif_else}, \textit{expr} is an expression, see \cref{}\todo{ref to python expressions}, \textit{stmt*} is a list of statements, see \cref{}\todo{ref to python statements}.
+
 
 \begin{figure}
-  \centering
-  \includegraphics[scale=.7]{./figures/dot_files/if_ast.pdf}
-  \caption{Abstract graph showing the nodes in the abstract syntax tree for a single \texttt{if} statement.}
-  \label{test:ast:if}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[scale=.7]{./figures/dot_files/if_else.pdf}
-  \caption{Abstract graph showing the nodes in the abstract syntax tree for an \texttt{if} and else statement.}
-  \label{test:ast:if_else}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{./figures/dot_files/if_ast.pdf}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{./figures/dot_files/if_else.pdf}
+    \end{subfigure}
+    \caption{Abstract graph showing the nodes in the abstract syntax tree for a single \texttt{if} statement on the left and an \texttt{if} and \texttt{else} statement on the right.}
+    \label{test:ast:if_and_else}
 \end{figure}
 
 \begin{figure}
