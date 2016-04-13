@@ -1,10 +1,10 @@
 \section{Flask}
 Flask is a framework for developing web applications in python\citep{flask_official}.
-Its goal is to be minimal without compromizing functionality.
+Its goal is to be minimal without compromising functionality.
 It is extensible and flexible, so components like database, template engine and form validation can be chosen by the developer.
 
 The minimal nature of Flask makes it possible to write a web page in a very small amount of code.
-The following program craetes a web server that serves a ``Hello World!'' page on the root.
+The following program creates a web server that serves a ``Hello World!'' page on the root.
 
 \begin{lstlisting}[style=python, caption='Minimal Flask application', label='minimal_flask']
 from flask import Flask
@@ -27,7 +27,7 @@ The descriptions will be based on the \citet{flask_docs}.
 \paragraph{Routing}
 The \texttt{app.route} decorator is used to bind a function to a URL.
 The parameter provided binds the function to the relative path.
-Example paths are '/' for the root and '/hello\_world' for a subpage.
+Example paths are '/' for the root and '/hello\_world' for a sub-page.
 The example in \cref{minimal_flask} binds the function \texttt{hello\_world()} to the  url \texttt{hostname/}
 
 \subparagraph{HTTP methods} Another parameter for the \texttt{app.route} decorator is the methods allowed.
@@ -105,7 +105,7 @@ def not_found(error):
 \end{lstlisting}
 
 \paragraph{SQLAlchemy}
-SQL ALchemy is a toolkit for operating on SQL databases directly from Python.
+SQL Alchemy is a toolkit for operating on SQL databases directly from Python.
 Its goal is to provide ``efficient and high performing database access, adapted into a simple and Pythonic domain language''\citep{sqlalchemy_official}.
 
 The code displayed on \cref{sqlalchemy_model} shows how the connection to a database is created.
