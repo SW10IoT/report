@@ -7,8 +7,8 @@ A CFG always consists of one entry node and one exit node, called \textit{entry}
 Given a node \textit{n} the set of predecessor nodes are denoted \textit{pred(n)} and the set of successors are denoted \textit{succ(n)}.
 
 \paragraph{Python control flow graphs}
-Control flow graphs for simple Python statements, such as an assignment, have an entry node, a node containing the assignment and an exit node.
-The control flow graph of the sequence of two statements $S_1$ and $S_2$ are constructed by deleting the exit node of $S_1$ and the entry node of $S_2$ and \emph{gluing} the two resulting graphs together.
+CFGs for simple Python statements, such as an assignment, have an entry node, a node containing the assignment and an exit node.
+The CFG of the sequence of two statements $S_1$ and $S_2$ are constructed by deleting the exit node of $S_1$ and the entry node of $S_2$ and \emph{gluing} the two resulting graphs together.
 This process is depicted on \cref{cfg_sequence}.
 
 \begin{figure}
@@ -27,17 +27,17 @@ This process is depicted on \cref{cfg_sequence}.
   \label{cfg_sequence}
 \end{figure}
 
-The control flow graphs of  control flow structures in the Python programming language was presented in the figures provided in \cref{python:control_structures}.
+The CFGs of  control flow structures in the Python programming language was presented in the figures provided in \cref{python:control_structures}.
 
 \textbf{Note} that the \textit{else} clause is not represented as a independent node, the false branch is represented in the same way as the true branch in a ``if-else'' structure.
 \todo{synes maske det skal flyttes til eksemplet, men det kommer an pa hvordan tekster i python eksemplet bliver}
 
-The control flow graph for a complete program is produced by systematically combining the building blocks.
-An example of a small program can be seen on \cref{cfg_small_program}
+The CFG for a complete program is produced by systematically combining the building blocks.
+A CFG of the general example, \cref{theory:general_code_example}, is shown on \cref{theory:general_code_example_cfg}.
 
 \begin{figure}
   \center
-  \includegraphics[width=0.5\textwidth]{figures/small_program.pdf}
-  \caption{The control flow graph of a small Python program}
-  \label{cfg_small_program}
+  \includegraphics[width=.5\textwidth]{figures/general_example.pdf}
+  \caption{The control flow graph of the general example, \cref{theory:general_code_example}.}
+  \label{theory:general_code_example_cfg}
 \end{figure}
