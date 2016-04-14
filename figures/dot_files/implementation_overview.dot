@@ -1,0 +1,34 @@
+digraph name {
+	code [label="Source code"];
+	ast [label="Abstract syntax tree"];
+	cfg [label="Control flow graph"];
+	engine [label="Engine"];
+	flask [label="Flask engine"];
+	django [label="Django engine"];
+	other [label="Other engine"];
+	fixedpoint [label="Fixed point algorithm"];
+	analysis [label="Analysis"];
+	reaching_analysis [label="Reaching definitions analysis"];
+	liveness_analysis [label="Liveness analysis"];
+	other_analysis [label="Other analysis"];
+	vulnerability [label="Vulnerabilities"];
+
+	code -> ast;
+	ast -> cfg;
+	cfg -> engine;
+
+	flask -> engine;
+	django -> engine;
+	other -> engine;
+	engine -> cfg;
+
+	cfg -> fixedpoint;
+	fixedpoint -> analysis;
+
+	reaching_analysis -> analysis;
+	liveness_analysis -> analysis;
+	other_analysis -> analysis;
+
+	analysis -> fixedpoint;	
+	fixedpoint -> vulnerability;
+	}
