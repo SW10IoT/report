@@ -36,8 +36,11 @@
 %mainmatter
 \pagenumbering{arabic} %use arabic page numbering in the mainmatter
 
-\input{sections/introduction.tex}
-\input{sections/security_aspects.tex}
+\chapter{Introduction}\label{ch:introduction}
+\input{sections/security_aspects.tex} % intro
+
+\chapter{Preliminaries}
+\input{sections/preliminaries_intro.tex}
 \input{sections/python.tex}
 \input{sections/python_surprising_structures.tex}
 \input{sections/flask_intro.tex}
