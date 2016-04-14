@@ -1,0 +1,39 @@
+graph name {
+	root [label="{}"];
+
+	e1 [label="{x > 1}"];
+	e2 [label="{x / 2}"];
+	e3 [label="{y > 3}"];
+	e4 [label="{x - y}"];
+
+	e1e2 [label="{x > 1, x / 2}"];
+	e1e3 [label="{x > 1, y > 3}"];
+	e1e4 [label="{x > 1, x - y}"];
+	e2e3 [label="{x / 2, y > 3}"];
+	e2e4 [label="{x / 2, x - y}"];
+	e3e4 [label="{y > 3, x - y}"];
+
+	e1e2e3 [label="{x > 1, x / 2, y > 3}"];
+	e1e2e4 [label="{x > 1, x / 2, x - y}"];
+	e1e3e4 [label="{x > 1, y > 3, x - y}"];
+	e2e3e4 [label="{x / 2, y > 3, x - y}"];
+
+	e1e2e3e4 [label="{x > 1, x / 2, y > 3, x - y}"];
+
+
+	root -- e1, e2, e3, e4;
+	e1 -- e1e2, e1e3, e1e4;
+	e2 -- e1e2, e2e3, e2e4;
+	e3 -- e1e3, e2e3, e3e4;
+	e4 -- e1e4, e2e4, e3e4;
+	e1e2 -- e1e2e3, e1e2e4;
+	e1e3 -- e1e2e3, e1e3e4;
+	e1e4 -- e1e2e4, e1e3e4;
+	e2e3 -- e1e2e3, e2e3e4;
+	e2e4 -- e1e2e4, e2e3e4;
+	e3e4 -- e1e3e4, e2e3e4;
+	e1e2e3 -- e1e2e3e4;
+	e1e2e4 -- e1e2e3e4;
+	e1e3e4 -- e1e2e3e4;
+	e2e3e4 -- e1e2e3e4;	
+	}
