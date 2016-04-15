@@ -1,6 +1,7 @@
 \section{Control Flow Graph}\label{control_flow_graph}
-If one wants to analyse a program and the analysis is flow sensitive one can use a Control Flow Graph(CFG) to track the flow of the program.
-That an analysis is flow sensitive means that it is significant in which order pieces of the program are executed.
+Static analysis is a type of flow sensitive analysis, meaning that it is significant in which order pieces of the program are executed.
+When performing a flow sensitive analysis one can use a Control Flow Graph(CFG) to describe the flow of the program.
+
 A CFG is simply just another representation of the program source.
 It is a directed graph where a node is a specific place in the program and edges represent the possible options to which the program can execute to.
 A CFG always consists of one entry node and one exit node, called \textit{entry} and \textit{exit}.
@@ -14,13 +15,13 @@ This process is depicted on \cref{cfg_sequence}.
 \begin{figure}
   \begin{subfigure}[b]{0.49\textwidth}
     \center
-    \includegraphics[scale=0.5]{figures/simple.pdf}
+    \includegraphics[scale=0.4]{figures/simple.pdf}
     \caption{A single statement}
   \end{subfigure}
   ~
   \begin{subfigure}[b]{0.49\textwidth}
     \center
-    \includegraphics[scale=0.5]{figures/sequence.pdf}
+    \includegraphics[scale=0.4]{figures/sequence.pdf}
     \caption{A sequence of two statements}
   \end{subfigure}
   \caption{Construction of a control flow graph for two sequential statements}
@@ -33,11 +34,11 @@ The CFGs of  control flow structures in the Python programming language was pres
 \todo{synes maske det skal flyttes til eksemplet, men det kommer an pa hvordan tekster i python eksemplet bliver}
 
 The CFG for a complete program is produced by systematically combining the building blocks.
-A CFG of the general example, \cref{theory:general_code_example}, is shown on \cref{theory:general_code_example_cfg}.
+A CFG of the general example in \cref{theory:general_code_example}, is shown on \cref{theory:general_code_example_cfg}.
 
 \begin{figure}
   \center
-  \includegraphics[width=.5\textwidth]{figures/general_example.pdf}
+  \includegraphics[width=.25\textwidth]{figures/general_example.pdf}
   \caption{The control flow graph of the general example, \cref{theory:general_code_example}.}
   \label{theory:general_code_example_cfg}
 \end{figure}

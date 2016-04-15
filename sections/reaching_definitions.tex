@@ -2,24 +2,8 @@
 To solve our problem of detecting when unsanitized user input reaches a critical point in the code, we need an analysis of what assignments may influence the values of all variables at any point in the program.
 The \emph{Reaching Definitions} as presented in \citet[p.~26]{schwartzbach} achieves just this.
 
-Consider the Python code from the general example on \cref{theory:general_code_example}, repeated here, \cref{reaching::code}, so it is easier to follow.
-
-\begin{lstlisting}[style=python, caption={General code example repeated here from \cref{theory:general_code_example}}, label=reaching::code]
-x = input()
-x = int(x)
-while x > 1:
-    y = x / 2
-    if y > 3:
-        x = x-y
-    z = x-4
-    if z > 0:
-        x = x / 2
-    z = z - 1
-print(x)
-\end{lstlisting}
-
-The code is very simple, it take some user input which is sent through a while loop that changes the three variables x,y and z.
-The x variable is printed out as the last operation of the program.
+Consider the Python code from the general example on \cref{theory:general_code_example}.
+When executing the program and providing some arbitrary input at \cref{theory:general_code_example:input}, the value will slide through the control flow of the program until it is printed in the end.
 At this point x has been changed by assignments a number of times, and it is not obvious where the value comes from.
 By performing the reaching definitions analysis we can find possible origins of the value.
 
@@ -28,17 +12,9 @@ As stated earlier a dataflow analysis consist of many of the concepts that have 
 These concepts will in the following be instantiated on the previously introduced example as to present the complete analysis.
 
 \subparagraph{Control flow graph}
-The CFG of this code is presented in \cref{reaching::cfg}.
+The CFG of this code was presented in \cref{theory:general_code_example}.
 
-\begin{figure}
-  \begin{center}
-  \includegraphics[scale=.5]{./figures/reaching_definitions.pdf}
-  \caption{CFG of the python code presented in \cref{reaching::code}}
-  \label{reaching::cfg}
-  \end{center}
-\end{figure}
-
-The flow is linear until the while loop.
+The flow of the program is linear until the while loop.
 The while loop diverts the flow into the loop and ultimately to the print statement.
 The loop has two if statements where the flow is again split up.
 It is easy to see from the flow graph that there are many possible routes from entry to exit, and the propagation of values is not straightforward.
@@ -48,7 +24,8 @@ The lattice used for this analysis is a power set lattice of all the assignments
 
 \[ L = ( 2^{ \{x = \text{input()}, ~ x = \text{int(x)}, ~ y = x/2, ~ x = x-y, ~ z = x-4, ~ x = x/2, ~ z = z-1 \} } , \subseteq ) \]
 
-\todo{visualisation of the lattice - do this or not?}
+The lattice of a simplified version of this lattice was described and depicted in \cref{lattice_example}.
+Providing an illustration of the full latice would be intangible, but the structure is similar.
 
 \subparagraph{Dataflow Constraint System}
 The analysis is performed backwards by joining the constraints of all predecessors of all nodes.
