@@ -4,7 +4,7 @@ While we programmed the conversion from abstract syntax tree to a control flow g
 This section will discuss some of these experiences.
 
 \subsection{While - else}
-Normally we know while as a simple control structure that has a condition and a body.
+Normally we know \texttt{while} as a simple control structure that has a condition and a body.
 The body will execute until the condition is false.
 This implementation is also found in Python, but Python has an extra variant of the while loop - an else clause.
 An example of a while loop with an else clause can be seen on \cref{surprise_while_else}.
@@ -23,11 +23,12 @@ In the example in \cref{surprise_while_else}, this is being utilised to handle v
 If that is the case, we break the body and do not execute the else clause which contains some logic for the value behaved as expected.
 
 The \texttt{for} loop in Python also has an \texttt{else} clause which works in the same way.
+\todo{Want example, y or n?}
 
 \subsection{Generator expression}
 The Python language has a goal of being simple, explicit and readable\citep{python_zen}.
 This can often be seen in some very elegant constructions contained in the language.
-One those is the generator statement, which we both ran into when implementing the control flow graph of the generator and during the whole development process when attempting to refactor a piece of code to make it more clear.
+One of those is the generator statement, which was discovered during the development of \pyt{}.
 
 A generator expression is a concise notation for a common pattern: iterating over a collection of items and then performing some operation on every element\citep{python_functional}.
 
@@ -51,7 +52,7 @@ The resulting elements are the stripped of white-space by the initial expression
 
 The generator in \cref{generator_strip} can be written without using a generator expression.
 This can be seen in \cref{generator_corresponding}.
-The generator expression is very clear in conveying its purpose while being shorter than the 'old way'.
+The generator expression is very clear in conveying its purpose while being shorter than the ``old way''.
 \begin{lstlisting}[style=python, caption={\Cref{generator_strip} implemented without using an generator expression}, label={generator_corresponding}]
 for line in strings:
     if not line != '':
@@ -65,3 +66,5 @@ An example of a list comprehension can be seen in \cref{listcomp}.
 \begin{lstlisting}[style=python, caption={The generator from \cref{generator_strip} changed to a list comprehension}, label={listcomp}]
 people = [line.strip() for line in strings if line != '']
 \end{lstlisting}
+
+There is an equivalent comprehension construct for \texttt{set}s\cref{} and \texttt{dict}s\cref{}.\todo{ref to list and dicts}
