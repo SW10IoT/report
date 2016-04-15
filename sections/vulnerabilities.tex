@@ -57,3 +57,11 @@ This could possibly result in database content or passwords to be accessed by in
 
 
 \todo{all these problems have a solution that are related to sanitization. Maybe we should write a section on sanitization and the different solutions that already exist}
+
+\section{Detecting vulnerabilities}\label{vulnerabilities:detecting}
+Common for these three security vulnerabilities is that some user input reaches a sensitive piece of code.
+An SQL injection happens when user input reaches a database query
+Cross site scripting happens when user input reaches some HTML.
+Path traversal happens when user input reaches a piece of code that performs file system access.
+
+To detect these vulnerabilities we need to create a tool that can connect information about user input and sensitive code to detect when the operations performed are dangerous.

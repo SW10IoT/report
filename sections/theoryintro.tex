@@ -1,9 +1,8 @@
-To be able to find security flaws in a program there are a range of different techniques, the ones used to develop \pyt{}, are being covered in this section.
-What we are interested in is to determine whether a dangerous input from the user is able to reach a place in the code where it can cause damage.
+As we concluded in \cref{vulnerabilities:detecting}  we are interested in determining when dangerous input from a user is able to reach a place in the code where it can cause damage.
+A technique for determining this is static analysis where the source of a program is statically analysed for some property.
 
 This chapter will describe the theory used for building the static analysis engine used by \pyt{}.
 It is based on the lecture notes on static analysis in \citet{schwartzbach}
-
 
 \paragraph{Undecidable}\label{theory_intro}
 As mentioned above we want to track input and determine whether it is harmful or not in the way it is used throughout the application.
