@@ -1,7 +1,20 @@
 \section{Implementation Overview}
+This section will give an overview of the different components and the overall flow of \pyt{}.
+An illustration giving an abstract overview can be seen on \cref{figure:implementation_overview}.
 
 \begin{figure}
   \input{./figures/implementation_overview.tikz}
-  \caption{Implementation overview.}
-  
+  \caption{An abstract overview of the implementation of \pyt{}, showing the main components and the flow.}
+  \label{figure:implementation_overview}
 \end{figure}
+
+The illustration shows that \pyt{} takes some source code as input and outputs at last a list of potential vulnerabilities.
+After the source code is loaded an abstract syntax tree(AST) is generated.
+The AST is generated using the standard Python library \texttt{ast}\cite{python_ast}.
+One of the biggest components is the CFG component, which uses the AST nodes to make CFG nodes.
+The engine is a component that uses a defined engine to prepare the CFG on the analysis.
+The default engine is the Flask engine.
+The fixed point algorithm is basically just implemented as the algorithm is described in \cref{fixed_point_algorithm}.
+But it is able to use different analyses and as default it uses the reaching definitions analysis.
+These analyses can be specified by the user.
+At last a vulnerability log is provided to the user giving precise information about the potential vulnerabilities found.
