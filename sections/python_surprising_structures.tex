@@ -1,7 +1,7 @@
-\section{Suprising structures in Python}
+\section{Surprising structures in Python}
 When working so close to the specification of a language some weird or surprising structures in the language arise.
-While we programmed the conversion from abstract syntax tree to a control flow graph, we had these experiences once in a while, and working with the structures has given os some insight, both in the workings of python and in the details of these interesting structures.
-This sections will discuss some of these experiences.
+While we programmed the conversion from abstract syntax tree to a control flow graph, we had these experiences once in a while, and working with the structures has given us some insight, both in the workings of python and in the details of these interesting structures.
+This section will discuss some of these experiences.
 
 \subsection{While - else}
 Normally we know while as a simple control structure that has a condition and a body.
@@ -19,19 +19,19 @@ else:
 \end{lstlisting}
 
 The else clause will execute when the condition is false, but if the body is exited by a \texttt{break} statement, the else clause will not be executed.
-In the example in \cref{surprise_while_else}, this is being utilized to handle values that are unexpected in some way.
-If that is the case, we break the body and do not execute the else clause which contains some logic for the value behaved as expexted.
+In the example in \cref{surprise_while_else}, this is being utilised to handle values that are unexpected in some way.
+If that is the case, we break the body and do not execute the else clause which contains some logic for the value behaved as expected.
 
 The \texttt{for} loop in Python also has an \texttt{else} clause which works in the same way.
 
 \subsection{Generator expression}
-The Python langauage has a goal of being simple, explicit and readable\citep{python_zen}.
+The Python language has a goal of being simple, explicit and readable\citep{python_zen}.
 This can often be seen in some very elegant constructions contained in the language.
 One those is the generator statement, which we both ran into when implementing the control flow graph of the generator and during the whole development process when attempting to refactor a piece of code to make it more clear.
 
 A generator expression is a concise notation for a common pattern: iterating over a collection of items and then performing some operation on every element\citep{python_functional}.
 
-\begin{lstlisting}[style=python, caption={Generator expression, stripping whitespace from strings}, label={generator_strip}]
+\begin{lstlisting}[style=python, caption={Generator expression, stripping white-space from strings}, label={generator_strip}]
 strings = ['King Arthur   ', '', '   Queen Elizabeth',
            '', '   Arnold Schwarzenegger   ']
 
@@ -39,7 +39,7 @@ people = (line.strip() for line in strings if line != '')
 \end{lstlisting}
 
 In \cref{generator_strip} some file has been parsed into an array.
-The resulting strings have some undesirable whitespace, and some of the strings are even empty.
+The resulting strings have some undesirable white-space, and some of the strings are even empty.
 The subsequent generator expression handles both of these problems.
 
 A generator expression consist of an expression part and a for part.
@@ -47,7 +47,7 @@ The for part is evaluated and the expression is executed on each element of the 
 The result is a generator that contains the results.
 
 In \cref{generator_strip} the generator iterates over the strings with the \texttt{for} statement and filters out empty strings with the \texttt{if} statement.
-The resulting elements are the stripped of whitespace by the initial expression.
+The resulting elements are the stripped of white-space by the initial expression.
 
 The generator in \cref{generator_strip} can be written without using a generator expression.
 This can be seen in \cref{generator_corresponding}.
@@ -58,8 +58,8 @@ for line in strings:
         yield line.strip()
 \end{lstlisting}
 
-Python contains a similar construct called the list comprehenesion which returns a list of the element instead of a generator.
-This construct uses square parenthesis instead og round parenthesis, but are not different in any other way.
+Python contains a similar construct called the list comprehension which returns a list of the element instead of a generator.
+This construct uses square parenthesis instead of round parenthesis, but are not different in any other way.
 An example of a list comprehension can be seen in \cref{listcomp}.
 
 \begin{lstlisting}[style=python, caption={The generator from \cref{generator_strip} changed to a list comprehension}, label={listcomp}]
