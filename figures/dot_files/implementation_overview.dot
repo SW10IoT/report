@@ -1,22 +1,25 @@
 digraph name {
-	code [label="Source code"];
-	ast [label="Abstract syntax tree"];
-	cfg [label="Control flow graph"];
-	engine [label="Engine"];
-	flask [label="Flask engine"];
-	django [label="Django engine"];
-	other [label="Other engine"];
-	fixedpoint [label="Fixed point algorithm"];
-	analysis [label="Analysis"];
-	reaching_analysis [label="Reaching definitions analysis"];
-	liveness_analysis [label="Liveness analysis"];
-	other_analysis [label="Other analysis"];
-	vulnerability [label="Vulnerabilities"];
+	graph [margin=0.1, nodesep=.5, ranksep=1];
+	node [shape="none", fixedsize=true, width=2, height=2];
+
+	code [width=1.5, height=1.5, image="implementation_overview_images/source_code.png", label="Source code"];
+	ast [width=1.5, height=1.3, image="implementation_overview_images/ast.gif", label="Abstract syntax tree"];
+	cfg [width=2.5, height=2.5, image="implementation_overview_images/for_complete.png", label="Control flow graph"];
+	engine [image="implementation_overview_images/cog_wheel.png", label="Engine"];
+	flask [image="implementation_overview_images/flask.png", width=1, height=1, label="Flask"];
+	django [image="implementation_overview_images/django.png", width=1, height=.6, label="Django"];
+	other [image="implementation_overview_images/question_mark.png", width=.8, height=1, label="Other"];
+	fixedpoint [image="implementation_overview_images/web.png", label="Fixed point algorithm"];
+	analysis [image="implementation_overview_images/analysis.png", width=1.8 label="Analysis"];
+	reaching_analysis [width=1, height=1, label="Reaching\ndefinitions"];
+	liveness_analysis [width=1, height=1, label="Liveness"];
+	other_analysis [image="implementation_overview_images/question_mark.png", width=.8, height=1, label="Other"];
+	vulnerability [image="implementation_overview_images/vulnerability.png", label="Vulnerabilities"];
 
 	code -> ast;
 	ast -> cfg;
 	cfg -> engine;
-
+	 
 	flask -> engine;
 	django -> engine;
 	other -> engine;
