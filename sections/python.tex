@@ -137,6 +137,7 @@ This \texttt{else} clause can be a statement body, or a nested \texttt{if} which
 An example of this can be seen on \cref{python:if:elif}.
 The outmost \texttt{if} has a nested \texttt{elif} statement which then contains a body executed when the \texttt{elif} condition evaluates to \texttt{True} and an \texttt{else} executed when it evaluates to \texttt{False}.
 
+\textbf{Note} that the \textit{else} clause is not represented as a independent node, the false branch is represented in the same way as the true branch in a ``if-else'' structure.
 
 \begin{figure}[H]
   \centering
