@@ -18,7 +18,7 @@ if __name__ == '__main__':
     app.run()
 \end{lstlisting}
 
-The Flask framework is imported and a function is defined with the \texttt{app.route} decorator which tells the framework where to serve the page.
+The Flask framework is imported and a function is defined with the \texttt{app.route} decorator \todo{beskriv decorators i python intro} which tells the framework where to serve the page.
 The function returns the string ``Hello World!'' which is shown on the web page.
 
 The following will present the Flask functionality that will be used in this project.
@@ -57,7 +57,7 @@ def query_param():
 \end{lstlisting}
 
 \paragraph{Responses}
-When returning from a function that will be rendered as a web page, Flask provided several possibilities that makes this process flexible.
+When returning from a function that will be rendered as a web page, Flask provides several possibilities that makes this process flexible.
 For example a returned string will automatically be converted to a valid HTML page.
 Special functions for creating responses exist, such as \texttt{send\_file(path, name)} which sends a file to the client.
 HTML files can be rendered with \texttt{make\_response()}, and more complex pages can be constructed with the template engine.
