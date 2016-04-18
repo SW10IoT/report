@@ -3,7 +3,7 @@ The static analysis we want to perform utilizes the mathematical theory of latti
 This theory will be described in the following.
 
 \paragraph{Partial orders}
-A lattice is a specialization of a partial order which will be described.
+A lattice is a specialization of a partial order which will be described in the following.
 A partial order is a mathematical structure $L = (S, \sqsubseteq)$ where S is a set and $\sqsubseteq$ is a binary relation where the following conditions are satisfied:
 \begin{itemize}
   \item Reflexivity: $\forall x \in S : x \sqsubseteq$
@@ -15,8 +15,8 @@ A partial order is a mathematical structure $L = (S, \sqsubseteq)$ where S is a 
 
 \paragraph{Least upper bound}
 As the name states, a least upper bound is the least of all upper bounds.
-An upper bound y of a set X where $ X \subset S$ where S is a partial order is written as $X \subseteq y$.
-y is an upper bound of X if we have that $\forall x \in X : x \sqsubseteq x$.
+An upper bound y of a set X where $ X \subseteq S$ and S is a partial order is written as $X \sqsubseteq y$.
+y is an upper bound of X if we have that $\forall x \in X : x \sqsubseteq y$.
 
 We can now define the least upper bound, written as $\sqcup X$:
 \[X \sqsubseteq \sqcup X \wedge \forall y \in S : X \sqsubseteq y \Rightarrow \sqcup X \sqsubseteq y\]
