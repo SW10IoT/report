@@ -29,7 +29,7 @@ Providing an illustration of the full latice would be intangible, but the struct
 
 \subparagraph{Dataflow Constraint System}
 The analysis is performed backwards by joining the constraints of all predecessors of all nodes.
-This can be expressed a the following function:
+This can be expressed as the following function:
 
 \[ JOIN(v) = \bigcup_{ w \in pred(v)} \constraint{w} \]
 
@@ -37,11 +37,12 @@ All nodes other that assignment just join all constraints of their predecessors:
 
 \[ \constraint{v} = JOIN(v) \]
 
-Assignment nodes changes the content of a variable and the former assignment to this variable will therefore be discarded:
+Assignment nodes changes the content of a variable.
+The former assignment to this variable will therefore be discarded and replaced with the current assignment node:
 
 \[ \constraint{v} = JOIN(v) \downarrow id \cup \{ v \} \]
 
-Where the $\downarrow$ function removes all assignments to the variable $id$ from the result of the JOIN.
+Here the $\downarrow$ function removes all assignments to the variable $id$ from the result of the JOIN.
 
 Applying the previously defined dataflow constraints to the generated CFG looks as follows:
 
