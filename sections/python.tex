@@ -19,14 +19,18 @@ A program can contain several modules.
 All data in Python is represented as objects.
 An object consists of an identity, a type and a value.
 The identity of an object never changes and is represented as an integer.
+The type of an object defines how the object can be used and which operations are supported by the object.
+The value of an object can for some objects change.
+Objects whose value can be changed are called mutable, while objects whose value can not be changed are immutable.
 
 Definition of objects happen in class definitions.
 Classes have methods and attributes attached to it.
 In \cref{class_definition} a class is defined.
 The \texttt{\_\_init\_\_()} method is an initializer function which is called when a new instance is created of that class.
 The \texttt{self} keyword references instance variables and instance methods.
-This example defines the \texttt{MyClass} class and creates an instance of the class with the value five passed to the initializer.
-The \texttt{print()} instance method is then called, which will print the \texttt{i} value.
+This example defines the \texttt{MyClass} class which has one instance method \texttt{print\_i} and one instance variable \texttt{i}.
+An instance of this class is created with the value five passed to the \texttt{i} variable through the initializer.
+The \texttt{print\_i()} instance method is then called, which will print the value of \texttt{i}.
 
 \begin{lstlisting}[style=python, caption={Class definition}, label=class_definition]
 def MyClass(object):
