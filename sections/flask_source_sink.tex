@@ -1,0 +1,75 @@
+\section{Sources, sinks and  and sanitizers in Flask}
+In order to find dangerous flows in a program we need to know what expressions introduce user input and what expressions may not receive input.
+We also need to be able to detect when the program actually make such input harmless.
+
+An expression which introduces user input in some way is called a \emph{source}, while a dangerous destination for such input is called a \emph{sink}.
+A function that can neutralize input so it is not dangerous to send to a sink is called a \emph{sanitizer}.
+
+\begin{lstlisting}[style=python, caption={A simple vulnerable program}, label=simple_sink_source]
+x = input()
+print('this is dangerous!')
+eval(x)
+\end{lstlisting}
+
+The program in \cref{simple_sink_source} is vulnerable to a user executing arbitrary code.
+\texttt{input()} is a source and \texttt{eval()} is a sink.
+The result of \texttt{input()} is being handed over to \texttt{eval()} without any sanitization.
+Imagine this program being served on a server which also contains confidential information.
+An attacker would possibly be able to retrieve this confidential information from the server.
+
+\subsection{Flask}
+Flask is a web framework, so it uses some different means of user input than the \texttt{input()} method.
+This section will cover a selection of these in order to have a basis for performing an analysis of a Flask application.
+
+\paragraph{Sources}
+In \cref{flask:intro} the \texttt{request} object was introduced.
+This object is used to access the input provided by the user through interaction with the page.
+
+\subparagraph{Query parameters}
+Query parameters submitted to the URL can be accessed with the \texttt{request.args.get(key, default)} method.
+This method takes the key to retrieve a value from and a default value as parameters.
+If this methods returns a value that is different from the default, it is potentially dangerous.
+
+\subparagraph{Form content}
+Input submitted through form fields can be accessed with the \texttt{request.form[key]} attribute.
+This attribute is a dictionary that maps a form field to its value.
+Values retrieved from this dictionary are potentially dangerous.
+
+\paragraph{Sinks}
+User input can arrive at a wealth of methods which can be regarded as a sink.
+We explored three vulnerabilities in \cref{security_vulnerabilities} which we would like to be able to detect.
+The following is the sinks that can possibly enable the chosen vulnerabilities.
+These are obviously only a small selection of all possible sinks.
+
+\subparagraph{Homemade templates}
+When utlizing the template engine of Flask many security concerns are ruled out.
+An eager developer that is too impatient to read the documentation for \emph{Jinja2} may resort to a solution that works, but is subpar regarding security.
+One example of this could be to use \texttt{string.replace(old, new)} instead of the template engine.
+The developer creates his own template format, and replaces placeholders with user input.
+It works, but if the input does not get sanitized, the user can inject javascript into the page, see \cref{vulnerabilities:xss}.
+
+The input passed to \texttt{string.replace()} can be sanitized using the \texttt{Markup} class provided by Flask.
+\texttt{Markup} is used to represent HTML markup and marks them as being safe.
+It contains an \texttt{escape} function that escapes HTML tags and thereby sanitizes the input.
+Manipulating a markup object with string interpolation also escapes all values.
+An example of escaping user input can be seen on \cref{escape} where the \texttt{Markup.escape} method is used to sanitize the input before inserting it with the \texttt{string.replace()} method.
+
+\begin{lstlisting}[style=python, caption={An example of escaping user input}, label={escape}]
+  html = open('templates/example1.html').read()
+  unsafe = request.args.get(param)
+
+  sanitized = Markup.escape(unsafe)
+  
+  resp = make_response(html.replace('{{ param }}', sanitized))
+\end{lstlisting}
+
+
+\subparagraph{Database access}
+db.engine.execute filter format trick
+
+\todo{ref til vulnerabilities:injection}
+\subparagraph{Filesystem access}
+Files can be sent to the client with the \texttt{send\_file(filename)} method.
+This method takes a file from the filesystem and sends it to the user.
+If the filename parameter is set by user input, the user can possibly traverse the filesystem of the server, see \cref{vulnerabilities:traversal}.
+This can be sanitized by disallowing the use of '..' in the variable passed to the filename parameter.

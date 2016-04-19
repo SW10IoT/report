@@ -1,11 +1,11 @@
-\section{Security vulnerabilities}
+\section{Security vulnerabilities}\label{security_vulnerabilities}
 
 To make a tool that finds security vulnerabilities in a program is a very broad and ambitious task.
 In order to make the task more manageable we have picked three common types of vulnerabilities from the OWASP list of top 10 vulnerabilities in web applications \cite{OWASP10}.
 The chosen vulnerabilities will in the following be described and code examples will be presented showing the vulnerability in practice.
 These code examples will later be used for testing the application.
 
-\subsection{Injection}
+\subsection{Injection}\label{vulnerabilities:injection}
 An injection is an uncontrolled use of user input that reaches an interpreter.
 This could be a SQL interpreter, the command line or the Python interpreter.
 If an injection vulnerability exists the user can  send arbitrary commands to the server, and possibly access or alter data without authorisation.
@@ -60,7 +60,7 @@ The key is to insert the \texttt{or} keyword which makes another statement possi
 The second statement just has to evaluate to true then all possible database entries are returned.
 This ultimately means that the statement sent to the SQL interpreter looks for all users instead of just a particular one.
 
-\subsection{XSS}
+\subsection{XSS}\label{vulnerabilities:xss}
 Cross site scripting (abbreviated XSS) occur when a site takes untrusted data and sends it to other users without sanitization.
 The description i based on \citet{crosssitescripting}.
 One example could be a comment section where an evil user sends in a comment containing some JavaScript.
@@ -72,7 +72,7 @@ In \cref{xss:request} some input is taken and it is inserted into the result pag
 A link to the vulnerable web page can be constructed and sent to a unknowing user who opens the link and gets important information stolen.
 In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
 
-\subsection{Directory Traversal}
+\subsection{Directory Traversal}\label{vulnerabilities:traversal}
 Path traversal is when access to a resource gives unintended access to the file system of the server.
 This description is based on \citet{pathtraversal}.
 An example could be attaching an image to the page decided by some user input.
