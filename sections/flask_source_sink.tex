@@ -3,7 +3,7 @@ In order to find dangerous flows in a program we need to know what expressions i
 We also need to be able to detect when the program actually makes such input harmless.
 
 An expression which introduces user input in some way is called a \emph{source}, while a dangerous destination for such input is called a \emph{sink}.
-A function that can neutralise input so it is not dangerous to send to a sink is called a \emph{sanitizer}.
+A function that can neutralise input so it is not dangerous to send to a sink is called a \emph{sanitiser}.
 
 \begin{lstlisting}[style=python, caption={A simple vulnerable program}, label=simple_sink_source]
 x = input()
