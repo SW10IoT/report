@@ -5,7 +5,7 @@ In order to make the task more manageable we have picked three common types of v
 The chosen vulnerabilities will in the following be described and code examples will be presented showing the vulnerability in practice.
 These code examples will later be used for testing the application.
 
-\paragraph{Injection}
+\subsection{Injection}
 An injection is an uncontrolled use of user input that reaches an interpreter.
 This could be a SQL interpreter, the command line or the Python interpreter.
 If an injection vulnerability exists the user can  send arbitrary commands to the server, and possibly access or alter data without authorisation.
@@ -13,7 +13,7 @@ The typical workaround is to sanitise the input so only the desired characters w
 
 We have chosen to work with SQL injections which are a subgroup of injection attacks.
 
-\subparagraph{SQL injection}
+\paragraph{SQL injection}
 This description is based on \citet{sqlinjection}.
 SQL injections happen when an application creates a query partly or entirely from user input without sanitising this input.
 The user can escape the query and add an arbitrary query.
@@ -23,17 +23,44 @@ An implementation of two possible SQL injections can be found in \cref{appendix:
 Here a database is setup with the library SQLAlchemy which has protection against SQL injection built in.
 The problem is that it also supports raw SQL queries, and this example only utilises these.
 
-In \cref{sql2} the author has prepared a SQL statement concatenated with a request parameter to find a particular user.
-Because the resulting string is not sanitised, the user can input whatever he wants, and an input like
-\[ name' ~ \text{OR} ~ 'a' = \text{'a} \]
-will return all users in the database, which is of course not intended behaviour.
-Note the missing apostrophe after the equality sign.
-The query still needs to be valid, so the string is first closed with the string ``name'', and afterwards a tautology is appending in an OR construction.
-This ultimately means that the statement sent to the SQL interpreter looks for all users instead of just a particular one.
-\todo{mere dybde i eksemplet? Vis konsol output?}
-\todo{html siderne ogsa i appendix?}
+\subparagraph{Naive SQL Handling}
+The first example is a naive handling of SQL queries.
+In this example the user has to input the whole query and the query is executed directly on the database.
+The method for this is shown on \cref{sqli_naive}.
 
-\paragraph{XSS}
+\begin{lstlisting}[style={python}, deletekeywords={file, FILE}, caption={An SQL statement is taken as input and executed directly on the database}, label={sqli_naive}]
+@app.route('/raw')
+def index():
+    param = request.args.get('param', 'not set')
+    result = db.engine.execute(param)
+    print(User.query.all(), file=sys.stderr)
+    return 'Result is displayed in console.'
+\end{lstlisting}
+
+\subparagraph{SQL Filter}
+The second example is where the user has to input the parameter for the filter method used for filtering the query.
+The code for the method taking the parameter as input and querying the database with the filter parameter is shown on \cref{sqli_filter}.
+
+\begin{lstlisting}[style={python}, caption={A filter string is taken as input and used as a parameter in the filter function.}, label={sqli_filter}]
+@app.route('/filter')
+def filter():
+    param = request.args.get('param', 'not set')
+    Session = sessionmaker(bind=db.engine)
+    session = Session()
+    result = session.query(User).filter("username={}".format(param))
+    for value in result:
+        print(value.username, value.email)
+    return 'Result is displayed in console.'
+\end{lstlisting}
+
+Because the input string is not sanitised, the user can input whatever he wants, and an input like
+\[2 ~ \text{or} ~ 1 = 1\]
+will return all users in the database, which is of course not intended behaviour.
+The key is to insert the \texttt{or} keyword which makes another statement possible.
+The second statement just has to evaluate to true then all possible database entries are returned.
+This ultimately means that the statement sent to the SQL interpreter looks for all users instead of just a particular one.
+
+\subsection{XSS}
 Cross site scripting (abbreviated XSS) occur when a site takes untrusted data and sends it to other users without sanitization.
 The description i based on \citet{crosssitescripting}.
 One example could be a comment section where an evil user sends in a comment containing some JavaScript.
@@ -45,7 +72,7 @@ In \cref{xss:request} some input is taken and it is inserted into the result pag
 A link to the vulnerable web page can be constructed and sent to a unknowing user who opens the link and gets important information stolen.
 In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
 
-\paragraph{Path traversal}
+\subsection{Path traversal}
 Path traversal is when access to a resource gives unintended access to the file system of the server.
 This description is based on \citet{pathtraversal}.
 An example could be attaching an image to the page decided by some user input.
