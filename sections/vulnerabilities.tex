@@ -1,5 +1,4 @@
 \section{Security vulnerabilities}\label{security_vulnerabilities}
-
 To make a tool that finds security vulnerabilities in a program is a very broad and ambitious task.
 In order to make the task more manageable we have picked three common types of vulnerabilities from the OWASP list of top 10 vulnerabilities in web applications \cite{OWASP10}.
 The chosen vulnerabilities will in the following be described and code examples will be presented showing the vulnerability in practice.
@@ -21,14 +20,15 @@ Depending on the system, the user can now change the database, read the database
 
 An implementation of two possible SQL injections can be found in \cref{appendix:sqli}.
 Here a database is setup with the library SQLAlchemy which has protection against SQL injection built in.
-The problem is that it also supports raw SQL queries, and this example only utilises these.
+The problem is that it also supports raw SQL queries, and these examples utilise these.
+The specific problems of the examples will be examined in the following.
 
 \subparagraph{Naive SQL Handling}
 The first example is a naive handling of SQL queries.
 In this example the user has to input the whole query and the query is executed directly on the database.
 The method for this is shown on \cref{sqli_naive}.
 
-\begin{lstlisting}[style={python}, deletekeywords={file, FILE}, caption={An SQL statement is taken as input and executed directly on the database}, label={sqli_naive}]
+\begin{lstlisting}[style={python}, deletekeywords={file, FILE}, caption={An SQL statement is taken as input and executed directly on the database}, label={sqli_naive}, firstnumber=24]
 @app.route('/raw')
 def index():
     param = request.args.get('param', 'not set')
@@ -36,12 +36,13 @@ def index():
     print(User.query.all(), file=sys.stderr)
     return 'Result is displayed in console.'
 \end{lstlisting}
+This is a very unlikely case, but if it gets served by accident, it is a very dangerous vulnerability.
 
 \subparagraph{SQL Filter}
 The second example is where the user has to input the parameter for the filter method used for filtering the query.
 The code for the method taking the parameter as input and querying the database with the filter parameter is shown on \cref{sqli_filter}.
 
-\begin{lstlisting}[style={python}, caption={A filter string is taken as input and used as a parameter in the filter function.}, label={sqli_filter}]
+\begin{lstlisting}[style={python}, caption={A filter string is taken as input and used as a parameter in the filter function.}, label={sqli_filter}, firstnumber=31]
 @app.route('/filter')
 def filter():
     param = request.args.get('param', 'not set')
@@ -68,9 +69,20 @@ When other users see this comment, their browser runs this JavaScript, which can
 Again, this can be prevented by sanitising user input that is stored.
 
 A very simple example of a cross site scripting is presented in \cref{appendix:xss}.
+The main part is displayed in \cref{xss}.
 In \cref{xss:request} some input is taken and it is inserted into the result page in \cref{xss:replace}.
 A link to the vulnerable web page can be constructed and sent to a unknowing user who opens the link and gets important information stolen.
 In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
+
+\begin{lstlisting}[style=python, caption={The main part of the XSS example from \cref{appendix:xss}}, label={xss}, escapeinside={(*@}{@*)}, firstnumber=6]
+@app.route('/XSS_param', methods =['GET'])
+def XSS1():
+    param = request.args.get('param', 'not set') (*@ \label{xss:request} @*)
+
+    html = open('templates/XSS_param.html').read()
+    resp = make_response(html.replace('{{ param }}', param))  (*@ \label{xss:replace}@*)
+    return resp
+\end{lstlisting}
 
 \subsection{Directory Traversal}\label{vulnerabilities:traversal}
 Path traversal is when access to a resource gives unintended access to the file system of the server.
@@ -79,8 +91,19 @@ An example could be attaching an image to the page decided by some user input.
 If the input is not validated an attacker will be able to traverse the file system with the parent directory element ('..'). 
 
 An example of this vulnerability can be seen in \cref{appendix:path_traversal}.
+The main part of the example is displayed in \cref{path_traversal}.
 Providing the request parameter as \emph{?image\_name=../file.txt} will open and show file.txt in the browser.
 This could possibly result in database content or passwords to be accessed by intruders.
+
+\begin{lstlisting}[style=python, caption={The main part of the path traversal from \cref{appendix:path_traversal}}, label={path_traversal}, escapeinside={(*@}{@*)}, firstnumber=6]
+@app.route('/')
+def cat_picture():
+    image_name = request.args.get('image_name')
+    if not image_name:
+        return 404
+    return send_file(os.path.join(os.getcwd(), image_name)) (*@ \label{traversal:path} @*)
+
+\end{lstlisting}
 
 \section{Detecting vulnerabilities}\label{vulnerabilities:detecting}
 Common for these three security vulnerabilities is that some user input reaches a sensitive piece of code.
