@@ -72,7 +72,7 @@ In \cref{xss:request} some input is taken and it is inserted into the result pag
 A link to the vulnerable web page can be constructed and sent to a unknowing user who opens the link and gets important information stolen.
 In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
 
-\subsection{Path traversal}
+\subsection{Directory Traversal}
 Path traversal is when access to a resource gives unintended access to the file system of the server.
 This description is based on \citet{pathtraversal}.
 An example could be attaching an image to the page decided by some user input.
@@ -81,9 +81,6 @@ If the input is not validated an attacker will be able to traverse the file syst
 An example of this vulnerability can be seen in \cref{appendix:path_traversal}.
 Providing the request parameter as \emph{?image\_name=../file.txt} will open and show file.txt in the browser.
 This could possibly result in database content or passwords to be accessed by intruders.
-
-
-\todo{all these problems have a solution that are related to sanitization. Maybe we should write a section on sanitization and the different solutions that already exist}
 
 \section{Detecting vulnerabilities}\label{vulnerabilities:detecting}
 Common for these three security vulnerabilities is that some user input reaches a sensitive piece of code.
