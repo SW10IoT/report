@@ -1,4 +1,4 @@
-\section{Implementation Overview}
+\section{Implementation Overview}\label{impl:overview}
 This section will give an overview of the different components and the overall flow of \pyt{}.
 An illustration giving an abstract overview can be seen on \cref{figure:implementation_overview}.
 
@@ -8,13 +8,18 @@ An illustration giving an abstract overview can be seen on \cref{figure:implemen
   \label{figure:implementation_overview}
 \end{figure}
 
-The illustration shows that \pyt{} takes some source code as input and outputs at last a list of potential vulnerabilities.
-After the source code is loaded an abstract syntax tree(AST) is generated.
-The AST is generated using the standard Python library \texttt{ast}\cite{python_ast}.
-One of the biggest components is the CFG component, which uses the AST nodes to make CFG nodes.
-The engine is a component that uses a defined engine to prepare the CFG on the analysis.
-The default engine is the Flask engine.
-The fixed point algorithm is basically just implemented as the algorithm is described in \cref{fixed_point_algorithm}.
-But it is able to use different analyses and as default it uses the reaching definitions analysis.
-These analyses can be specified by the user.
-At last a vulnerability log is provided to the user giving precise information about the potential vulnerabilities found.
+The illustration shows how  \pyt{} takes the source code as input, manipulates it and finally outputs a list of potential vulnerabilities.
+nnThe process will be described in the following on a general level.
+
+\begin{itemize}
+\item The source code is parsed to an abstract syntax tree (denoted as AST) representation.
+  The AST is generated using the standard Python library \texttt{ast}\cite{python_ast}.
+\item The AST is systematically traversed and turned into a control flow graph by the CFG component.
+\item The engine is a component that prepares the CFG on the analysis depending on the web framework used in the source code.
+  The default engine is the Flask engine, but a similar module for Django applications could be devised.
+  \todo{maske et bedre navn end engine?}
+\item The fixed point algorithm is applied on the CFG and the resulting constraints are annotated on each CFG node
+  The fixed point module is flexible which means that the analysis can be substituted.
+  By default \pyt{} uses the reaching definitions analysis, but this could be expanded with liveness analysis or similar.
+\item At last a log is provided to the user giving precise information about the potential vulnerabilities found by the analysis
+\end{itemize}
