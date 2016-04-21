@@ -1,0 +1,53 @@
+\section{Flexible analysis}\label{impl:flexible}
+As mentined in \cref{impl:overview} the fixed point analysis is implemented so that the analysis can be changed.
+For our purposes the \emph{reaching definitions} analysis is sufficient -- it provides the answers we need to locate the security vulnerabilities in web applications.
+
+However, one could imagine improving \pyt{} by utilizing other analyses that could help identify the vulnerabilities.
+In such a case \pyt{} has been implemented so it can be easiliy expanded with another analysis.
+The liveness analysis presented in \citet[p.~19]{schwartzbach} has been implemented in order to exemplify the process of implementing new analyses.
+This process will be explained in the following.
+
+\subsection{Implementing liveness}
+The complete implementation is presented in \cref{appendix:liveness}.
+The implementation corresponds to the definition presented in \citet[p.~20]{schwartzbach}.
+The \texttt{LivenessAnalysis} class inherits from \texttt{AnalysisBase} which contains logic for annotating the CFG with extra information.
+In the case of the liveness analysis we need information about the \texttt{vars(E)} of each node.
+The deduction of these are defined as a visitor \texttt{VarsVisitor} \todo{maske ref til visitor som bliver omtalt på et tidspunkt} which visits an AST node and finds the variables as defined in \citet{schwartzbach}.
+
+\texttt{LivenessAnalysis} contains the constraints of the liveness analysis defined in \texttt{fixpointmethod}, which is shown in \cref{liveness_impl_fixpointmethod}.
+This method is used by the fixed point analysis to apply the constraints on each node.
+This method uses a helper \texttt{JOIN} which corresponds to the JOIN function in \citet{schwartzbach}, and the variables found by \texttt{VarsVisitor}.
+
+\begin{lstlisting}[style=python, caption={Implementation of liveness analysis - \texttt{fixpointmethod}}, label={liveness_impl_fixpoint}, escapeinside={(*@}{@*)}, firstnumber=24]
+    def fixpointmethod(self, cfg_node):
+        """Setting the constraints of the given cfg node
+        obeying the liveness analysis rules."""
+    
+        # if for Condition and call case: Join(v) u vars(E).
+        if cfg_node.ast_type == Compare.__name__ or
+           cfg_node.ast_type == Call.__name__:
+            JOIN = self.join(cfg_node)
+            # set union
+            JOIN.update(self.annotated_cfg_nodes[cfg_node])  
+            cfg_node.new_constraint = JOIN
+
+        # if for Assignment case: Join(v) \ {id} u vars(E).
+        elif isinstance(cfg_node, AssignmentNode): 
+            JOIN = self.join(cfg_node)
+            # set difference
+            JOIN.discard(cfg_node.ast_node.targets[0].id)
+            # set union
+            JOIN.update(self.annotated_cfg_nodes[cfg_node])  
+            cfg_node.new_constraint = JOIN
+
+        # if for entry and exit cases: {}.
+        elif cfg_node.ast_type == "ENTRY" or
+             cfg_node.ast_type == "EXIT":
+            pass
+        # else for other cases.
+        else:
+        cfg_node.new_constraint = self.join(cfg_node)
+\end{lstlisting}
+
+With this implementation the \pyt{} fixed point algorithm implementation can perform liveness analysis on an arbitrary piece of python source code.
+The \pyt{} vulnerability checker could likewise be expanded with any analysis that could aid the detection of security vulnerabilites.

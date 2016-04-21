@@ -20,6 +20,6 @@ nnThe process will be described in the following on a general level.
   \todo{maske et bedre navn end engine?}
 \item The fixed point algorithm is applied on the CFG and the resulting constraints are annotated on each CFG node
   The fixed point module is flexible which means that the analysis can be substituted.
-  By default \pyt{} uses the reaching definitions analysis, but this could be expanded with liveness analysis or similar.
+  By default \pyt{} uses the reaching definitions analysis, but this could be expanded with other analyses, see \cref{impl:flexible}.
 \item At last a log is provided to the user giving precise information about the potential vulnerabilities found by the analysis
 \end{itemize}
