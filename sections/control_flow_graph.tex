@@ -1,6 +1,6 @@
 \section{Control Flow Graph}\label{control_flow_graph}
-Static analysis is a type of flow sensitive analysis, meaning that it is significant in which order pieces of the program are executed.
-When performing a flow sensitive analysis one can use a Control Flow Graph(CFG) to describe the flow of the program.
+The analysis we want to perform is flow sensitive, meaning that the order of the statements in the program influence the result of the analysis.
+When performing a flow sensitive analysis, a Control Flow Graph (abbreviated CFG for convenience) can be used to describe the flow of the program.
 
 A CFG is simply just another representation of the program source.
 It is a directed graph where a node is a specific place in the program and edges represent the possible options to which the program can execute to.
