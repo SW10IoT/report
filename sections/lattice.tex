@@ -51,6 +51,14 @@ The subset can be seen on \cref{theory:general_code_example_small}.
 
 This lattice is defined by the set of four expressions $\{x > 1, x / 2, y > 3, x - y \}$.
 In general the set $A$ defines a lattice $(2^A, \sqsubseteq )$ where $\top = \emptyset$, $\bot = A$, $x\sqcup y = x \cup y$ and $x \sqcap y = x \cap y$.
-This lattice is useful when one is using expressions to analyse the program with.
 
-\todo{noget om hvordan vi vil bruge det i analysen? Synes det er svaert at skrive inden fixed point og analyserne er introduceret}
+Every analysis requires the lattice to contain certain elements of the program in order to work.
+Examples range from expressions or assignments to variables.
+The presented type of lattice is used in analyses that depend on information about the expressions in a program.
+One example of such analysis is 'available expressions' which is presented in \citet[p.~22]{schwartzbach}.
+This analysis finds expressions that are \emph{available} at a program point.
+An available expression is an expression that has already been calculated earlier in the execution.
+Finding available expressions can be used to optimize the program by saving the calculation and thus avoid recalculating it.
+
+
+
