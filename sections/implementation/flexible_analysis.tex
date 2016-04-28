@@ -1,9 +1,9 @@
 \section{Flexible analysis}\label{impl:flexible}
-As mentined in \cref{impl:overview} the fixed point analysis is implemented so that the analysis can be changed.
+As mentioned in \cref{impl:overview} the fixed point analysis is implemented so that the analysis can be changed.
 For our purposes the \emph{reaching definitions} analysis is sufficient -- it provides the answers we need to locate the security vulnerabilities in web applications.
 
-However, one could imagine improving \pyt{} by utilizing other analyses that could help identify the vulnerabilities.
-In such a case \pyt{} has been implemented so it can be easiliy expanded with another analysis.
+However, one could imagine improving \pyt{} by utilising other analyses that could help identify the vulnerabilities.
+In such a case \pyt{} has been implemented so it can be easily expanded with another analysis.
 The liveness analysis presented in \citet[p.~19]{schwartzbach} has been implemented in order to exemplify the process of implementing new analyses.
 This process will be explained in the following.
 
@@ -18,7 +18,7 @@ The deduction of these are defined as a visitor \texttt{VarsVisitor} \todo{maske
 This method is used by the fixed point analysis to apply the constraints on each node.
 This method uses a helper \texttt{JOIN} which corresponds to the JOIN function in \citet{schwartzbach}, and the variables found by \texttt{VarsVisitor}.
 
-\begin{lstlisting}[style=python, caption={Implementation of liveness analysis - \texttt{fixpointmethod}}, label={liveness_impl_fixpoint}, escapeinside={(*@}{@*)}, firstnumber=24]
+\begin{lstlisting}[style=python, caption={Implementation of liveness analysis - \texttt{fixpointmethod}}, label={liveness_impl_fixpointmethod}, escapeinside={(*@}{@*)}, firstnumber=24]
     def fixpointmethod(self, cfg_node):
         """Setting the constraints of the given cfg node
         obeying the liveness analysis rules."""
