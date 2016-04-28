@@ -9,14 +9,28 @@ The body will execute until the condition is false.
 This implementation is also found in Python, but Python has an extra variant of the while loop - an else clause.
 An example of a while loop with an else clause can be seen on \cref{surprise_while_else}.
 
-\begin{lstlisting}[style=python, caption={A while loop with an else clause}, label={surprise_while_else}]
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python]
 while x < threshold:
     if invalid_value(x):
         break
     x += 1
 else:
-    handle_threshold_reached()
-\end{lstlisting}
+    handle_value()
+    \end{lstlisting}
+    \caption{A while loop with an else clause}\label{surprise_while_else}
+    \end{subfigure}
+  ~
+    \begin{subfigure}[b]{0.4\textwidth}
+      \includegraphics[scale=.4]{./figures/while_break.pdf}
+      \caption{Possible flows}\label{surprise_while_else_cfg}
+    \end{subfigure}
+    
+  \caption{An example of a while loop with a break statement}
+\end{figure}
+
 
 The else clause will execute when the condition is false, but if the body is exited by a \texttt{break} statement, the else clause will not be executed.
 In the example in \cref{surprise_while_else}, this is being utilised to handle values that are unexpected in some way.
