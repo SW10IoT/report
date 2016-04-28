@@ -81,8 +81,8 @@
 % When using thmmarks, amsmath must be an option as well. Otherwise \eqref doesn't work anymore.
 \usepackage[framed,amsmath,thmmarks]{ntheorem}
 %algoritms
-\usepackage{algorithmicx,algpseudocode}
-\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
+\usepackage[linesnumbered, boxed]{algorithm2e}
+\SetKwRepeat{Do}{do}{while}
 
 % listings used for code examples
 \usepackage{listings}

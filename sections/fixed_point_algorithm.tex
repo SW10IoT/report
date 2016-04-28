@@ -12,12 +12,16 @@ Assuming that the node $v_i$ generates the dataflow equation $\llbracket v_i \rr
 This combined function resembles the function presented in \cref{theory:fixedpoint:systemsofequations}, and it can indeed be solved by fixed-points.
 A naive algorithm for solving such a function is presented in \citet{schwartzbach}:
 
-\begin{algorithmic}
-  \State $x = (\bot, \dots, \bot)$
-  \Do
-  \State $t = x$
-  \State $x = F(x)$
-  \doWhile $ x \ne t $
-\end{algorithmic}
+\begin{algorithm}
+  \caption{The naive Fixed-Point algorithm as presented in \citet[p.18~]{schwartzbach}}\label{fixed-point_algo}  
+  \DontPrintSemicolon
+  $x = (\bot, \dots, \bot)$ \\
+  \Do{$ x \ne t $}
+         {
+           $t = x$\\
+           $x = F(x)$
+         }
+\end{algorithm}
+
 
 \todo{if we use the more advanced algorithms, write them here}
