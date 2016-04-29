@@ -175,8 +175,7 @@ A \texttt{while} control structure can also have an \texttt{else} clause.
 The body of the \texttt{else} clause is executed when the condition of the \texttt{while} statement is false.
 
 An example is displayed in \cref{python:while:else} which contains a  \texttt{while} control structure with the condition \texttt{x > 100} and an \texttt{else} clause.
-The possible flows can be seen on \cref{python:while:else:flow}, where the \texttt{else} clause is executed when the condition resolves to \texttt{False}
-\todo{vi mangler break logikken}
+The possible flows can be seen on \cref{python:while:else:flow}, where the \texttt{else} clause is executed when the condition resolves to \texttt{False}.
 
 \begin{figure}[H]
   \centering
@@ -211,10 +210,8 @@ This control structure has an optional \texttt{else} statement, which body is ex
 To illustrate the \texttt{for} control structure we provide two examples.
 The first example, on \cref{python:for}, shows the most common usage of the \texttt{for} control structure.
 Here we iterate over a range, which is a built in function that returns a range of numbers, in this case 0, 1 and 2.
-The second example also has a \texttt{else} statement and can be found on \cref{python:for:else}.
-\todo{som de(De to for eksempler.) ser ud nu er de meget ens, og to virker overflodigt. Igen mangler vi break til at forklare else clause - VENT med afgørelse til vi har break :)}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
     \begin{lstlisting}[style=python]
@@ -235,29 +232,4 @@ x = 3
   \end{subfigure}
   \caption{A \texttt{for} control structure}
   \label{python:for}
-\end{figure}
-
-
-\begin{figure}
-  \centering
-  \begin{subfigure}[b]{0.4\textwidth}
-    \begin{lstlisting}[style=python]
-for x in range(3):
-    print(x)
-    y += 1
-else:
-    print(y)
-    \end{lstlisting}
-    \caption{Code example}\label{python:for:else:code}
-  \end{subfigure}
-  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-  %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.4\textwidth}
-    \centering
-    \includegraphics[scale=.5]{./figures/for_complete.pdf}
-    \caption{Possible flows}
-    \label{python:for:else:flow}
-  \end{subfigure}
-  \caption{A \texttt{for} control structure with an \texttt{else} statement}
-  \label{python:for:else}
 \end{figure}

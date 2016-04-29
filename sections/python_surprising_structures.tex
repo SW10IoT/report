@@ -24,7 +24,7 @@ else:
     \end{subfigure}
   ~
     \begin{subfigure}[b]{0.4\textwidth}
-      \includegraphics[scale=.4]{./figures/while_break.pdf}
+      \includegraphics[scale=.5]{./figures/while_break.pdf}
       \caption{Possible flows}\label{surprise_while_else_cfg}
     \end{subfigure}
     
@@ -37,6 +37,32 @@ In the example in \cref{surprise_while_else}, this is being utilised to handle v
 If that is the case, we break the body and do not execute the else clause which contains some logic for the value behaved as expected.
 
 The \texttt{for} loop in Python also has an \texttt{else} clause which works in the same way.
+A example of this can be seen in \cref{python:for:else}.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \begin{lstlisting}[style=python]
+for x in range(5):
+    if invalid_value(x):
+        break
+    print(x)
+else:
+    print('Accepted')
+    \end{lstlisting}
+    \caption{Code example}\label{python:for:else:code}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[scale=.5]{./figures/for_else.pdf}
+    \caption{Possible flows}
+    \label{python:for:else:flow}
+  \end{subfigure}
+  \caption{A \texttt{for} control structure with an \texttt{else} statement}
+  \label{python:for:else}
+\end{figure}
 
 \subsection{Generator expression}
 The Python language has a goal of being simple, explicit and readable\citep{python_zen}.
