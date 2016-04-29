@@ -22,7 +22,7 @@
 
 \node[inner sep=10pt] (engine) at (\XNode,7)
     {\includegraphics[width=.1\textwidth]{./figures/dot_files/implementation_overview_images/cog_wheel.png}};
-\node[text width=\TextWidth{}cm] at (\XLabel,7) {\hfill{}Engine};
+\node[text width=\TextWidth{}cm] at (\XLabel,7) {\hfill{}Adaptor};
 
 \node[inner sep=10pt] (algorithm) at (\XNode,4)
     {\includegraphics[width=.1\textwidth]{./figures/dot_files/implementation_overview_images/spiral.png}};
@@ -32,7 +32,7 @@
     {\includegraphics[width=.15\textwidth]{./figures/dot_files/implementation_overview_images/vulnerability.png}};
 \node[text width=\TextWidth{}cm] at (\XLabel,1) {\hfill{}Vulnerabilities};
 
-%%%%%%%%%%%%%%%%%%%% ENGINES %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Adaptors %%%%%%%%%%%%%%%%%%%%%%%%
 \node[inner sep=10pt] (flask) at (\XEngines,11)
     {\includegraphics[width=.2\textwidth]{./figures/dot_files/implementation_overview_images/flask_text.png}};
 
