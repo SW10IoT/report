@@ -22,7 +22,7 @@
 
 \node[inner sep=10pt] (engine) at (\XNode,7)
     {\includegraphics[width=.1\textwidth]{./figures/dot_files/implementation_overview_images/cog_wheel.png}};
-\node[text width=\TextWidth{}cm] at (\XLabel,7) {\hfill{}Adaptor};
+\node[text width=\TextWidth{}cm] at (\XLabel,7) {\hfill{}Framework \\ \hfill{}Adaptor};
 
 \node[inner sep=10pt] (algorithm) at (\XNode,4)
     {\includegraphics[width=.1\textwidth]{./figures/dot_files/implementation_overview_images/spiral.png}};
