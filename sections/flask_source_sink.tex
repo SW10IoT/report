@@ -65,9 +65,45 @@ An example of escaping user input can be seen on \cref{escape} where the \texttt
 
 
 \subparagraph{Database access}
-db.engine.execute filter format trick
+The recommended way to work with a database in Flask is by using a package called SQLAlchemy\cite{sqlalchemy}.\cite{sqlalchemy_docs}
+This package gives the developer the option to setup and/or communicate with a database.
+In the following two examples of SQL injection, described in \cref{vulnerabilities:injection}, will be presented.
+The complete source code of the web application can be found in \cref{sql_injection_example}.
+The examples both print out the result of the SQL queries to the console.
+In a real application their would be some kind of UI where it is presented to the user.
 
-\todo{ref til vulnerabilities:injection}
+
+The first example, \cref{sqli_raw}, shows that the address ``/raw'' takes a parameter called \texttt{param}.
+This parameter is then executed directly on the database.
+The result is printed to the console.
+The problem here is that the user is able to execute every query he wants.
+But SQLAlchemy prevents from executing several SQL commands and from changing the database by for example deleting all of it.
+
+\begin{lstlisting}[style=python, caption={An example of executing a raw sql query without sanitising.}, label={sqli_raw}]
+@app.route('/raw')
+def index():
+    param = request.args.get('param', 'not set')
+    result = db.engine.execute(param)
+    print(User.query.all(), file=sys.stderr)
+    return 'Result is displayed in console.'
+\end{lstlisting}
+
+The second example, \cref{sqli_filter}, shows how the parameter of the filter function is not sanitised.
+The address ``/filter'' takes a parameter, \texttt{param}, as input.
+This \texttt{param} is used directly in a filter function on the database.
+If the value of the \texttt{param} is ``2 or 1 = 1'' the filter function will return all users because the \texttt{param} always evaluates to true.
+\begin{lstlisting}[style=python, caption={An example of inserting a raw sql parameter without sanitising it.}, label={sqli_filter}]
+@app.route('/filter')
+def filter():
+    param = request.args.get('param', 'not set')
+    Session = sessionmaker(bind=db.engine)
+    session = Session()
+    result = session.query(User).filter("username={}".format(param))
+    for value in result:
+        print(value.username, value.email)
+    return 'Result is displayed in console.'
+\end{lstlisting}
+
 \subparagraph{Filesystem access}
 Files can be sent to the client with the \texttt{send\_file(filename)} method.
 This method takes a file from the filesystem and sends it to the user.
