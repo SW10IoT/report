@@ -235,9 +235,10 @@ x = 3
 \end{figure}
 
 \subsection{Decorators}
+The following is based on \citet[p.~558]{lutz2013learning}.
 Python contains a syntax that allows one to transform a function into another function easily.
 This syntax is called a decorator and it is denoted with a \texttt{@method} before a function.
-An very simple decorator is shown in \cref{decorator_impl}.
+A simple decorator is shown in \cref{decorator_impl}.
 The class \texttt{Decorator} implements the \texttt{\_\_init\_\_} method which is used to save the arguments of the decorator, and the \texttt{\_\_call\_\_} which is used to replace the original method with a transformation.
 In this example the \texttt{\_\_call\_\_} method prints the argument passed to the decorator and then returns the original function.
 The output of running this example is presented in \cref{decorator_output}.
@@ -249,9 +250,9 @@ class LabelDecorator(object):
     def __init__(self, number):
         self.number = number
 
-    def __call__(self, f):
+    def __call__(self, func):
         print('Function: ', self.number)
-        return f
+        return func
         
 @LabelDecorator(1)
 def foo(a, b):
