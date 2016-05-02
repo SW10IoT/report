@@ -233,3 +233,36 @@ x = 3
   \caption{A \texttt{for} control structure}
   \label{python:for}
 \end{figure}
+
+\subsection{Decorators}
+Python contains a syntax that allows one to transform a function into another function easily.
+This syntax is called a decorator and it is denoted with a \texttt{@method} before a function.
+An very simple decorator is shown in \cref{decorator_impl}.
+The class \texttt{Decorator} implements the \texttt{\_\_init\_\_} method which is used to save the arguments of the decorator, and the \texttt{\_\_call\_\_} which is used to replace the original method with a transformation.
+In this example the \texttt{\_\_call\_\_} method prints the argument passed to the decorator and then returns the original function.
+The output of running this example is presented in \cref{decorator_output}.
+Decorators can be used to perform modifications to functions, like preprocessing some of the arguments or logging the arguments passed to the function.
+
+
+\begin{lstlisting}[style=python, caption={Implementation of a simple decorator}, label={decorator_impl}]
+class LabelDecorator(object):
+    def __init__(self, number):
+        self.number = number
+
+    def __call__(self, f):
+        print('Function: ', self.number)
+        return f
+        
+@LabelDecorator(1)
+def foo(a, b):
+    return a + b
+
+print(foo(3, 4))
+ 
+\end{lstlisting}
+
+\begin{lstlisting}[style=python, caption={Output when running the previous example}, label={decorator_output}]
+$ python decorator.py
+Function:  1
+7
+\end{lstlisting}
