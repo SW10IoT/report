@@ -1,0 +1,23 @@
+digraph name {
+	graph[margin=0.01]
+	node [shape="box"]
+
+	entry[shape="none"]
+	exit[shape="none"]
+
+	
+	source
+	sink
+	
+	entrydots[label=". . .", shape="none"]
+	sourcedots[label=". . .", shape="none"]
+	sinkdots[label=". . .", shape="none"]
+
+	
+	entry-> entrydots;
+	entrydots -> source;
+	source -> sourcedots;
+	sourcedots -> sink
+	sink -> sinkdots;
+	sinkdots -> exit;
+	}

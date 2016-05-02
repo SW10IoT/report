@@ -1,0 +1,27 @@
+digraph name {
+	graph[margin=0.01]
+	node [shape="box"]
+
+	entry[shape="none"]
+	exit[shape="none"]
+
+	
+	source
+	sanitiser
+	sink
+	
+	entrydots[label=". . .", shape="none"]
+	sourcedots[label=". . .", shape="none"]
+	sanitiserdots[label=". . .", shape="none"]
+	sinkdots[label=". . .", shape="none"]
+
+	
+	entry-> entrydots;
+	entrydots -> source;
+	source -> sourcedots;
+	sourcedots -> sanitiser
+	sanitiser -> sanitiserdots
+	sanitiserdots -> sink
+	sink -> sinkdots;
+	sinkdots -> exit;
+	}
