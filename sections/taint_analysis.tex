@@ -1,1 +1,15 @@
 \section{Taint Analysis}
+The following is based on \citet[Part 3]{schwartz2010all}.
+Taint analysis is used for tracking the information between sources and sinks.
+If some data comes from an untrusted or tainted source it is a tainted.
+All other data is untainted.
+Which sources introduce taint are defined by the user of the analysis.
+
+If a taint analysis is marking too much data as taint it is called \textit{overtainting}.
+If a taint analysis is marking too little data as taint it is called \textit{undertainting}.
+If the analysis is \textit{precise} it means there is no over- or undertainting.
+Undertainting leads to missing some vulnerabilities and overtainting leads to having some false positive vulnerabilities.
+
+Because finding all vulnerabilities is critical it is common to use the approach of overtainting.
+This can lead to a problem called \textit{taintspread} which is when more and more data is tainted and that with less precision.
+To help with that, one can use \textit{sanitisers} to untaint data.
