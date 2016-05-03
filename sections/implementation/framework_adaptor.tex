@@ -1,17 +1,16 @@
 \section{Framework adaptor}
 Our goal of our tool is to target web application frameworks.
-As there exist a lot of different frameworks and these are orgranised in different manners, we need to accommodate for these variations.
-The framework adaptor is purposed to accomodate for different organizations by different web application frameworks.
+As there exist different frameworks and these are organised in different manners, we need to accommodate for these variations.
+The framework adaptor is purposed to accommodate for different web application frameworks.
 The \texttt{FrameworkAdaptor} class is an abstract class with an abstract method \texttt{run}.
 It contains a list of CFGs where the adaptor is expected to put the result of the adaptation.
 The implementation of \texttt{run} should include processing for all framework specific details that are needed in order to get a correct model of the application.
-This adaptor can be implemented for an arbibrary framework like Django or, in our case, Flask.
+This adaptor can be implemented for an arbitrary framework like Django or, in our case, Flask.
 
 \paragraph{The Flask Adaptor}
 In Flask all web pages are defined in a function with a decorator.
-This function is never explicitly called in the source code, so a single traversal by the CFG visitor of the file will not include all these methods in the resulting CFG.
+This function is never explicitly called in the source code, so a single traversal by the CFG visitor of the file will not include all these methods in the resulting list of CFGs.
 The adaptor \texttt{FlaskAdaptor} was implemented for this purpose.
-The \texttt{FlaskAdaptor} expects the list of CFGs to contain the single CFG obtained by traversing the file.
 This CFG contains all function found during the traversal.
 The adaptor then finds all functions that are defined with the \texttt{@app.route()} decorator, and adds it to the list of CFGs.
 This results in a list of CFGs that cover all the code needed for analysing the application.
