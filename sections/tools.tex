@@ -1,0 +1,14 @@
+\section{Existing Tools}
+In this section we attempt to look at tools that find security vulnerabilities by analysing Python web applications.
+We have found two tools which are described in the following.
+
+\subsection{Python Taint Mode}
+The Python Taint Mode, \citet{conti2010taint}, is a 300 LOC library which contains a series of functions that are used as decorators to taint the source code.
+To use the library one has to decorate the source code.
+Also for variables a function \texttt{taint} is used to taint them.
+Using this tool means one has to go through the whole source code and taint, variables and functions.
+The tool can not handle booleans and has some built in class function it can not handle.
+The effectiveness of the tool is not documented.
+
+\subsection{Rough Auditing Tool for Security}
+The Rough Auditing Tool for Security(RATS)
