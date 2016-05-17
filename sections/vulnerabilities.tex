@@ -61,6 +61,38 @@ The key is to insert the \texttt{or} keyword which makes another statement possi
 The second statement just has to evaluate to true then all possible database entries are returned.
 This ultimately means that the statement sent to the SQL interpreter looks for all users instead of just a particular one.
 
+\subsubsection{Command Injection}
+This description is based on \citet{commandinjection}.
+Command injections are very similar to SQL injections, but instead of injecting commands into a database system, this attack makes it possible to inject commands into server shell.
+The ability to perform commands on a server opens up possibilities to read password files, delete system files and various other dangerous operations.
+
+\paragraph{Example}
+An example of a command injection vulnerable application is presented in \cref{appendix:command_injection}.
+In this example a textfile is being used as store for a site where customers can suggest items for a menu.
+When customers enter an item into a textbox, it is stored on a new line in the file.
+The content of the file is then read a displayed on the screen, showing all the suggesions.
+The dangerous function is shown in \cref{command_injection_function} where it can be seen how the parameter from a textbox is being passed directly to the shell call in \cref{CI_call}.
+Entering a string starting with a command separator (semicolon in bash and ampersand in windows cmd), makes it possible to interact directly with the system shell.
+Thus entering a string like
+\[ \text{; ls} \]
+will print out the contents of folder containing the application.
+Having access to the filesystem is obviously dangerous, as a malicious user can now perform arbitrary commands on the server.
+
+\begin{lstlisting}[style=python, caption={The culprit making command injection possible. Param is not being escaped before being executed by the shell.}, label={command_injection_function}, firstnumber=13]
+@app.route('/menu', methods=['POST'])
+def menu():
+    param = request.form['suggestion']
+    command = 'echo ' + param + ' >> ' + 'menu.txt'
+
+    subprocess.call(command, shell=True)
+
+    with open('menu.txt','r') as f:
+        menu = f.read()
+
+    return render_template('command_injection.html', menu=menu)
+
+\end{lstlisting}
+
 \subsection{XSS}\label{vulnerabilities:xss}
 Cross site scripting (abbreviated XSS) occur when a site takes untrusted data and sends it to other users without sanitisation.
 The description i based on \citet{crosssitescripting}.
