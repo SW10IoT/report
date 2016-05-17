@@ -1,3 +1,22 @@
 \section{Python Web Frameworks}
 This section contains some of the available Python web frameworks.
 The web frameworks are chosen from \citet{python_web_frameworks_list}.
+
+\subsection{Django}
+Django\cite{django_cite} is a web framework that contains all you need to make a complete web application.
+Django is using the Model-View-Controller architecture pattern(MVC)\cite{leff2001web}.
+It is build in a way that one has to add stuff in a specific way.
+This means that there is not a lot customiseability in how the architecture of the project is built.
+
+Django operates with a abstract concept of apps.
+An app contains the following modules:
+\begin{itemize}
+\item Main module - where the app is starting to execute code.
+\item Tests module - testing of the app.
+\item Views module - visualisation of the app.
+\item Urls module - maps urls to views.
+\item Models module - models for instance from a database.
+\item Apps module - nested apps.
+\end{itemize}
+A Django web application consists of a combination of apps.
+
