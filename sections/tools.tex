@@ -1,5 +1,5 @@
 \section{Existing Tools}
-In this section we attempt to look at tools that find security vulnerabilities by analysing Python web applications.
+In this section we attempt to look at open source tools that find security vulnerabilities by analysing Python web applications.
 We have found two tools which are described in the following.
 
 \subsection{Python Taint Mode}
@@ -11,4 +11,13 @@ The tool can not handle booleans and has some built in class function it can not
 The effectiveness of the tool is not documented.
 
 \subsection{Rough Auditing Tool for Security}
-The Rough Auditing Tool for Security(RATS)
+The Rough Auditing Tool for Security(RATS)\cite{rats} is a tool for C, C++, Perl, PHP and Python.
+It is said to be fast and is good for integrating into a building process.
+For Python the tool only checks for risky builtin functions so it is rather basic.
+Also RATS has not been developed on since 2013 and the open source project seems dead.
+
+\subsection{Comparison}
+Having found two analysis tools which both are rather different there is not much to compare.
+This is because the Python Taint Mode is where one decorates the source code and the RATS tool is checking for builtin functions only.
+As we can see there are not many tools and the RATS tool is not even being supported anymore.
+This pushed us in the direction of considering to making an open source tool that finds security vulnerabilities in Python web applications.
