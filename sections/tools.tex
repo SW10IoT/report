@@ -1,12 +1,16 @@
 \section{Existing Tools}
-In this section we attempt to look at open source tools that find security vulnerabilities by analysing Python web applications.
+In this section we will look at open source tools that find security vulnerabilities by analysing Python web applications.
 We have found two tools which are described in the following.
 
 \subsection{Python Taint Mode}
-The Python Taint Mode, \citet{conti2010taint}, is a 300 LOC library which contains a series of functions that are used as decorators to taint the source code.
-To use the library one has to decorate the source code.
-Also for variables a function \texttt{taint} is used to taint them.
-Using this tool means one has to go through the whole source code and taint, variables and functions.
+The Python Taint Mode, \citet{conti2010taint}, is a library which contains a series of functions that are used as decorators to taint the source code.
+To use the library one has to annotate the source code.
+Dangerous methods have to be provided with the \texttt{untrusted} and \texttt{ssink} decorators, indicating where untrusted data comes from and where it can be damaging.
+Dangerous variables have to be marked with a function \texttt{taint}.
+
+Some of these annotations can be provided in the beginning of the file, while others, like the tainting of variables have to be tainted directly in the code.
+This means that one has to go through the whole source code and taint variables and functions in order to get a proper analysis.
+
 The tool can not handle booleans and has some built in class function it can not handle.
 The effectiveness of the tool is not documented.
 
@@ -18,6 +22,6 @@ Also RATS has not been developed on since 2013 and the open source project seems
 
 \subsection{Comparison}
 Having found two analysis tools which both are rather different there is not much to compare.
-This is because the Python Taint Mode is where one decorates the source code and the RATS tool is checking for builtin functions only.
+This is because Python Taint Mode requires the developer to decorate the source code and the RATS tool is checking for builtin functions only.
 As we can see there are not many tools and the RATS tool is not even being supported anymore.
 This pushed us in the direction of considering to making an open source tool that finds security vulnerabilities in Python web applications.
