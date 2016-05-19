@@ -2,9 +2,9 @@
 We use the built in python library \texttt{ast} for building an abstract syntax tree from the source code.
 This module contains a \texttt{parse} method that constructs an AST from a string containing python code.
 The abstract grammar of Python can be found in \cref{appendix:abstract_syntax}.
-Select rules are displayed in \cref{ast_select_rules}.
+Selected rules, which are relevant for the following example, are displayed in \cref{ast_select_rules}.
 
-\begin{lstlisting}[style=default, caption{Select rules from the python abstract grammar}, label={ast_select_rules}]
+\begin{lstlisting}[style=default, caption={Selected rules from the python abstract grammar}, label={ast_select_rules}]
 mod = Module(stmt* body)
 
 stmt = Assign(expr* targets, expr value)
