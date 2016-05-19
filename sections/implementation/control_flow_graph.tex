@@ -1,5 +1,5 @@
 \section{Control Flow Graph}
-The \texttt{control\_flow\_graph} module contains a class, \texttt{CFG}, that takes an AST and builds a CFG from it.
+The \texttt{cfg} module contains a class, \texttt{CFG}, that takes an AST and builds a CFG from it.
 The CFG is built by traversing the generated AST using the visitor pattern.\cite{design_patterns}
 The visitor pattern is implemented by the AST module, and our CFG module utilizes this implementation.
 
@@ -76,7 +76,7 @@ This is for instance seen in \cref{if_last_statements} where the 'last nodes' of
 A 'last statement' is in this context any statement that needs to be connected to the subsequent statement of the \texttt{if}.
 Among these are \texttt{raise} statements, \texttt{return} statements and the last statements of the body, \texttt{elif} bodies and the \texttt{else} body. \todo{måske bedre eksempler og tegninger med pile}
 These are sent to the calling function by returning a \texttt{ControlFlowNode} in \cref{if_return}.
-This calling function is \texttt{stmt\_star\_handler} which, as stated above, connects all the nodes properly. \todo{vil det altid være stmt\_star eller er der undtagelser?}
+This calling function is \texttt{stmt\_star\_handler} which, as stated above, connects all the nodes properly.
 
 \begin{lstlisting}[style=python, caption={Visiting an If AST node.}, label={visit_if_code}, escapeinside={(*@}{@*)}]
 def visit_If(self, node):
