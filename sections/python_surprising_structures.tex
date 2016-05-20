@@ -1,4 +1,4 @@
-\section{Surprising structures in Python}
+\section{Surprising features in Python}
 When working so close to the specification of a language some weird or surprising structures in the language arise.
 While we programmed the conversion from abstract syntax tree to a control flow graph, we had these experiences once in a while, and working with the structures has given us some insight, both in the workings of python and in the details of these interesting structures.
 This section will discuss some of these experiences.
@@ -105,3 +105,12 @@ An example of a list comprehension can be seen in \cref{listcomp}.
 \begin{lstlisting}[style=python, caption={The generator from \cref{generator_strip} changed to a list comprehension}, label={listcomp}]
 people = [line.strip() for line in strings if line != '']
 \end{lstlisting}
+
+\subsection{Pass By Object Reference}
+Should contain:
+\begin{itemize}
+\item \url{http://robertheaton.com/2014/02/09/pythons-pass-by-object-reference-as-explained-by-philip-k-dick/}
+  Ovenstående bare mere concise if possible
+\item evt kig på:
+\url{http://stackoverflow.com/a/986145}
+\end{itemize}
