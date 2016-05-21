@@ -142,7 +142,7 @@ This also applies to the \texttt{append} function, \cref{parameter_passing:appen
 \paragraph{Pass-by-object-reference}
 Pass-by-object-reference is the Python way of handling parameter passing.
 This means that the argument is copied but both refer to the same object in memory.
-Given the object \texttt{l = [0]} when we are using pass-by-object-reference and calling the function \texttt{reassign}, \cref{paramter_passing:reassign}.
+Given the object \texttt{l = [0]} when we are using pass-by-object-reference and calling the function \texttt{reassign}, \cref{parameter_passing:reassign}.
 A copy of the argument, \texttt{l$'$} is referring to the same object in memory but has a different name.
 So \texttt{reassign} sets \texttt{l$'$ = [1]} but not \texttt{l} because reassign is not manipulating the object but only the name that is referring to it.
 When calling the \texttt{append} function the object is referenced and both \texttt{l} and \texttt{l$'$} are changed to \texttt{[1]}.
