@@ -108,23 +108,41 @@ people = [line.strip() for line in strings if line != '']
 
 \subsection{Parameter Passing}
 This section describes how Python deals with parameter passing.
-This is included as we were surprised how it is dealt with and it is important to factor in when parameters are assigned in functions.
+This is included as we were surprised how it is dealt with and it is important to factor in when parameters are assigned in functions.\todo{Hedder det en paramter når en paramter bliver brugt i funktionen?! forvirring}
 
 The most known parameter passing techniques are pass-by-reference and pass-by-value.
 A short description of these to will lead up to an explanation of how Python is handling parameter passing.
-To illustrate the different approaches the following two methods are used, \cref{parameter_passing:reassign} and \cref{parameter_passing:reassign}.
+To illustrate the different approaches the following two functions are used, \cref{parameter_passing:reassign} and \cref{parameter_passing:reassign}.
 
-\begin{lstlisting}[style=python, caption={Parameter passing: \texttt{reassign} method.}, label={parameter_passing:reassign}]
+\begin{lstlisting}[style=python, caption={Parameter passing: \texttt{reassign} function.}, label={parameter_passing:reassign}]
   def reassign(l):
       l = [1]
 \end{lstlisting}
 
-\begin{lstlisting}[style=python, caption={Parameter passing: \texttt{append} method.}, label={parameter_passing:append}]
+\begin{lstlisting}[style=python, caption={Parameter passing: \texttt{append} function.}, label={parameter_passing:append}]
   def append(l):
       l.append(1)
 \end{lstlisting}
 
 \paragraph{Pass-by-reference}
-\paragraph{Pass-by-value}
-\paragraph{Pass-by-object-reference}
+Pass-by-reference is when the argument is directly passed into the function.
+Given the object \texttt{l = [0]} when we are using pass-by-reference and calling the function \texttt{reassign}, \cref{parameter_passing:reassign}.
+This will change the object \texttt{l} to: \texttt{l = [1]}.
+This is because the object is passed directly and this means that the function is operating directly on the object.
+The \texttt{append} function also behaves as above so the result is the same: \texttt{l = [1]}.
 
+\paragraph{Pass-by-value}
+Pass-by-value is when the argument is copied and passed into the function.
+The argument is copied and stored a new place in memory and the copy is passed into the function.
+Given the object \texttt{l = [0]} when we are using pass-by-value and calling the function \texttt{reassign}, \cref{parameter_passing:reassign}.
+This will change the copied object \texttt{l$'$} to: \texttt{l$'$ = [1]}.
+But the object given as argument remains the same as it was not manipulated by the function.
+This also applies to the \texttt{append} function, \cref{parameter_passing:append}, where after calling the function \texttt{l = [0]} and \texttt{l$'$ = [1]}.
+
+\paragraph{Pass-by-object-reference}
+Pass-by-object-reference is the Python way of handling parameter passing.
+This means that the argument is copied but both refer to the same object in memory.
+Given the object \texttt{l = [0]} when we are using pass-by-object-reference and calling the function \texttt{reassign}, \cref{paramter_passing:reassign}.
+A copy of the argument, \texttt{l$'$} is referring to the same object in memory but has a different name.
+So \texttt{reassign} sets \texttt{l$'$ = [1]} but not \texttt{l} because reassign is not manipulating the object but only the name that is referring to it.
+When calling the \texttt{append} function the object is referenced and both \texttt{l} and \texttt{l$'$} are changed to \texttt{[1]}.
