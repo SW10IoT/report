@@ -112,6 +112,17 @@ This is included as we were surprised how it is dealt with and it is important t
 
 The most known parameter passing techniques are pass-by-reference and pass-by-value.
 A short description of these to will lead up to an explanation of how Python is handling parameter passing.
+To illustrate the different approaches the following two methods are used, \cref{parameter_passing:reassign} and \cref{parameter_passing:reassign}.
+
+\begin{lstlisting}[style=python, caption={Parameter passing: \texttt{reassign} method.}, label={parameter_passing:reassign}]
+  def reassign(l):
+      l = [1]
+\end{lstlisting}
+
+\begin{lstlisting}[style=python, caption={Parameter passing: \texttt{append} method.}, label={parameter_passing:append}]
+  def append(l):
+      l.append(1)
+\end{lstlisting}
 
 \paragraph{Pass-by-reference}
 \paragraph{Pass-by-value}
