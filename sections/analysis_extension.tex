@@ -1,0 +1,62 @@
+\section{Analysis extension}
+The previously described algorithm is able to detect that a value flows from a source to a sink.
+Unfortunately this method is insufficient in finding all vulnerabilities.
+When a value from a source is assigned to a variable \textit{s}, this variable is not necessarily the one being used when arriving at a sink.
+Other variables can be assigned to values that derive from \textit{s}, or \textit{s} can be reassigned to a modified version of \textit{s}.
+
+These two problems arise from using the method presented in \cref{theory:reaching}.
+Two small examples of the problems can be seen in \cref{ext_reassign} and \cref{ext_assign}.
+Here the method \texttt{source} is an arbitrary method that introduce taint while \texttt{sink} is an arbitrary sensitive sink.
+
+\begin{figure}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \begin{lstlisting}[style=python]
+s = source()
+
+s = 'input: ' + s
+
+sink(s)
+    \end{lstlisting}
+    \caption{Reassigning a tainted variable with a modification of the tainted value}
+    \label{ext:reassign}
+  \end{subfigure}
+  ~~
+  \begin{subfigure}[b]{0.45\textwidth}
+    \begin{lstlisting}[style=python, numbers=none]
+s = source()
+
+user_input = 'input: ' + s
+
+sink(user_input)
+    \end{lstlisting}
+    \caption{Assigning a derived value of the tainted variable}
+    \label{ext:assign}
+  \end{subfigure}
+\end{figure}
+
+In neither of the two examples it will be possible to detect the vulnerability with the method from \cref{theory:reaching}, because the flow is cut off by the assignments.
+To fix this we have introduced two extensions to the method.
+
+\subsection{Propagation of reassignments}
+In order to maintain the tainted variable \textit{s} 'alive' we have modified the assignment dataflow constraint presented in \cref{theory:reaching}.
+We want to let both the original assignment as well as the reassignment live in the analysis.
+First we check if the current assignment is a reassignment.
+An assignment is a reassignment if the variable assigned to also is part of the right hand side.
+If it is a reassignment, we omit the arrow function of the original rule, else the rule is as defined originally.
+
+\begin{align*}
+  \constraint{v} = &\text{ if v is a reassignment:}\\
+  &\phantom{==}JOIN(v) \cup \{ v \}\\
+  &\text{ else:}\\
+  &\phantom{==}JOIN(v) \downarrow id \cup \{ v \}\\
+\end{align*}
+
+Now both the original assignment and the reassignment will propagate to the sink.
+
+\subsection{Assignment of Variable derivations}\label{ext:derivation}
+To be able to detect derivatons of variables as being vulnerabilities, we need to keep track of assignments to these derivations.
+This will be done when finding sources in the CFG.
+Each time a source is found, the subsequent nodes will be checked for assignments of derivations of this source node.
+Nodes that fit this description will be saved together with the source node as a 'secondary' source node.
+When checking for pairs of sources and sinks these assignments will also be considered as sources.
