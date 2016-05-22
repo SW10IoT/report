@@ -15,7 +15,7 @@ The process will be described in the following on a general level.
 \item The source code is parsed to an abstract syntax tree (denoted as AST) representation.
   The AST is generated using the standard Python library \texttt{ast}\cite{python_ast}. \todo{opdater med hvodan  project handler håndterer filer og imports}
 \item The AST is systematically traversed and turned into a control flow graph by the CFG component.
-\item The engine is a component that prepares the CFG on the analysis depending on the web framework used in the source code.
+\item The framework adaptor is a component that prepares the CFG on the analysis depending on the web framework used in the source code.
   The default engine is the Flask engine, but a similar module for Django applications could be devised.
   \todo{maske et bedre navn end engine?}
 \item The fixed point algorithm is applied on the CFG and the resulting constraints are annotated on each CFG node
