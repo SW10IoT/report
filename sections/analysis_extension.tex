@@ -5,10 +5,10 @@ When a value from a source is assigned to a variable \textit{s}, this variable i
 Other variables can be assigned to values that derive from \textit{s}, or \textit{s} can be reassigned to a modified version of \textit{s}.
 
 These two problems arise from using the method presented in \cref{theory:reaching}.
-Two small examples of the problems can be seen in \cref{ext_reassign} and \cref{ext_assign}.
-Here the method \texttt{source} is an arbitrary method that introduce taint while \texttt{sink} is an arbitrary sensitive sink.
+Two small examples of the problems can be seen in \cref{ext:reassign} and \cref{ext:assign}.
+Here the method \texttt{source} is an arbitrary method that introduces taint while \texttt{sink} is an arbitrary sensitive sink.
 
-\begin{figure}
+\begin{figure}[h]
 
   \begin{subfigure}[b]{0.45\textwidth}
     \begin{lstlisting}[style=python]
@@ -44,6 +44,7 @@ We want to let both the original assignment as well as the reassignment live in 
 First we check if the current assignment is a reassignment.
 An assignment is a reassignment if the variable assigned to also is part of the right hand side.
 If it is a reassignment, we omit the arrow function of the original rule, else the rule is as defined originally.
+The extended constraint rule is shown below:
 
 \begin{align*}
   \constraint{v} = &\text{ if v is a reassignment:}\\
