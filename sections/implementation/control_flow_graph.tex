@@ -78,32 +78,24 @@ Among these are \texttt{raise} statements, \texttt{return} statements and the la
 These are sent to the calling function by returning a \texttt{ControlFlowNode} in \cref{if_return}.
 This calling function is \texttt{stmt\_star\_handler} which, as stated above, connects all the nodes properly.
 
-\begin{lstlisting}[style=python, caption={Visiting an If AST node.}, label={visit_if_code}, escapeinside={(*@}{@*)}]
+\begin{lstlisting}[style=python, caption={Visiting an If AST node.}, label={visit_if_code}, escapeinside={(*@}{@*)}, breaklines=true]
 def visit_If(self, node):
     label_visitor = LabelVisitor() (*@\label{if_test_label}@*)
     label_visitor.visit(node.test)
 
-    test = self.append_node(Node(label_visitor.result,
-                                 node,
-                                 line_number = node.lineno)
-                           )
+    test = self.append_node(Node(label_visitor.result, node, line_number = node.lineno))
     self.add_if_label(test)
 
     body_connect_stmts = self.stmt_star_handler(node.body) (*@ \label{if_body_handling} @*)
     test.connect(body_connect_stmts.first_statement)
         
     if node.orelse: (*@ \label{if_orelse_handling} @*)
-        orelse_last_nodes = self.handle_or_else(node.orelse,
-                                               test)
+        orelse_last_nodes = self.handle_or_else(node.orelse, test)
         body_connect_stmts.last_statements.extend(orelse_last_nodes) (*@ \label{if_last_statements} @*)
     else:
         body_connect_stmts.last_statements.append(test)
 
     last_statements = self.remove_breaks(body_connect_stmts.last_statements)
 
-    return ControlFlowNode(test,
-                           last_statements,
-                           break_statements
-                           =body_connect_stmts.break_statements) (*@ \label{if_return} @*)
+    return ControlFlowNode(test, last_statements, break_statements=body_connect_stmts.break_statements) (*@ \label{if_return} @*)
 \end{lstlisting}
-\todo{Prettify listing}
