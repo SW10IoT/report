@@ -30,3 +30,26 @@ The flow of such a program makes it impossible to guarantee that the application
   \caption{Control Flow Graphs for applications with potential vulnerabilities}
 \end{figure}
 \todo{draft, vi skal nok overveje denne sektion igen når vi har alle detaljer omkring taint, propagation og sanitiser handling på plads}
+
+A sanitised version of the cross site scripting example from \cref{vulnerabilities:xss} can be seen in \cref{sanitised_xss}.
+The function \texttt{Markup.escape()} takes a string input and returns an escaped version, making it safe to insert into html.
+\pyt will report this as a vulnerability, but will add that it may be sanitised by the \texttt{Markup.escape()} function.
+
+\begin{lstlisting}[style=python, caption={The cross site scripting example sanitised by the escape function}, label={sanitised_xss}]
+from flask import Flask, request, make_response, Markup
+
+app = Flask(__name__)
+
+@app.route('/XSS_param', methods =['GET'])
+def XSS1():
+    param = request.args.get('param', 'not set')
+
+    param = Markup.escape(param)
+
+    html = open('templates/XSS_param.html').read()
+    resp = make_response(html.replace('{{ param }}', param))
+    return resp
+
+if __name__ == '__main__':
+    app.run(debug= True)  
+\end{lstlisting}
