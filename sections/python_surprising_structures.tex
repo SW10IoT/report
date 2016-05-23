@@ -107,11 +107,11 @@ people = [line.strip() for line in strings if line != '']
 \end{lstlisting}
 
 \subsection{Parameter Passing}
-This section describes how Python deals with parameter passing.
-This is included as we were surprised how it is dealt with and it is important to factor in when parameters are assigned in functions.\todo{Hedder det en paramter når en paramter bliver brugt i funktionen?! forvirring}
+This section describes how Python deals with parameter passing and is inspired by \citet{parameter_passing}, official documentation for this can be found at \citet{parameter_passing_official}.
+This section is included as we were surprised how it is dealt with and it is important to factor in when parameters are assigned in functions.
 
 The most known parameter passing techniques are pass-by-reference and pass-by-value.
-A short description of these to will lead up to an explanation of how Python is handling parameter passing.
+A short description of these two will lead up to an explanation of how Python is handling parameter passing.
 To illustrate the different approaches the following two functions are used, \cref{parameter_passing:reassign} and \cref{parameter_passing:append}.
 
 \begin{lstlisting}[style=python, caption={Parameter passing: \texttt{reassign} function.}, label={parameter_passing:reassign}]
