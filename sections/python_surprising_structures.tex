@@ -125,8 +125,10 @@ To illustrate the different approaches the following two functions are used, \cr
 \end{lstlisting}
 
 An abstract way of showing what is going on internally is used.
-This is illustrated on \cref{parameter_example} where we have a variable \texttt{l} which is of type list which is an object stored in memory as \texttt{[0]}.
-All examples below use that variable as argument.
+This is illustrated on \cref{parameter_example} where we have a variable \texttt{l} which points at a list which is an object stored in memory as \texttt{[0]}.
+In python a variable is just a name that points to some object in memory.
+Assigning 1 to a variable and then reassigning it to 2 does not change the 1 in memory.
+It just saves the 2 object in memory and makes the variable point at this object.
 
 \ppv{l}{[0]}{A variable \texttt{l} stored in memory as \texttt{[0]}}{parameter_example}
 
@@ -156,9 +158,9 @@ To visualise see \cref{parameter_value_l} and \cref{parameter_value_lprime}, her
 
 \paragraph{Pass-by-object-reference}
 Pass-by-object-reference is the Python way of handling parameter passing.
-This means that the argument is copied but both refer to the same object in memory.
-Given the object \texttt{l = [0]} when we are using pass-by-object-reference and calling the function \texttt{reassign}.
-A copy of the argument, \texttt{l$'$} is referring to the same object in memory but has a different name.
+In this parameter passing mechanism the argument is copied into a new variable local to the function, but both refer to the same object in memory.
+Given the object \texttt{l = [0]} when calling the function \texttt{reassign}.
+The new variable \texttt{l$'$} is referring to the same object in memory.
 So \texttt{reassign} sets \texttt{l$'$ = [1]} but not \texttt{l} because reassign is not manipulating the object but only the name that is referring to it.
 Calling \texttt{reassign} manipulates the variables and is visualised in \cref{parameter_object_reassign_l} and \cref{parameter_object_reassign_lprime}.
 
@@ -166,15 +168,16 @@ Calling \texttt{reassign} manipulates the variables and is visualised in \cref{p
 \ppv{l$'$}{[1]}{The variable \texttt{l$'$} stored in memory as \texttt{[1]} when calling function \cref{parameter_passing:reassign}.}{parameter_object_reassign_lprime}
 
 When calling the \texttt{append} function the object is referenced and both \texttt{l} and \texttt{l$'$} are changed to \texttt{[0, 1]}.
-Calling \texttt{append} manipulates the variables this is visualised in \cref{parameter_object_append}.
+Calling \texttt{append} manipulates the objects referenced by the variables.
+This is visualised in \cref{parameter_object_append}.
 
 \begin{figure}[h]
    \centering
 \begin{tikzpicture}
   \node[circle] (var1) at (0,5) {l};
   \node[circle] (var2) at (0,3) {l$'$};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem1) at (1.5,5) {mem};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem2) at (1.5,3) {mem};  
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem1) at (1.5,5) {name};
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem2) at (1.5,3) {name};  
   \node (result) at (3,4) {[0, 1]};
   \draw[->] (var1) -- (mem1);
   \draw[->] (var2) -- (mem2);
