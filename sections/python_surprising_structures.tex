@@ -176,9 +176,9 @@ This is visualised in \cref{parameter_object_append}.
 \begin{tikzpicture}
   \node[circle] (var1) at (0,5) {l};
   \node[circle] (var2) at (0,3) {l$'$};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem1) at (1.5,5) {name};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem2) at (1.5,3) {name};  
-  \node (result) at (3,4) {[0, 1]};
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem1) at (1.75,5) {mem};
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem2) at (1.75,3) {mem};  
+  \node (result) at (3.5,4) {[0, 1]};
   \draw[->] (var1) -- (mem1);
   \draw[->] (var2) -- (mem2);
   \draw[->] (result) -- (mem1);

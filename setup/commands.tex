@@ -4,9 +4,9 @@
 \newcommand{\ppv}[4]{\begin{figure}[h]
    \centering
 \begin{tikzpicture}
-  \node[circle] (var) at (0,5) {#1};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem) at (1.5,5) {name};
-  \node (result) at (3,5) {#2};
+  \node (var) at (0,5) {#1};
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem) at (1.75,5) {mem};
+  \node (result) at (3.5,5) {#2};
   \draw[->] (var) -- (mem);
   \draw[->] (result) -- (mem);
 \end{tikzpicture}   
