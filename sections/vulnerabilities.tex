@@ -12,7 +12,7 @@ The typical workaround is to sanitise the input so only the desired characters w
 
 The following will present two subgroups of injection attacks, SQL injections and command injections.
 
-\subsection{SQL injection}
+\subsection{SQL injection}\label{vulnerabilities:sqli}
 This description is based on \citet{sqlinjection}.
 SQL injections happen when an application creates a query partly or entirely from user input without sanitising this input.
 The user can escape the query and add an arbitrary query.
@@ -61,7 +61,7 @@ The key is to insert the \texttt{or} keyword which makes another statement possi
 The second statement just has to evaluate to true then all possible database entries are returned.
 This ultimately means that the statement sent to the SQL interpreter looks for all users instead of just a particular one.
 
-\subsection{Command Injection}
+\subsection{Command Injection}\label{vulnerabilities:ci}
 This description is based on \citet{commandinjection}.
 Command injections are very similar to SQL injections, but instead of injecting commands into a database system, this attack makes it possible to inject commands into server shell.
 The ability to perform commands on a server opens up possibilities to read password files, delete system files and various other dangerous operations.
