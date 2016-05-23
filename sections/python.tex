@@ -267,3 +267,37 @@ $ python decorator.py
 Function:  1
 7
 \end{lstlisting}
+
+\subsection{Import(ant)}
+In Python it is possible to import other modules.
+Import is possible with the import statement:
+
+\begin{lstlisting}[style=python, caption={Import statement.}, label={import:standard}]
+  import module_name
+\end{lstlisting}
+
+When using the above import statement the whole module gets imported and creates a reference to that module in the current namespace.
+So it imports functions, classes and variables and they can be accessed and used by prefixing with ``module\_name''.
+An example would look like this:
+
+\begin{lstlisting}[style=python, caption={Import from statement.}, label={import:from}]
+  import module_name
+
+  x = module_name.fib(10)
+\end{lstlisting}
+
+The import statement also has another variant the import-from statement:
+
+\begin{lstlisting}[style=python, caption={Import from statement.}, label={import:from}]
+  from module_name import Class, function, variable
+\end{lstlisting}
+
+The import-from statement is importing all names that are defined after the \texttt{import} keyword and adds them to the local namespace.
+Accessing this module is different as the names are now in the local namespace one does not need to prefix them.
+An example of using a function would look like this:
+
+\begin{lstlisting}[style=python, caption={Import from statement.}, label={import:from}]
+  from module_name import fib
+
+  x = fib(10)
+\end{lstlisting}
