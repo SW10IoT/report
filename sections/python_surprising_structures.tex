@@ -124,48 +124,64 @@ To illustrate the different approaches the following two functions are used, \cr
       l.append(1)
 \end{lstlisting}
 
-An abstract way of showing what is going on internally is used.
-This is illustrated on \cref{parameter_example} where we have a variable \texttt{l} which points at a list which is an object stored in memory as \texttt{[0]}.
+An abstract way of showing the internal representation will be used.
+An example can be seen on \cref{parameter_example} where we have a variable \texttt{l} which points at a list which is an object stored in memory as \texttt{[0]}.
 In python a variable is just a name that points to some object in memory.
+A name is illustrated as a box.
 Assigning 1 to a variable and then reassigning it to 2 does not change the 1 in memory.
 It just saves the 2 object in memory and makes the variable point at this object.
 
-\ppv{l}{[0]}{A variable \texttt{l} stored in memory as \texttt{[0]}}{parameter_example}
+\ppv{l}{[0]}{A variable \texttt{l} pointing at a list \texttt{[0]}}{parameter_example}
 
 \paragraph{Pass-by-reference}
-Pass-by-reference is when the argument is directly passed into the function.
-Given the object \texttt{l = [0]} when we are using pass-by-reference and calling the function \texttt{reassign}.
+Pass-by-reference is a parameter passing mechanich where the argument is directly passed into the function.
+Consider passign \texttt{l = [0]} to the function \texttt{reassign}.
 After the call the object \texttt{l} is changed to: \texttt{l = [1]}, visualised on \cref{parameter_reference_reassign}.
 
-\ppv{l}{[1]}{The variable \texttt{l} stored in memory as \texttt{[0]} after calling function \cref{parameter_passing:reassign}.}{parameter_reference_reassign}
+\ppv{l}{[1]}{The variable \texttt{l} pointing at the list \texttt{[0]} after calling function \texttt{reassign}}{parameter_reference_reassign}
 
-This is because the object is passed directly and this means that the function is operating directly on the object.
-The \texttt{append} function also behaves as above but because append adds to the list the result is: \texttt{l = [0, 1]}, visualised in \cref{parameter_reference_append}.
-\ppv{l}{[0, 1]}{The variable \texttt{l} stored in memory as \texttt{[0, 1]} after calling function \cref{parameter_passing:append}.}{parameter_reference_append}
+This is because the variable is passed directly which means that the function is operating directly on the object.
+The \texttt{append} function behaves similarly, but because append adds to the list the result is: \texttt{l = [0, 1]}, visualised in \cref{parameter_reference_append}.
+
+\ppv{l}{[0, 1]}{The variable \texttt{l} pointing at the list \texttt{[0, 1]} after calling function \texttt{append}}{parameter_reference_append}
 
 
 \paragraph{Pass-by-value}
-Pass-by-value is when the argument is copied and passed into the function.
-The argument is copied and stored a new place in memory and the copy is passed into the function.
-Given the object \texttt{l = [0]} when we are using pass-by-value and calling the function \texttt{reassign}.
-After the cal the copied object \texttt{l$'$} is changed to: \texttt{l$'$ = [1]}.
-But the object given as argument remains the same as it was not manipulated by the function.
-This also applies to the \texttt{append} function, \cref{parameter_passing:append}, where after calling the function \texttt{l = [0]} and \texttt{l$'$ = [1]}.
+The other well known parameter passign mechanism is pass-by-value, where the actual parameter is copied and passed into the function.
+The actual parameter is copied and stored a new place in memory and the copy is passed into the function.
+Given the object \texttt{l = [0]} passed as parameter to the function \texttt{reassign}, the copied object \texttt{l$'$} is changed to: \texttt{l$'$ = [1]}.
+The original object \texttt{l}  remains the same as it is not manipulated by the function.
+
+\begin{figure}[H]
+  \ppvs{l}{[0]}{The variable \texttt{l} pointing at the list \texttt{[0]} after calling the functions \texttt{reassign}}{parameter_value_l}
+  ~
+  \ppvs{l$'$}{[1]}{The variable \texttt{l$'$} pointing at the list  \texttt{[1]} after calling function \texttt{reassign}}{parameter_value_lprime}
+  \caption{When reassigning in pass-by-value, only the copied list is changed}
+\end{figure}
+
+A similar thing happens in the \texttt{append} function, where after calling the function \texttt{l = [0]} and \texttt{l$'$ = [0, 1]}.
 To visualise see \cref{parameter_value_l} and \cref{parameter_value_lprime}, here it becomes clear that when we access \texttt{l} after the call nothing has changed.
 
-\ppv{l}{[0]}{The variable \texttt{l} stored in memory as \texttt{[0]} after calling function \cref{parameter_passing:reassign} and \cref{parameter_passing:append}.}{parameter_value_l}
-\ppv{l$'$}{[1]}{The variable \texttt{l$'$} stored in memory as \texttt{[1]} when calling function \cref{parameter_passing:reassign} and \cref{parameter_passing:append}.}{parameter_value_lprime}
+\begin{figure}[H]
+  \ppvs{l}{[0]}{The variable \texttt{l} pointing at the list \texttt{[0]} after calling the functions and \texttt{append}}{parameter_value_l}
+  ~
+  \ppvs{l$'$}{[0, 1]}{The variable \texttt{l$'$} pointing at the list \texttt{[0, 1]} after calling function \texttt{append}}{parameter_value_lprime}
+  \caption{When appending in pass-by-value, only the copied list is changed}
+\end{figure}
 
 \paragraph{Pass-by-object-reference}
 Pass-by-object-reference is the Python way of handling parameter passing.
 In this parameter passing mechanism the argument is copied into a new variable local to the function, but both refer to the same object in memory.
-Given the object \texttt{l = [0]} when calling the function \texttt{reassign}.
-The new variable \texttt{l$'$} is referring to the same object in memory.
-So \texttt{reassign} sets \texttt{l$'$ = [1]} but not \texttt{l} because reassign is not manipulating the object but only the name that is referring to it.
+Given the object \texttt{l = [0]} when calling the function \texttt{reassign}, a new variable \texttt{l$'$} is created that refers to the same \texttt{[0]} object in memory.
+So \texttt{reassign} sets \texttt{l$'$ = [1]} but not \texttt{l} because \texttt{reassign} is not manipulating the object but only the name that is referring to it.
 Calling \texttt{reassign} manipulates the variables and is visualised in \cref{parameter_object_reassign_l} and \cref{parameter_object_reassign_lprime}.
 
-\ppv{l}{[0]}{The variable \texttt{l} stored in memory as \texttt{[0]} after calling function \cref{parameter_passing:reassign}.}{parameter_object_reassign_l}
-\ppv{l$'$}{[1]}{The variable \texttt{l$'$} stored in memory as \texttt{[1]} when calling function \cref{parameter_passing:reassign}.}{parameter_object_reassign_lprime}
+\begin{figure}[H]
+  \ppvs{l}{[0]}{The variable \texttt{l} pointing at the list \texttt{[0]} after calling function \texttt{reassign}}{parameter_object_reassign_l}
+  ~
+  \ppvs{l$'$}{[1]}{The variable \texttt{l$'$} pointing at the list \texttt{[1]} after calling function \texttt{reassign}}{parameter_object_reassign_lprime}
+  \caption{Pass-by-object-reference copies the variable, but points it at the same object as the original variable}
+\end{figure}
 
 When calling the \texttt{append} function the object is referenced and both \texttt{l} and \texttt{l$'$} are changed to \texttt{[0, 1]}.
 Calling \texttt{append} manipulates the objects referenced by the variables.
@@ -174,15 +190,11 @@ This is visualised in \cref{parameter_object_append}.
 \begin{figure}[h]
    \centering
 \begin{tikzpicture}
-  \node[circle] (var1) at (0,5) {l};
-  \node[circle] (var2) at (0,3) {l$'$};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem1) at (1.75,5) {mem};
-  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem2) at (1.75,3) {mem};  
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem1) at (1.75,5) {l};
+  \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem2) at (1.75,3) {l$'$};  
   \node (result) at (3.5,4) {[0, 1]};
-  \draw[->] (var1) -- (mem1);
-  \draw[->] (var2) -- (mem2);
-  \draw[->] (result) -- (mem1);
-  \draw[->] (result) -- (mem2);
+  \draw[<-] (result) -- (mem1);
+  \draw[<-] (result) -- (mem2);
 \end{tikzpicture}   
   \caption{The variable \texttt{l} and \texttt{l$'$} stored in memory as \texttt{[0, 1]} when calling function \cref{parameter_passing:append}.}
   \label{parameter_object_append}
