@@ -1,7 +1,7 @@
-\section{Handling Imports}
+section{Handling Imports}
 This section contains a rationale of how the imports are handled.
-The two way of importing files, import and import-from, are presented in \cref{python:import} and these two way need to be handled separately.
-They are handled separately in the way that the naming for import is prefixed by the name of the module and this is not the case for import-from.
+The two ways of importing files, import and import-from, are presented in \cref{python:import} and these two ways need to be handled separately.
+The naming for import is prefixed by the name of the module while this is not the case for import-from.
 
 
 The file that is given as input to \pyt{} is used as the entry point.
@@ -53,10 +53,12 @@ To illustrate consider these two modules:
   c = a.Car()
 \end{lstlisting}
 
+\todo{module definitions stakken kommer ud af ingenting her}
+
 Looking at module \texttt{a} and \texttt{b} on \cref{import:definition_module} and \cref{import:import_module} respectively we will now see how the module definitions stack is built.
 So first the AST for the entry file is created in this case we say its module \texttt{b}.
 Then a module definitions is created for the current module.
-So the stack contains one module definitions: stack = [module\_definitions<b>].\todo{flottere stack hvis ci skal have der her eksempel}
+So the stack contains one module definitions: stack = [module\_definitions<b>].
 
 The AST is visited and when an import statement is visited a new module is visited and a new module definitions is created and added to the stack.
 So we have the following stack: stack = [module\_definitions<b>, module\_definitions<a>]
