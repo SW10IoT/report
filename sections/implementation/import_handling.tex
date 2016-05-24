@@ -1,7 +1,6 @@
-Should contain a description of:
-\begin{itemize}
-\item project\_handler module
-\item module\_definitions module
-\item module\_definitions\_stack in cfg module
-\item General description of how the import solution is designed
-\end{itemize}
+\section{Handling Imports}
+This section contains a rationale of how the imports are handled.
+The two way of importing files, import and import-from, are presented in \cref{python:import} and these two way need to be handled separately.
+They are handled separately in the way that the naming for import is prefixed by the name of the module and this is not the case for import-from.
+
+
