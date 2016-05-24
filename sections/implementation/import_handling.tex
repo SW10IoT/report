@@ -27,3 +27,48 @@ This will result in a list of project modules containing the following modules: 
 And a list of local modules containing the modules that are in the same folder as the entry file: [\textit{app.py, models.py}].
 
 
+Using the \texttt{ast} module, described in \cref{library:ast}, the abstract syntax tree(AST) is generated for the entry point.
+When visiting an import or import-from node the module and its definitions are loaded.
+A definition in this context is a definition of a variable, function or class.
+
+To illustrate consider these two modules:
+
+\begin{lstlisting}[style=python, caption={A module that defines a function and two classes called \texttt{a}}, label={import:definition_module}]
+  def fuel(km):
+      ...
+
+  class Car():
+      ...
+
+  class Owner():
+      ...
+\end{lstlisting}
+\begin{lstlisting}[style=python, caption={A module called \texttt{b} importing the above module \texttt{a}}, label={import:import_module}]
+  ...
+  
+  import a
+  
+  ...
+
+  c = a.Car()
+\end{lstlisting}
+
+Looking at module \texttt{a} and \texttt{b} on \cref{import:definition_module} and \cref{import:import_module} respectively we will now see how the module definitions stack is built.
+So first the AST for the entry file is created in this case we say its module \texttt{b}.
+Then a module definitions is created for the current module.
+So the stack contains one module definitions: stack = [module\_definitions<b>].\todo{flottere stack hvis ci skal have der her eksempel}
+
+The AST is visited and when an import statement is visited a new module is visited and a new module definitions is created and added to the stack.
+So we have the following stack: stack = [module\_definitions<b>, module\_definitions<a>]
+
+The definitions in the import are: \texttt{foo}, \texttt{Car} and \texttt{Owner}.
+These are added to the module definitions of module \texttt{a}: module\_definitions<a> = [\texttt{foo}, \texttt{Car}, \texttt{Owner}].
+And to the  module definitions of module \texttt{b} which is accessed via the stack:  module\_definitions<b> = [\texttt{a.foo}, \texttt{a.Car}, \texttt{a.Owner}].
+
+This is important so that when one of the imported definitions later is used the module definitions of module \texttt{a} does have knowledge about it.
+Note that the names of the definitions are different.
+This is because of the way the import statement works, see \cref{python:import}
+
+Every time there is an import a new module definitions is created and added to the stack.
+When the import is done the stack is popped.
+This process handles the names for different modules and nested imports.
