@@ -4,3 +4,26 @@ The two way of importing files, import and import-from, are presented in \cref{p
 They are handled separately in the way that the naming for import is prefixed by the name of the module and this is not the case for import-from.
 
 
+The file that is given as input to \pyt{} is used as the entry point.
+First of the \texttt{project\_handler} module is used to get local modules and project modules.
+A local module is a Python file that is in the same folder as the file.
+A project module is a Python file that is in the same project as the file.
+The projects entry point is the folder the file is in or if another project root is specified.
+
+To illustrate the above consider the following example project structure below.
+
+\dirtree{%
+.1 /.
+.2 car\_app.
+.3 app.py.
+.3 models.py.
+.3 user.
+.4 forms.py.
+.4 views.py.
+}
+
+So lets say that the entry point is the \textit{app.py} file.
+This will result in a list of project modules containing the following modules: [\textit{car\_app.app.py, car\_app.models.py, car\_app.user.forms.py, car\_app.user.views.py}].
+And a list of local modules containing the modules that are in the same folder as the entry file: [\textit{app.py, models.py}].
+
+
