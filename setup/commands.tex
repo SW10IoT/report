@@ -4,7 +4,6 @@
 \newcommand{\ppv}[4]{\begin{figure}[H]
    \centering
 \begin{tikzpicture}
-  \node (var) at (0,5) {#1};
   \node[draw, line width=0.05mm, minimum width=1cm,minimum height=1cm, outer sep=10pt] (mem) at (1.75,5) {#1};
   \node (result) at (3.5,5) {#2};
   \draw[<-] (result) -- (mem);
