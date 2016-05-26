@@ -1,1 +1,15 @@
 \section{Reflections}
+This chapter will reflect on \pyt{} and the experiences we have had during development of the tool.
+
+\subsection{Are frameworks like Flask good for web security?}
+In the beginning of the project period we had an idea of making a tool that could find security flaws in web applications.
+We were well aware that vulnerabilities would not be in an abundance, but after looking for candidates we became surprised.
+Even when looking at lists of well known vulnerabilities, be always came to a dead end when implementing it in Flask.
+Flask took care of everything, without we even had to think about it.
+There were no configuration needs, special runtime flags or constructs to avoid -- it just worked, and was impenetrable.
+
+We therefore had to resort to the vulnerabilities we presented in \cref{security_vulnerabilities}.
+These vulnerabilities are still dangerous, but they are very unlikely to be found in the wild (maybe with the exception of the command injection vulnerability. This may actually be valid for some very niche cases)
+
+Our experience with the Flask framework is therefore an indication that frameworks like Flask definitely help security of web applications.
+Following the quick start tutorial on the web page enables a lot of functionality for even an unexperienced developer, without needing to worry about security.
