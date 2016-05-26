@@ -1,0 +1,17 @@
+\chapter{Trigger word definition for flask}\label{appendix:trigger_word_flask}
+The following file is used as the default trigger definition file in \pyt{}.
+It is tailored for flask projects.
+
+\begin{lstlisting}[style=python, caption={Trigger word definition for flask projects}, label={flask_trigger_words}]
+sources:
+get(
+form[
+
+sinks:
+replace( -> escape
+send_file( -> '..', '..' in
+execute(
+filter(
+subprocess.call(
+
+\end{lstlisting}
