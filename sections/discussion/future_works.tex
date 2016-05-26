@@ -7,3 +7,18 @@ Should contain:
 \item Limitiations
 \item Optimering af pyt -hvordan handler vi ~500000 cfg nodes ..
 \end{itemize}
+
+\subsection{Better trigger word definitions}
+Finding sources and sinks was a feature where the litterature was sparse.
+Plenty of papers use the terms, but no one described a clever way to find them.
+We therefore devised our own system.
+
+The implemented system uses a text file with the trigger words written in a very simple syntax.
+The labels of CFG nodes are compared with the trigger words, and if they contain one, they are marked as being either a source, a sink or a sanitiser.
+Using this simple implementation we ran into problems like finding the trigger word in variable names.
+The quick solution was to add a '(' to the trigger word, which fixed that single problem.
+
+In further development the whole trigger word system should be reconsidered.
+The definition should be more sophisticated, and the comparison should be more intelligent than just comparing in the label.
+
+
