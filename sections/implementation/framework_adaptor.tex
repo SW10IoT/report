@@ -10,14 +10,14 @@ This adaptor can be implemented for an arbitrary framework like Django or, in ou
 \paragraph{The Flask Adaptor}
 In Flask all web pages are defined in a function with a decorator.
 This function is never explicitly called in the source code, so a single traversal by the CFG visitor of the file will not include all these methods in the resulting list of CFGs.
-The adaptor \texttt{FlaskAdaptor} was implemented for this purpose.
+The \texttt{FlaskAdaptor} was implemented for this purpose.
 The result of the CFG visitor contains all functions found during the traversal.
 The Flask adaptor goes through these and finds all functions that are defined with the \texttt{@app.route()} decorator, and adds it to the list of CFGs.
 This results in a list of CFGs that cover all the code needed for analysing the application.
 
 \paragraph{Implementing a custom adaptor}
 The adaptor component is in place for making it possible to adapt the analysis to any framework.
-This section will describe how such an implementation should be devised.
+This paragraph will describe how such an implementation should be devised.
 
 In \cref{appendix:flask_adaptor} the implementation of the Flask adaptor is shown.
 This implementation will be used as a basis for this description.
