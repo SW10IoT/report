@@ -1,0 +1,53 @@
+\chapter{Flask adaptor implementation}\label{appendix:flask_adaptor}
+The following code listing presents the implementation of the adaptor that adapts Flask projects to be analysed by \pyt{}
+This is also the default adaptor used by the \pyt{} command line.
+
+\begin{lstlisting}[style=python, caption={Implementation of the Flask adaptor}, label={flask_adaptor_implementation}]
+"""Contains a class that can be used as adaptor."""
+import ast
+
+from framework_adaptor import FrameworkAdaptor
+from ast_helper import get_call_names
+from cfg import build_function_cfg
+from module_definitions import project_definitions
+
+class FlaskAdaptor(FrameworkAdaptor):
+    """The flask adaptor class manipulates the CFG to adapt to flask applications."""
+
+    def get_last(self, iterator):
+        """Get last element of iterator."""
+        item = None
+        for item in iterator:
+            pass
+        return item
+
+    def is_flask_route_function(self, ast_node):
+        """Check whether function uses a decorator."""
+        for decorator in ast_node.decorator_list:
+            if isinstance(decorator, ast.Call):
+                if self.get_last(get_call_names(decorator.func)) == 'route':
+                    return True
+        return False
+
+    def get_cfg(self, definition):
+        """Build a function cfg and return it."""
+        cfg = build_function_cfg(definition.node, self.project_modules, self.local_modules, definition.path, definition.module_definitions)
+        return cfg
+
+    def get_func_nodes(self):
+        """Get all nodes from a function."""
+        return [definition for definition in project_definitions.values() if isinstance(definition.node, ast.FunctionDef)]
+
+    def find_flask_route_functions(self, cfg):
+        """Find all flask functions with decorators."""
+        for definition in self.get_func_nodes():
+            if definition.node and self.is_flask_route_function(definition.node):
+                yield self.get_cfg(definition)
+
+    def run(self):
+        """Executed by the super class, everything that needs to be executed goes here."""
+        function_cfgs = list()
+        for cfg in self.cfg_list:
+            function_cfgs.extend(self.find_flask_route_functions(cfg))
+        self.cfg_list.extend(function_cfgs)
+\end{lstlisting}

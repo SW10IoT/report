@@ -11,6 +11,23 @@ This adaptor can be implemented for an arbitrary framework like Django or, in ou
 In Flask all web pages are defined in a function with a decorator.
 This function is never explicitly called in the source code, so a single traversal by the CFG visitor of the file will not include all these methods in the resulting list of CFGs.
 The adaptor \texttt{FlaskAdaptor} was implemented for this purpose.
-This CFG contains all function found during the traversal.
-The adaptor then finds all functions that are defined with the \texttt{@app.route()} decorator, and adds it to the list of CFGs.
+The result of the CFG visitor contains all functions found during the traversal.
+The Flask adaptor goes through these and finds all functions that are defined with the \texttt{@app.route()} decorator, and adds it to the list of CFGs.
 This results in a list of CFGs that cover all the code needed for analysing the application.
+
+\paragraph{Implementing a custom adaptor}
+The adaptor component is in place for making it possible to adapt the analysis to any framework.
+This section will describe how such an implementation should be devised.
+
+In \cref{appendix:flask_adaptor} the implementation of the Flask adaptor is shown.
+This implementation will be used as a basis for this description.
+The adaptor inherits from the class \texttt{FrameworkAdaptor} which contains an instance variable for a CFG list and the abstract function \texttt{run}.
+The \texttt{run} function is the entry point to an adaptor.
+
+In the Flask implementation the CFG list, which is initially populated with the result of the CFG visitor, is iterated over and the \texttt{find\_flask\_route\_functions} function is called on each. \footnote{In our case there is always one CFG in this list, but other implementations might have more than one.}
+The idea of the \texttt{find\_flask\_route\_functions} was described in the previous paragraph.
+A similar consideration has to be made for the framework in question and then implemented in a similar fashion.
+
+After implementing a custom adaptor, \pyt{} will be able to analyse any application using this framework.
+  
+
