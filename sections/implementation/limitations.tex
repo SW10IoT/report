@@ -1,9 +1,21 @@
 \section{Limitations}
-This should contain:
+\subsection{Dynamic Features}
+The following dynamic features are not supported meaning that the right flow of the source code is not captured and therefore is not taken into account in the analysis.
+\pyt{} does not support the built in functions \texttt{eval} and \texttt{exec}.
+These functions take a string as input and are executed as Python.
+This means that one has no idea of what can happen when these functions are used.
+
+\pyt{} does also not support monkey patching.
+Monkey patching is used to swap or change functions in order to manipulate modules or classes.
+This is powerful but also difficult to capture.
+
+Not supporting the above dynamic features means that taint can be introduced without \pyt{} noticing.
+One way to fix this is to overtaint by just tainting all nodes containing \texttt{eval} and \texttt{exec} for instance.
+
+Limitations should contain:
 \begin{itemize}
 \item ``Having no dynamic analysis is a major disadvantage'' - Rene
 \item Monkey patching
-\item import own module/library module etc. Also as statement
 \item Decorators(?)
 \item Inbuilt/library (?)
 \item Others?
