@@ -21,4 +21,10 @@ The quick solution was to add a '(' to the trigger word, which fixed that single
 In further development the whole trigger word system should be reconsidered.
 The definition should be more sophisticated, and the comparison should be more intelligent than just comparing in the label.
 
-
+\subsection{More efficient fixed-point algorithm}
+In this project efficiency has not been a priority, and for the most part is has not been a problem.
+In the evaluation performed on real projects, described in \cref{evaluation:real}, this suddenly became a hurdle.
+It turns out that big projects produce CFGs that are so large that \pyt{} simply does not terminate in a realistic amount of time.
+It would therefore be a natural next step to attempt to improve this inefficiency.
+As mentioned in \cref{fixed_point_algorithm} this project has not spent time examining alternative implementations of the fixed-point algorithm.
+One suggestion would therefore be to attempt to implement the improved version of the algorithm, in order to get a faster analysis.

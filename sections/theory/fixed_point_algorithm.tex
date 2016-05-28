@@ -1,8 +1,7 @@
 \section{The Fixed-point Algorithm}\label{fixed_point_algorithm}
 A CFG has been defined in \cref{control_flow_graph} and a lattice has been defined in \cref{lattice}.
-Given a CFG and lattice a fixed-point algorithm can be defined.
+Given a CFG, a lattice and assiciated dataflow constraints, the fixed-point algorithm can compute the fixed-point.
 The following is from \citet{schwartzbach}.
-
 
 Operating on a CFG that contains the nodes $\{ v_1, v_2, \dots, v_n \}$ we work with the lattice $L^n$.
 Assuming that the node $v_i$ generates the dataflow equation $\llbracket v_i \rrbracket = F_i ( \llbracket v_1 \rrbracket, \dots, \llbracket v_n \rrbracket)$, the equations of all the nodes can be combined in a function $ F: L^n \rightarrow L^n$.
@@ -25,4 +24,5 @@ A naive algorithm for solving such a function is presented in \citet{schwartzbac
 
 As $L^n$ is finite and assuming that the constraints that make up $F(x)$ are monotonous, the fixed-point algorithm will always terminate according to the Fixed-point theorem, see \cref{fixed_point_definition}.
 
-\todo{if we use the more advanced algorithms, write them here}
+There exist more efficient algorithms than the naive version presented, some of them are described in \citet[p.~18]{schwarzbach}.
+Because efficiency was not a high priority these have not been examined.
