@@ -1,15 +1,15 @@
 \section{Related Work}
-wat related work with one master thesis makes sense..
+As mentioned in \cref{existing_tools}, few tools exist that do anything like what we want.
+The same is the case in terms of research papers.
+This section will present the single paper that had a similar goal as our project.
 
 \subsection{Balancing Cost and Precision of Approximate Type Inference in Python}
 This section contains and overview of the work of \citet{fritz}.
-This master thesis implements a data flow analyses for Python.
-\citet{fritz} uses the worklist algorithm to compute the result of an analysis using fixpoint iteration.
-The analysis is expressed as a monotone framework.
-Widening is used to ensure termination.
-He has made an analysis to make a overview of names mapped to what types they have.
-The aim of the thesis is to find the most efficient way in both results and time to do this.
+This master's thesis implements a data flow analysis for performing approximate type inference on Python code.
+
+\citet{fritz} builds a CFG of the source code, and uses the worklist algorithm to compute the result of an analysis using fixpoint iteration.
+The result is then used to perform type inference on.
 
 The thesis contains brief explanation about the implementation in Appendix A.
-Unfortunately the source code is not open source and not available neither is the software.
-If the source code would have been available one could have used the control flow graph and the worklist algorithm from this thesis.
+Unfortunately the source code is not available.
+If the source code would have been available, the implementation of the control flow graph and the worklist algorithm could have been used as a foundation for our project.
