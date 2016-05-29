@@ -59,12 +59,12 @@ Instead of being local to the function body, such a change will persist.
 \paragraph{Polyvariance}
 If we ``glue in'' the function bodies of called function by referencing the respective CFG, we get a \emph{monovariant} analysis.
 An example of monovariant analysis can be seen on \cref{monovariant}
-This method has puts some limitiations on the analyses that are performed on the CFG.
+This method puts some limitiations on the analyses that are performed on the CFG.
 For example constant propagation analysis will be inaccurate because more than one call will be represented in the callee CFG.
 For our purposes we need propagation of assignments to be accurate for an arbitrary number of calls to a function.
 
 The solution is to make the analysis \emph{polyvariant}.
-This is done by make multiple copies of the function body for each call site.
+This is done by making multiple copies of the function body for each call site.
 This solves the problem about propagation because every call site has a separate copy of the function where the analysis can perform unique calculations.
 
 \begin{figure}[H]
