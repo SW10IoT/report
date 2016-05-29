@@ -24,6 +24,8 @@ A decorated definition is not transformed, and the decorator is stored.
 This means that some details may be lost.
 Some transformations may introduce taint, which will not be caught by \pyt{}.
 
+A correct implementation of decorators will be very similar to that of a function call, but there will be some considerations on how to capture the transformed function correctly.
+
 \subsection{Libraries}
 The import handling does its best to find the implementation of functions called throughout the program, but it can only find the implementation of functions where the source code is available.
 This may be limiting the analysis, but having to traverse all library code will be a major task.
