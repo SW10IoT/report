@@ -15,11 +15,11 @@ One way to fix this is to overtaint by just tainting all nodes containing \textt
 \subsection{Decorators}
 Decorators are used to transform a function into another function.
 Flask uses this to register functions that should be accessible as a webpage.
-In practice a decorator is implemented as a class that contains a transformation function that returns the transformed function.
+In practice a decorator is implemented as a class or a function that contains a transformation function that returns the transformed function.
 When a function definition is decorated, the transformed function will be used instead.
 An example was provided in \cref{python:decorators}.
 
-The current implementation do not perform this decoration process.
+The current implementation does not perform this decoration process.
 A decorated definition is not transformed, and the decorator is stored.
 This means that some details may be lost.
 Some transformations may introduce taint, which will not be caught by \pyt{}.
