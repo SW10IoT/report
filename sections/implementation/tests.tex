@@ -67,10 +67,13 @@ The example consists of assignments, a tuple, the star operator and a list in or
 All the concepts both need to work individually and together, and tests have helped ensuring this.
 
 \paragraph{Dynamic types}
-Python is a dynamic language which can be very unforgiving to debug.
-A wrong type returned from a function produces an error in a function somewhere completely different.
-The stack trace is not always helpful at telling where the actual problem is located.
+Python is a dynamic language which can be unforgiving to debug.
+A wrong type returned from a function produces an error in a function somewhere else.
+That can result in a big stack trace which can be hard to follow.
 
 When developing with tests a catalogue of small tests are naturally developed.
 When introducing an error that breaks more than just the construct at hand, test have helped pinpointing the real cause of the error.
 This has sometimes lead to insight that either helped us understand why our implementation was wrong, or why what we expected was not the real outcome.
+
+\paragraph{Integration test}
+At last some integration tests were added to secure that \pyt{} produces the right output for each vulnerability example described in \cref{security_vulnerabilities}.
