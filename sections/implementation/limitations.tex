@@ -2,24 +2,32 @@
 \subsection{Dynamic Features}
 The following dynamic features are not supported meaning that the right flow of the source code is not captured and therefore is not taken into account in the analysis.
 \pyt{} does not support the built in functions \texttt{eval} and \texttt{exec}.
-These functions take a string as input and are executed as Python.
-This means that one has no idea of what can happen when these functions are used.
+These functions take a string as input which are executed as Python code.
+This means that the content of this string cannot be evaluated statically, and \pyt{} cannot anticipate what will happen.
 
 \pyt{} does also not support monkey patching.
-Monkey patching is used to swap or change functions in order to manipulate modules or classes.
+Monkey patching is used to replace functions in order to manipulate modules or classes.
 This is powerful but also difficult to capture.
 
 Not supporting the above dynamic features means that taint can be introduced without \pyt{} noticing.
 One way to fix this is to overtaint by just tainting all nodes containing \texttt{eval} and \texttt{exec} for instance.
 
-Limitations should contain:
-\begin{itemize}
-\item ``Having no dynamic analysis is a major disadvantage'' - Rene
-\item Monkey patching
-\item Decorators(?)
-\item Inbuilt/library (?)
-\item Others?
-\end{itemize}
+\subsection{Decorators}
+Decorators are used to transform a function into another function.
+Flask uses this to register functions that should be accessible as a webpage.
+In practice a decorator is implemented as a class that contains a transformation function that returns the transformed function.
+When a function definition is decorated, the transformed function will be used instead.
+An example was provided in \cref{python:decorators}.
+
+The current implementation do not perform this decoration process.
+A decorated definition is not transformed, and the decorator is stored.
+This means that some details may be lost.
+Some transformations may introduce taint, which will not be caught by \pyt{}.
+
+\subsection{Libraries}
+The import handling does its best to find the implementation of functions called throughout the program, but it can only find the implementation of functions where the source code is available.
+This may be limiting the analysis, but having to traverse all library code will be a major task.
+Fixing this requires considerations of when it is worth doing, and when it is just increasing running time, without adding value.
 
 \subsection{Language Constructs}
 This section contains a list of language constructs that were not implemented due to time constraints and were not deemed important as most of them were not faced in the projects we ran as input.
