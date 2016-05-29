@@ -67,7 +67,7 @@ else:
 \subsection{Generator expression}
 The Python language has a goal of being simple, explicit and readable\citep{python_zen}.
 This can often be seen in some very elegant constructions contained in the language.
-One of those is the generator statement, which was discovered during the development of \pyt{}.
+One of those is the generator expression, which was discovered during the development of \pyt{}.
 
 A generator expression is a concise notation for a common pattern: iterating over a collection of items and then performing some operation on every element\citep{python_functional}.
 
@@ -135,8 +135,8 @@ It just saves the 2 object in memory and makes the variable point at this object
 \ppv{l}{[0]}{A variable \texttt{l} pointing at a list \texttt{[0]}}{parameter_example}
 
 \paragraph{Pass-by-reference}
-Pass-by-reference is a parameter passing mechanich where the argument is directly passed into the function.
-Consider passign \texttt{l = [0]} to the function \texttt{reassign}.
+Pass-by-reference is a parameter passing mechanism where the argument is directly passed into the function.
+Consider passing \texttt{l = [0]} to the function \texttt{reassign}.
 After the call the object \texttt{l} is changed to: \texttt{l = [1]}, visualised on \cref{parameter_reference_reassign}.
 
 \ppv{l}{[1]}{The variable \texttt{l} pointing at the list \texttt{[0]} after calling function \texttt{reassign}}{parameter_reference_reassign}
