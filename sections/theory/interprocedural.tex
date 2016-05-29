@@ -37,6 +37,17 @@ The final result is a single CFG for the caller with the callee interwoven in.
 The result is depicted on \cref{interprocedural_glue}.
 Here all the saved variables are characterised with a prefix and a number \emph{i}, which is a unique index for the called function.
 
+\paragraph{Adjusting shadow variables to Python}
+The previous description of shadow variables results in a CFG that simulates the call-by-value parameter passing mechanism.
+As described in \cref{python:parameter_passing}, Python uses call-by-object-reference.
+We have not been able to make an adjustment that captures this completely.
+Instead we have made an approximation that ensures that values changed inside a function will persist after the call.
+
+The modification changes the last of the four steps.
+Instead of restoring all saved variables, the variables will be assigned the formal parameter that is being used inside the function body.
+In this way the changes made to the formal parameter will persist.
+This solution is inaccurate because it does not represent reassigning the parameter correctly (the \texttt{reassign} case in \cref{pyhon:paramter_passing}.
+Instead of being local to the function body, such a change will persist.
 
 \begin{figure}[H]
   \center
