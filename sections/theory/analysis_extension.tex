@@ -1,4 +1,4 @@
-\section{Analysis extension}
+\section{Analysis Extension}
 The previously described algorithm is able to detect that a value flows from a source to a sink.
 Unfortunately this method is insufficient in finding all vulnerabilities.
 When a value from a source is assigned to a variable \textit{s}, this variable is not necessarily the one being used when arriving at a sink.
@@ -38,7 +38,7 @@ sink(user_input)
 In neither of the two examples it will be possible to detect the vulnerability with the method from \cref{theory:reaching}, because the flow is cut off by the assignments.
 To fix this we have introduced two extensions to the method.
 
-\subsection{Propagation of reassignments}
+\subsection{Propagation of Reassignments}
 In order to maintain the tainted variable \textit{s} 'alive' we have modified the assignment dataflow constraint presented in \cref{theory:reaching}.
 We want to let both the original assignment as well as the reassignment live in the analysis.
 First we check if the current assignment is a reassignment.
@@ -57,7 +57,7 @@ Now both the original assignment and the reassignment will propagate to the sink
 This modification will still guarantee that the analysis will terminate, because the analysis will still only walk up the lattice.
 This is true because the added case only adds a node to the constraint, which causes the analysis to walk up in the lattice.
 
-\subsection{Assignment of Variable derivations}\label{ext:derivation}
+\subsection{Assignment of Variable Derivations}\label{ext:derivation}
 To be able to detect derivatons of variables as being vulnerabilities, we need to keep track of assignments to these derivations.
 This will be done when finding sources in the CFG.
 Each time a source is found, the subsequent nodes will be checked for assignments of derivations of this source node.

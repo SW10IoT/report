@@ -1,7 +1,7 @@
-\section{Future works}
+\section{Future Works}
 This section contains a number of subjects which can be improved and be worked on in the future.
 
-\subsection{Better trigger word definitions}
+\subsection{Better Trigger Word Definitions}
 Finding sources and sinks was a feature where the litterature was sparse.
 Plenty of papers use the terms, but no one described a clever way to find them.
 We therefore devised our own system.
@@ -14,7 +14,7 @@ The quick solution was to add a '(' to the trigger word, which fixed that single
 In further development the whole trigger word system should be reconsidered.
 The definition should be more sophisticated, and the comparison should be more intelligent than just comparing in the label.
 
-\subsection{More efficient fixed-point algorithm}
+\subsection{More Efficient Fixed-point Algorithm}
 In this project efficiency has not been a priority, and for the most part is has not been a problem.
 In the evaluation performed on real projects, described in \cref{evaluation:real}, this suddenly became a hurdle.
 It turns out that big projects produce CFGs that are so large that \pyt{} simply does not terminate in a realistic amount of time.
@@ -22,7 +22,7 @@ It would therefore be a natural next step to attempt to improve this inefficienc
 As mentioned in \cref{fixed_point_algorithm} this project has not spent time examining alternative implementations of the fixed-point algorithm.
 One suggestion would therefore be to attempt to implement the improved version of the algorithm, in order to get a faster analysis.
 
-\subsection{Expanding \pyt{} with other analyses}
+\subsection{Expanding \pyt{} with Other Analyses}
 As discussed in \cref{impl:flexible}, \pyt{} has been implemented in a flexible way, so that any analysis can be implemented.
 This means that it is possible to expand the analysis with supporting analyses.
 The implemented example, liveness analysis, could be used to determine if a found vulnerability is in a piece of dead code.
@@ -32,7 +32,7 @@ There could therefore be a optional command line flag that filters out dead code
 
 Other analyses could also prove helpful in the detection of vulnerabilities.
 
-\subsection{Support more frameworks}
+\subsection{Support More Frameworks}
 This project has only looked into the Flask web framework.
 In order to make \pyt{} even more useful, more frameworks should be supported.
 As mentioned in \cref{preliminaries:web_frameworks}, Django is a very popular framework.

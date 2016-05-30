@@ -1,4 +1,4 @@
-\subsection{Taint analysis}
+\subsection{Taint Analysis}
 In order to find dangerous flows in a program we need to know what expressions introduce user input and what expressions may not receive input.
 We also need to be able to detect when the program actually makes such input harmless.
 The theoretical background for this was discussed in \cref{theory:taint}
@@ -15,7 +15,7 @@ The result of \texttt{input()} is being handed over to \texttt{eval()} without a
 Imagine this program being served on a server which also contains confidential information.
 An attacker would possibly be able to retrieve this confidential information from the server.
 
-\subsection{Sources, sinks and and sanitisers in Flask}
+\subsection{Sources, Sinks and Sanitisers in Flask}
 Flask is a web framework, so it uses some different means of user input than the \texttt{input()} method.
 This section will cover a selection of these in order to have a basis for performing an analysis of a Flask application.
 
