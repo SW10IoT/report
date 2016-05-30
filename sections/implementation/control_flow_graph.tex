@@ -75,7 +75,7 @@ Again \texttt{stmt\_star\_handler} handles the connection of the bodies.
 Through the implementation a number of 'last nodes' are being kept track of.
 This is for instance seen in \cref{if_last_statements} where the 'last nodes' of the orelse node are added to the 'last nodes' of the body.
 A 'last statement' is in this context any statement that needs to be connected to the subsequent statement of the \texttt{if}.
-Among these are \texttt{raise} statements, \texttt{return} statements and the last statements of the body, \texttt{elif} bodies and the \texttt{else} body. \todo{måske bedre eksempler og tegninger med pile}
+Among these are \texttt{raise} statements, \texttt{return} statements and the last statements of the body, \texttt{elif} bodies and the \texttt{else} body.
 These are sent to the calling function by returning a \texttt{ControlFlowNode} in \cref{if_return}.
 This calling function is \texttt{stmt\_star\_handler} which, as stated above, connects all the nodes properly.
 
