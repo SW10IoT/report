@@ -1,7 +1,8 @@
-\section{Control Flow Graph}\todo{Update so it fits to the impl.}
-The \texttt{cfg} module contains a class, \texttt{CFG}, that takes an AST and builds a CFG from it.
+\section{Control Flow Graph}
+The \texttt{cfg} module contains a class, \texttt{Visitor}, that takes an AST and builds a CFG from it.
 The CFG is built by traversing the generated AST using the visitor pattern.\cite{design_patterns}
 The visitor pattern is implemented by the AST module, and our CFG module utilizes this implementation.
+The \texttt{Visitor} class constructs a list of nodes which are saved as a \texttt{CFG}.
 
 \begin{figure}[H]
   \begin{subfigure}[b]{0.2\textwidth}
