@@ -1,20 +1,19 @@
 \section{Handling Imports}
-This section contains a description of how the imports are handled.
-Handling imports is essentially just coupling called functions to the correct function or class definition in another file and imported variables.
+This section contains a description of how imports are handled when processing a file.
+Handling imports is essentially just coupling called functions, class instantiations and variables to the correct definition in another file.
 As such it is not theoretically interesting.
 However, it is a requirement for being able to run \pyt{} on real projects, which is important because we want to evauluate the security of complete web applications.
-So it is included as it is nontrivial to implement.
 
 \paragraph{The import statements}
-The two ways of importing files, import and import-from, are presented in \cref{python:import} and these two ways need to be handled separately.
-The naming for import is prefixed by the name of the module while this is not the case for import-from.
+The two ways of importing in Python, import and import-from, are presented in \cref{python:import} and these two ways need to be handled separately.
+When referencing a function in a module imported with the \texttt{import} statement the function needs to be prefixed with the name of the module while this is not the case for \texttt{import-from}.
 
 
 The file that is given as input to \pyt{} is used as the entry point.
-First of the \texttt{project\_handler} module is used to get local modules and project modules.
+First, the \texttt{project\_handler} module is used to get what we call local modules and project modules.
 A local module is a Python file that is in the same folder as the file.
 A project module is a Python file that is in the same project as the file.
-The projects entry point is the folder the file is in or if another project root is specified.
+The project modules are used to resolve the location of modules placed in another directory.
 
 To illustrate the above consider the following example project structure below.
 
@@ -30,14 +29,17 @@ To illustrate the above consider the following example project structure below.
 }  
 \hfill
 
-So lets say that the entry point is the \textit{app.py} file.
-This will result in a list of project modules containing the following modules: [\textit{car\_app.app.py, car\_app.models.py, car\_app.user.forms.py, car\_app.user.views.py}].
+Consider the entry point being the \textit{app.py} file.
+The \texttt{project\_handler} module will construct a list of project modules containing the following modules: [\textit{car\_app.app.py, car\_app.models.py, car\_app.user.forms.py, car\_app.user.views.py}].
 And a list of local modules containing the modules that are in the same folder as the entry file: [\textit{app.py, models.py}].
 
-
+\paragraph{The module definitions stack}
 Using the \texttt{ast} module, described in \cref{library:ast}, the abstract syntax tree(AST) is generated for the entry point.
 When visiting an import or import-from node the module and its definitions are loaded.
 A definition in this context is a definition of a variable, function or class.
+A file being loaded usually also contains imports.
+In order to control the different import contexts, a module definition stack is built.
+Each entry in the stack contains a list of loaded definitions for one file.
 
 To illustrate consider these two modules:
 
@@ -61,24 +63,19 @@ To illustrate consider these two modules:
   c = a.Car()
 \end{lstlisting}
 
-Looking at module \texttt{a} and \texttt{b} on \cref{import:definition_module} and \cref{import:import_module} respectively we will now see how the module definitions stack is built.
-The module definitions stack is a stack that consists of module definitions which each have a list of module definitions.
-These are used to store information about imports.
-So first the AST for the entry file is created in this case we say its module \texttt{b}.
-Then a module definitions is created for the current module.
+First the AST for the entry file is created in this case we say its module \texttt{b}.
+Then an entry in the stack created for \texttt{b}.
 So the stack contains one module definitions: stack = [module\_definitions<b>].
 
 The AST is visited and when an import statement is visited a new module is visited and a new module definitions is created and added to the stack.
-So we have the following stack: stack = [module\_definitions<b>, module\_definitions<a>]
+Visiting the import of \texttt{a} results in the following stack: stack = [module\_definitions<b>, module\_definitions<a>]
 
-The definitions in the import are: \texttt{foo}, \texttt{Car} and \texttt{Owner}.
-These are added to the module definitions of module \texttt{a}: module\_definitions<a> = [\texttt{foo}, \texttt{Car}, \texttt{Owner}].
-And to the  module definitions of module \texttt{b} which is accessed via the stack:  module\_definitions<b> = [\texttt{a.foo}, \texttt{a.Car}, \texttt{a.Owner}].
+The definitions in the \texttt{a} list are: \texttt{foo}, \texttt{Car} and \texttt{Owner}.
+These are added to the list of module \texttt{a}: module\_definitions<a> = [\texttt{foo}, \texttt{Car}, \texttt{Owner}].
+Additionally they are added to the list of module \texttt{b} with names prepended with an \texttt{a}:  module\_definitions<b> = [\texttt{a.foo}, \texttt{a.Car}, \texttt{a.Owner}].
 
-This is important so that when one of the imported definitions later is used the module definitions of module \texttt{a} does have knowledge about it.
-Note that the names of the definitions are different.
-This is because of the way the import statement works, see \cref{python:import}
+This is important so that when one of the imported definitions later is used in \texttt{b} the list of \texttt{b} contains the correct definition.
 
-Every time there is an import a new module definitions is created and added to the stack.
+Every time there is an import a new list is added to the stack.
 When the import is done the stack is popped.
 This process handles the names for different modules and nested imports.
