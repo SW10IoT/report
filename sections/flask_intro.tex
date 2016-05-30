@@ -1,7 +1,7 @@
 \section{Flask}\label{flask:intro}
 Flask is a framework for developing web applications in Python\citep{flask_official}.
 Its goal is to be minimal without compromising functionality.
-It is extensible and flexible, so components like database, template engine and form validation can be chosen by the developer.
+It is extensible and flexible, so components like database and form validation can be chosen by the developer.
 
 The minimal nature of Flask makes it possible to write a web page in a very small amount of code.
 The following program, see \cref{minimal_flask}, creates a web server that serves a ``Hello World!'' page on the root.
@@ -28,7 +28,7 @@ The descriptions will be based on the \citet{flask_docs}.
 The \texttt{app.route} decorator is used to bind a function to a URL.
 The parameter provided binds the function to the relative path.
 Example paths are '/' for the root and '/hello\_world' for a sub-page.
-The example in \cref{minimal_flask} binds the function \texttt{hello\_world()} to the  url \texttt{hostname/}
+The example in \cref{minimal_flask} binds the function \texttt{hello\_world()} to the  url \texttt{hostname/}.
 
 \subparagraph{HTTP methods} Another parameter for the \texttt{app.route} decorator is the methods allowed.
 This parameter enables other HTTP methods than the default GET.
