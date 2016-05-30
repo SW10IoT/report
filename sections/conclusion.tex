@@ -6,6 +6,10 @@ The resulting applications would then be used to check if the tool was able to d
 The theory needed to build such a tool was then described.
 The theory includes control flow analysis, the monotone framework and taint analysis.
 
-The tool \pyt{} was then implemented and evaluated.
+The tool \pyt{} was then implemented with the aim of being flexible.
+\pyt{} is specialised to find vulnerabilities in Flask using a modified reaching definintions analysis, but it is the intention that both aspects can be expanded on.
+It is thereby possible to implement support for Django or use other analyses, without having to make major changes.
+
+A last \pyt{} was evaluated.
 \pyt{} was able to find all the manufactured vulnerabilities.
 It was also able to run on open source Flask projects, but was not able to find any vulnerabilities in these.
