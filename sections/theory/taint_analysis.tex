@@ -1,5 +1,8 @@
-\section{Taint Analysis}
+\section{Taint Analysis}\label{theory:taint}
 The following is based on \citet[Part 3]{schwartz2010all}.
+An expression which introduces user input in some way is called a \emph{source}, while a dangerous destination for such input is called a \emph{sink}.
+A function that can neutralise input so it is not dangerous to send to a sink is called a \emph{sanitiser}.
+
 Taint analysis is used for tracking the information between sources and sinks.
 If some data comes from an untrusted or tainted source it is regarded as being tainted.
 All other data is untainted.

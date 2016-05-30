@@ -1,9 +1,7 @@
-\section{Sources, sinks and  and sanitisers in Flask}
+\subsection{Taint analysis}
 In order to find dangerous flows in a program we need to know what expressions introduce user input and what expressions may not receive input.
 We also need to be able to detect when the program actually makes such input harmless.
-
-An expression which introduces user input in some way is called a \emph{source}, while a dangerous destination for such input is called a \emph{sink}.
-A function that can neutralise input so it is not dangerous to send to a sink is called a \emph{sanitiser}.
+The theoretical background for this was discussed in \cref{theory:taint}
 
 \begin{lstlisting}[style=python, caption={A simple vulnerable program}, label=simple_sink_source]
 x = input()
@@ -17,7 +15,7 @@ The result of \texttt{input()} is being handed over to \texttt{eval()} without a
 Imagine this program being served on a server which also contains confidential information.
 An attacker would possibly be able to retrieve this confidential information from the server.
 
-\subsection{Flask}
+\subsection{Sources, sinks and and sanitisers in Flask}
 Flask is a web framework, so it uses some different means of user input than the \texttt{input()} method.
 This section will cover a selection of these in order to have a basis for performing an analysis of a Flask application.
 
@@ -26,7 +24,7 @@ In \cref{flask:intro} the \texttt{request} object was introduced.
 This object is used to access the input provided by the user through interaction with the page.
 
 \subparagraph{Query parameters}
-Query parameters submitted to the URL can be accessed with the \texttt{request.args.get(key, default)} method.
+Query parameters submitted to the URL of the format 'domain.com?query=parameter' can be accessed with the \texttt{request.args.get(key, default)} method.
 This method takes the key to retrieve a value from and a default value as parameters.
 If this methods returns a value that is different from the default, it is potentially dangerous.
 
