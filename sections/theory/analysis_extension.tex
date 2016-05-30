@@ -58,7 +58,7 @@ This modification will still guarantee that the analysis will terminate, because
 This is true because the added case only adds a node to the constraint, which causes the analysis to walk up in the lattice.
 
 \subsection{Assignment of Variable Derivations}\label{ext:derivation}
-To be able to detect derivatons of variables as being vulnerabilities, we need to keep track of assignments to these derivations.
+To be able to detect derivations of variables as being vulnerabilities, we need to keep track of assignments to these derivations.
 This will be done when finding sources in the CFG.
 Each time a source is found, the subsequent nodes will be checked for assignments of derivations of this source node.
 Nodes that fit this description will be saved together with the source node as a 'secondary' source node.

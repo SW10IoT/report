@@ -27,7 +27,7 @@ Because parameters of functions have no relation to the scope of other functions
 Shadow variables ensure that the meaning of the different scopes are kept when gluing the function CFG into the main CFG.
 The process of gluing a function into the calling function can be split up into four steps:
 \begin{itemize}
-\item When calling a function we need to save the variables of the current scope, ensuring no clashes with the variabels of the function body.
+\item When calling a function we need to save the variables of the current scope, ensuring no clashes with the variables of the function body.
 \item Then we need to save all the formal parameters of the function definition and insert the actual parameters into the appropriate variables in order to create the function local scope.
 \item The body of the function can now be inserted as it was originally defined, with the exception that all returns need to be assigned to a unique variable.
 \item After the function body all the saved variables need to be restored.
@@ -59,7 +59,7 @@ Instead of being local to the function body, such a change will persist.
 \paragraph{Polyvariance}
 If we ``glue in'' the function bodies of called function by referencing the respective CFG, we get a \emph{monovariant} analysis.
 An example of monovariant analysis can be seen on \cref{monovariant}
-This method puts some limitiations on the analyses that are performed on the CFG.
+This method puts some limitations on the analyses that are performed on the CFG.
 For example constant propagation analysis will be inaccurate because more than one call will be represented in the callee CFG.
 For our purposes we need propagation of assignments to be accurate for an arbitrary number of calls to a function.
 
@@ -83,6 +83,6 @@ This solves the problem about propagation because every call site has a separate
     \label{polyvariant}
   \end{subfigure}
   
-  \caption{The difference betweem monovariant and polyvariant interprocedural analysis. Illustrations from \citet[p.~40]{schwartzbach}}
+  \caption{The difference between monovariant and polyvariant interprocedural analysis. Illustrations from \citet[p.~40]{schwartzbach}}
   \label{monopoly}
 \end{figure}

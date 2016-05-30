@@ -70,7 +70,7 @@ The ability to perform commands on a server opens up possibilities to read passw
 An example of a command injection vulnerable application is presented in \cref{appendix:command_injection}.
 In this example a textfile is being used as store for a site where customers can suggest items for a menu.
 When customers enter an item into a textbox, it is stored on a new line in the file.
-The content of the file is then read and displayed on the screen, showing all the suggesions.
+The content of the file is then read and displayed on the screen, showing all the suggestions.
 The dangerous function is shown in \cref{command_injection_function} where it can be seen how the parameter from a textbox is being passed directly to the shell call in \cref{CI_call}.
 Entering a string starting with a command separator (semicolon in bash and ampersand in windows cmd), makes it possible to interact directly with the system shell.
 Thus entering a string like

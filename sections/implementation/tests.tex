@@ -12,7 +12,7 @@ An example of a construct which has many different cases is the \texttt{if} cont
 The \texttt{if} abstract syntax node contains an \emph{orelse} reference which can either be another \texttt{if}, representing an \text{elif} clause, or a list of statements, representing the body of an \texttt{else} clause.
 In addition an \texttt{if} can have many different expressions in its \emph{test} clause.
 These expressions are often logic expressions but can also be nameconstants, function calls, lambdas and even a list.
-To illustrate the three d\texttt{if}ferent cases three abstract directed graphs have been made.
+To illustrate the three different cases three abstract directed graphs have been made.
 \begin{itemize}
 \item The graph for a single \texttt{if} statement can be seen on the left on \cref{test:ast:if_and_else}.
 \item The graph for an \texttt{if} and an \texttt{elif} statement can be seen on the right on \cref{test:ast:if_and_else}.
