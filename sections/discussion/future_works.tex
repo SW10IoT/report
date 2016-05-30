@@ -3,9 +3,6 @@
 Should contain:
 \begin{itemize}
 \item Udvid med Django, pyt er parametriseret, så det er let at gå igang med
-\item Udvid med andre analyser der forbedrer resultaterne
-\item Limitiations
-\item Optimering af pyt -hvordan handler vi ~500000 cfg nodes ..
 \end{itemize}
 
 \subsection{Better trigger word definitions}
@@ -28,3 +25,22 @@ It turns out that big projects produce CFGs that are so large that \pyt{} simply
 It would therefore be a natural next step to attempt to improve this inefficiency.
 As mentioned in \cref{fixed_point_algorithm} this project has not spent time examining alternative implementations of the fixed-point algorithm.
 One suggestion would therefore be to attempt to implement the improved version of the algorithm, in order to get a faster analysis.
+
+\subsection{Expanding \pyt{} with other analyses}
+As discussed in \cref{impl:flexible}, \pyt{} has been implemented in a flexible way, so that any analysis can be implemented.
+This means that it is possible to expand the analysis with supporting analyses.
+The implemented example, liveness analysis, could be used to determine if a found vulnerability is in a piece of dead code.
+If this is the case, the developer might not be interested in this particular vulnerability.
+The danger of not displaying vulnerabilities in dead code is of course that this code may become live at any time, and then the vulnerability is suddenly dangerous.
+There could therefore be a optional command line flag that filters out dead code, based on the liveness analysis.
+
+Other analyses could also prove helpful in the detection of vulnerabilities.
+
+\subsection{Support more frameworks}
+This project has only looked into the Flask web framework.
+In order to make \pyt{} even more useful, more frameworks should be supported.
+As mentioned in \cref{preliminaries:web_frameworks}, Django is a very popular framework.
+Implementing support for Django could greatly increase the number of applications that \pyt{} is able to analyse.
+
+Implementing another framework requires a new adaptor.
+The process of writing a new framework adaptor was described in \cref{framework_adaptor}.
