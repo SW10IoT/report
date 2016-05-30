@@ -161,3 +161,4 @@ master.pdf
 /build.sh
 /clean.sh
 *.orig
+/summary.pdf
