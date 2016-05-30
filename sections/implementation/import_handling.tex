@@ -59,9 +59,9 @@ To illustrate consider these two modules:
   c = a.Car()
 \end{lstlisting}
 
-\todo{module definitions stakken kommer ud af ingenting her}
-
 Looking at module \texttt{a} and \texttt{b} on \cref{import:definition_module} and \cref{import:import_module} respectively we will now see how the module definitions stack is built.
+The module definitions stack is a stack that consists of module definitions which each have a list of module definitions.
+These are used to store information about imports.
 So first the AST for the entry file is created in this case we say its module \texttt{b}.
 Then a module definitions is created for the current module.
 So the stack contains one module definitions: stack = [module\_definitions<b>].
