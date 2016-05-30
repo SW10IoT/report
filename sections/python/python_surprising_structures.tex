@@ -71,12 +71,14 @@ One of those is the generator expression, which was discovered during the develo
 
 A generator expression is a concise notation for a common pattern: iterating over a collection of items and then performing some operation on every element\citep{python_functional}.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[style=python, caption={Generator expression, stripping white-space from strings}, label={generator_strip}]
 strings = ['King Arthur   ', '', '   Queen Elizabeth',
            '', '   Arnold Schwarzenegger   ']
 
 people = (line.strip() for line in strings if line != '')
 \end{lstlisting}
+\end{minipage}
 
 In \cref{generator_strip} some file has been parsed into an array.
 The resulting strings have some undesirable white-space, and some of the strings are even empty.
@@ -92,17 +94,22 @@ The resulting elements are the stripped of white-space by the initial expression
 The generator in \cref{generator_strip} can be written without using a generator expression.
 This can be seen in \cref{generator_corresponding}.
 The generator expression is very clear in conveying its purpose while being shorter than the ``old way''.
+
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[style=python, caption={\Cref{generator_strip} implemented without using an generator expression}, label={generator_corresponding}]
 for line in strings:
     if not line != '':
         yield line.strip()
 \end{lstlisting}
+\end{minipage}
 
 Python contains similar constructs called the comprehensions which return a list, set or dictionary of the element instead of a generator.
 This construct uses square or curly parenthesis instead of round parenthesis, but are not different in any other way.
 An example of a list comprehension can be seen in \cref{listcomp}.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[style=python, caption={The generator from \cref{generator_strip} changed to a list comprehension}, label={listcomp}]
 people = [line.strip() for line in strings if line != '']
 \end{lstlisting}
+\end{minipage}
 
