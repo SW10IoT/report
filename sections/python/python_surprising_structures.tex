@@ -1,9 +1,9 @@
-\section{Surprising features in Python}
+\section{Surprising Features in Python}
 When working so close to the specification of a language some weird or surprising structures in the language arise.
 While we programmed the conversion from abstract syntax tree to a control flow graph, we had these experiences once in a while, and working with the structures has given us some insight, both in the workings of python and in the details of these interesting structures.
 This section will discuss some of these experiences.
 
-\subsection{While - else}
+\subsection{While - Else}
 Normally we know \texttt{while} as a simple control structure that has a condition and a body.
 The body will execute until the condition is false.
 This implementation is also found in Python, but Python has an extra variant of the while loop - an else clause.
@@ -64,7 +64,7 @@ else:
   \label{python:for:else}
 \end{figure}
 
-\subsection{Generator expression}
+\subsection{Generator Expression}
 The Python language has a goal of being simple, explicit and readable\citep{python_zen}.
 This can often be seen in some very elegant constructions contained in the language.
 One of those is the generator expression, which was discovered during the development of \pyt{}.
