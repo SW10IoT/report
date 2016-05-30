@@ -107,6 +107,9 @@ In \cref{xss:request} some input is taken and it is inserted into the result pag
 A link to the vulnerable web page can be constructed and sent to a unknowing user who opens the link and gets important information stolen.
 In this example the input is not saved permanently, but if it was saved as for example a comment, a malicious user could inject arbitrary JavaScript, which all subsequent users would execute in their browsers.
 
+An easy way of avoiding this vulnerability, is to use the template engine of Flask.
+If the template engine was used instead of manually replacing the string, the template engine would sanitise the input.
+
 \begin{lstlisting}[style=python, caption={The main part of the XSS example from \cref{appendix:xss}}, label={xss}, escapeinside={(*@}{@*)}, firstnumber=6]
 @app.route('/XSS_param', methods =['GET'])
 def XSS1():
