@@ -24,10 +24,8 @@ This implementation will be used as a basis for this description.
 The adaptor inherits from the class \texttt{FrameworkAdaptor} which contains an instance variable for a CFG list and the abstract function \texttt{run}.
 The \texttt{run} function is the entry point to an adaptor.
 
-In the Flask implementation the CFG list, which is initially populated with the result of the CFG visitor, is iterated over and the \texttt{find\_flask\_route\_functions} function is called on each. \footnote{In our case there is always one CFG in this list, but other implementations might have more than one.}
+In the Flask implementation the CFG list, which is initially populated with the result of the CFG visitor, is iterated over and the \texttt{find\_flask\_route\_functions} function is called on each.\footnote{In our case there is always one CFG in this list, but other implementations might have more than one.}
 The idea of the \texttt{find\_flask\_route\_functions} was described in the previous paragraph.
 A similar consideration has to be made for the framework in question and then implemented in a similar fashion.
 
 After implementing a custom adaptor, \pyt{} will be able to analyse any application using this framework.
-  
-
