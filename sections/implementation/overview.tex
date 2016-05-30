@@ -12,12 +12,11 @@ The illustration shows how  \pyt{} takes the source code as input, manipulates i
 The process will be described in the following on a general level.
 
 \begin{itemize}
-\item The source code is parsed to an abstract syntax tree (denoted as AST) representation.
-  The AST is generated using the standard Python library \texttt{ast}\cite{python_ast}. \todo{opdater med hvodan  project handler håndterer filer og imports}
+\item The source code is parsed to an abstract syntax tree (denoted as AST) representation per file.
+  The AST is generated using the standard Python library \texttt{ast}\cite{python_ast}.
 \item The AST is systematically traversed and turned into a control flow graph by the CFG component.
 \item The framework adaptor is a component that prepares the CFG on the analysis depending on the web framework used in the source code.
-  The default engine is the Flask engine, but a similar module for Django applications could be devised.
-  \todo{maske et bedre navn end engine?}
+  The default adaptor is the Flask adaptor, but a similar module for Django applications could be devised.
 \item The fixed point algorithm is applied on the CFG and the resulting constraints are annotated on each CFG node
   The fixed point module is flexible which means that the analysis can be substituted.
   By default \pyt{} uses the reaching definitions analysis, but this could be expanded with other analyses, see \cref{impl:flexible}.
