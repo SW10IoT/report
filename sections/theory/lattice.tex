@@ -1,6 +1,6 @@
-\section{Lattice Theory}\label{lattice}
+\section{Lattice}\label{lattice}
 The static analysis we want to perform utilises the mathematical theory of lattices together with a monotone function to guarantee that the analysis will terminate.
-This theory will be described in the following.
+The theory behind lattices will be described in the following.
 
 \paragraph{Partial orders}
 A lattice is a specialisation of a partial order which will be described in the following.
@@ -48,7 +48,7 @@ The subset can be seen on \cref{theory:general_code_example_small}.
 \end{lstlisting}
 
 This lattice is defined by the set of four expressions $\{x > 1, x / 2, y > 3, x - y \}$.
-In general the set $A$ defines a lattice $(2^A, \sqsubseteq )$ where $\top = \emptyset$, $\bot = A$, $x\sqcup y = x \cup y$ and $x \sqcap y = x \cap y$.
+In general the set $A$ defines a lattice $(2^A, \sqsubseteq )$ where $\top = A$, $\bot = \emptyset$, $x\sqcup y = x \cup y$ and $x \sqcap y = x \cap y$.
 
 Every analysis requires the lattice to contain certain elements of the program in order to work.
 Examples range from expressions or assignments to variables.

@@ -2,7 +2,7 @@ graph name {
 	graph [ranksep=1, splines=line];
 	node [shape="none"];
 		
-	root [label="{}"];
+	e1e2e3e4 [label="{x > 1, x / 2, y > 3, x - y}"];
 
 	e1 [label="{x > 1}"];
 	e2 [label="{x / 2}"];
@@ -21,22 +21,25 @@ graph name {
 	e1e3e4 [label="{x > 1, y > 3, x - y}"];
 	e2e3e4 [label="{x / 2, y > 3, x - y}"];
 
-	e1e2e3e4 [label="{x > 1, x / 2, y > 3, x - y}"];
+	root [label="{}"];
 
 
-	root:s -- e1:n, e2:n, e3:n, e4:n;
-	e1:s -- e1e2:n, e1e3:n, e1e4:n;
-	e2:s -- e1e2:n, e2e3:n, e2e4:n;
-	e3:s -- e1e3:n, e2e3:n, e3e4:n;
-	e4:s -- e1e4:n, e2e4:n, e3e4:n;
-	e1e2:s -- e1e2e3:n, e1e2e4:n;
-	e1e3:s -- e1e2e3:n, e1e3e4:n;
-	e1e4:s -- e1e2e4:n, e1e3e4:n;
-	e2e3:s -- e1e2e3:n, e2e3e4:n;
-	e2e4:s -- e1e2e4:n, e2e3e4:n;
-	e3e4:s -- e1e3e4:n, e2e3e4:n;
-	e1e2e3:s -- e1e2e3e4:n;
-	e1e2e4:s -- e1e2e3e4:n;
-	e1e3e4:s -- e1e2e3e4:n;
-	e2e3e4:s -- e1e2e3e4:n;	
-	}
+	e1e2e3e4:s -- e1e2e3:n, e1e2e4:n, e1e3e4:n, e2e3e4:n;
+
+	e1e2e3:s -- e1e2:n, e1e3:n, e2e3:n;
+	e1e2e4:s -- e1e2:n, e1e4:n, e2e4:n;
+	e1e3e4:s -- e1e3:n, e1e4:n, e3e4:n;
+	e2e3e4:s -- e2e3:n, e2e4:n, e3e4:n;
+
+	e1e2:s -- e1:n, e2:n;
+	e1e3:s -- e1:n, e3:n;
+	e1e4:s -- e1:n, e4:n;
+	e2e3:s -- e2:n, e3:n;
+	e2e4:s -- e2:n, e4:n;
+	e3e4:s -- e3:n, e4:n;
+	
+	e1:s -- root:n;
+	e2:s -- root:n
+	e3:s -- root:n
+	e4:s -- root:n;
+}
