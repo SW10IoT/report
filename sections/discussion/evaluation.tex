@@ -87,7 +87,8 @@ This source then reaches the sink in line 11 which is detected by the trigger wo
 \end{figure}
 
 \subsection{Detecting vulnerabilities in real projects}\label{evaluation:real}
-Six open source projects were tested with \pyt{} a table with results can be seen on \cref{evaluation:real:table}.
+Six open source projects were tested with \pyt{}, for evaluation its performance on realistic inputs.
+A table with the results can be seen on \cref{evaluation:real:table}.
 
 \begin{figure}
   \centering
@@ -109,12 +110,12 @@ Six open source projects were tested with \pyt{} a table with results can be see
   \label{evaluation:real:table}
 \end{figure}
 
-As one can see on the table no vulnerabilities were found and one project where \pyt{} did not terminate.
-This shows that \pyt{} can be used for real projects.
+As one can see on the table, no vulnerabilities were found and there were even one project where \pyt{} did not terminate.
+This shows that \pyt{} can be used for real projects
 
 \paragraph{Flaskbb}
-Flaskbb did not terminate this is due to the amount of nodes being 432855 in the main control flow graph.
-The amount of nodes means that the analysis takes up much time and space.
+Flaskbb did not terminate in a reasonable amount of time, and the run was manually stopped.
+Upon further inspection it turns out to be due to the amount of nodes being created.
+432855 nodes were created, just in the main control flow graph.
+This huge amount of nodes makes the analysis takes up much time and space.
 
-\subsection{Summary}
-\todo{maybe a summary of the results?}
