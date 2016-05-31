@@ -27,8 +27,8 @@ Because parameters of functions have no relation to the scope of other functions
 Shadow variables ensure that the meaning of the different scopes are kept when gluing the function CFG into the main CFG.
 The process of gluing a function into the calling function can be split up into four steps:
 \begin{itemize}
-\item When calling a function we need to save the variables of the current scope, ensuring no clashes with the variables of the function body.
-\item Then we need to save all the formal parameters of the function definition and insert the actual parameters into the appropriate variables in order to create the function local scope.
+\item When calling a function all the variables of the current scope need to be saved, ensuring no clashes with the variables of the function body.
+\item Then all the formal parameters of the function definition are saved and the actual parameters are inserted into appropriate variables in order to create the function local scope.
 \item The body of the function can now be inserted as it was originally defined, with the exception that all returns need to be assigned to a unique variable.
 \item After the function body all the saved variables need to be restored.
 \end{itemize}
