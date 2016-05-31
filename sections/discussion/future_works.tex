@@ -1,5 +1,5 @@
 \section{Future Works}
-This section contains a number of subjects which can be improved and be worked on in the future.
+This section contains a number of subjects which can be improved upon and worked on in the future.
 
 \subsection{Better Trigger Word Definitions}
 Finding sources and sinks was a feature where the literature was sparse.
@@ -13,6 +13,13 @@ The quick solution was to add a '(' to the trigger word, which fixed that single
 
 In further development the whole trigger word system should be reconsidered.
 The definition should be more sophisticated, and the comparison should be more intelligent than just comparing in the label.
+
+\subsection{More Vulnerability Definitions}
+One of the reasons that our evaluation found no vulnerabilities in real applications (see \cref{evaluation}), is the small number of vulnerabilities \pyt{} looks for.
+The used trigger word definition only finds those particular vulnerabilities that was found in the beginning of the project.
+In order to make \pyt{} really useful, this trigger word definition should be expanded, not only with new vulnerabilities, but also with variants of the vulnerabilities already being searched for.
+The two SQL injection attacks presented in \cref{vulnerabilities:sqli} is one example of a vulnerabilities where variants of the same vulnerability exists.
+It is imaginable that many vulnerabilities exists in a number of variants that all need to be defined by trigger words.
 
 \subsection{More Efficient Fixed-point Algorithm}
 In this project efficiency has not been a priority, and for the most part is has not been a problem.
