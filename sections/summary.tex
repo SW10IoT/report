@@ -1,0 +1,22 @@
+\chapter*{Summary}
+This report presents the static analysis too \pyt{} which has been created to detect security vulnerabilities in Python web applications, in particular applications built in the framework Flask.
+
+The tool utilizes the monotone framework for the analysis.
+An AST is built by the builtin AST library, and a CFG is built from the AST.
+The resulting CFG is then processed so Flask specific features are taken into account.
+A modified version of the reaching definitions algorithm is now run by the fixed-point algorithm to aid the finding of vulnerabilities.
+Vulnerabilties are detected based on a definition file containing 'trigger words'.
+A trigger word is a word that indicate where the flow of the program can be dangerous.
+The detected vulnerabilities are in the end reported to the developer.
+
+\pyt{} has been created with flexibility in mind.
+The analysis can be either changed or extended so the performance of \pyt{} can be improved upon.
+Also the Flask specific processing can be changed so other frameworks can be analysed without major changes to \pyt{}.
+
+In order to test the abilities of \pyt{} a number of vulnerable applications was manufactured and \pyt{} was evaluated with these.
+All the manufactured examples was correctly identified as being vulnerable by \pyt{}.
+
+To test \pyt{} in a more realistic setting it was also run on 7 open source projects.
+Here no vulnerabilities were found.
+One of the projects was so big that \pyt{} spent very long on the analysis and was therefore terminated.
+
