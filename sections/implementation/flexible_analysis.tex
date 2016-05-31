@@ -1,6 +1,6 @@
 \section{Flexible analysis}\label{impl:flexible}
-As mentioned in \cref{impl:overview} the fixed point analysis is implemented so that the analysis can be changed.
-For our purposes the \emph{reaching definitions} analysis is sufficient -- it provides the answers we need to locate the security vulnerabilities in web applications.
+As mentioned in the implementation overview, the fixed point analysis is implemented so that the analysis can be changed.
+For our purposes the modified \emph{reaching definitions} analysis presented in \cref{theory:extension} is sufficient -- it provides the answers we need to locate the security vulnerabilities in web applications.
 
 However, one could imagine improving \pyt{} by utilising other analyses that could help identify the vulnerabilities.
 In such a case \pyt{} has been implemented so it can be easily expanded with another analysis.
@@ -10,9 +10,9 @@ This process will be explained in the following.
 \subsection{Implementing Liveness}
 The complete implementation is presented in \cref{appendix:liveness}.
 The implementation corresponds to the definition presented in \citet[p.~20]{schwartzbach}.
-The \texttt{LivenessAnalysis} class inherits from \texttt{AnalysisBase} which contains logic for annotating the CFG with extra information.
+The \texttt{Liveness\-Analysis} class inherits from \texttt{AnalysisBase} which contains logic for annotating the CFG with extra information.
 In the case of the liveness analysis we need information about the \texttt{vars(E)} of each node.
-The deduction of these are defined as a visitor \texttt{VarsVisitor}, see \cref{cfg:visitor} which visits an AST node and finds the variables as defined in \citet{schwartzbach}.
+The deduction of these are defined as a visitor \texttt{VarsVisitor} which visits an AST node and finds the variables as defined in \citet{schwartzbach}.
 
 \texttt{LivenessAnalysis} contains the constraints of the liveness analysis defined in \texttt{fixpointmethod}, which is shown in \cref{liveness_impl_fixpointmethod}.
 This method is used by the fixed point analysis to apply the constraints on each node.

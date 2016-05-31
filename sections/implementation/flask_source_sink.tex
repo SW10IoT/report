@@ -63,12 +63,12 @@ An example of escaping user input can be seen on \cref{escape} where the \texttt
 
 
 \subparagraph{Database access}
-The recommended way to work with a database in Flask is by using a package called SQLAlchemy\cite{sqlalchemy}.\cite{sqlalchemy_docs}
+The recommended way to work with a database in Flask is by using a package called SQLAlchemy\cite{sqlalchemy, sqlalchemy_docs}.
 This package gives the developer the option to setup and/or communicate with a database.
 In the following two examples of SQL injection, described in \cref{vulnerabilities:injection}, will be presented.
 The complete source code of the web application can be found in \cref{sql_injection_example}.
 The examples both print out the result of the SQL queries to the console.
-In a real application their would be some kind of UI where it is presented to the user.
+In a real application there would be some web interface where it is presented to the user.
 
 
 The first example, \cref{sqli_raw}, shows that the address ``/raw'' takes a parameter called \texttt{param}.

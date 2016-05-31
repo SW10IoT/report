@@ -53,7 +53,7 @@ If
 \subsection{From AST to CFG}
 Implementing the CFG requires considering all the cases mentioned in \cref{python:control_structures}.
 \Cref{CFG_if_else} shows an one of the cases with the intermediate AST step included (\cref{CFG_if_ast}).
-Here the AST is visualised as a tree, where the first node is an \texttt{If} node \footnote{An AST for a complete program starts with a \texttt{Module} node, but this is not shown here in order to simplify the tree}
+Here the AST is visualised as a tree, where the first node is an \texttt{If} node\footnote{An AST for a complete program starts with a \texttt{Module} node, but this is not shown here in order to simplify the tree}
 This node contains a test node, a body, represented as a list of nodes, and an orelse body, also represented as a list of nodes.
 In this example the conditions are \texttt{NameConstant} nodes and all statements are \texttt{Assign} nodes.
 The orelse body of the outer \texttt{If} node contains another \texttt{If} node which contains the \texttt{elif} which has the else in its orelse body.
